@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Cours Complet - Nexus Finance Pro</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Segoe+UI:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --primary-color: #48C9B0;
+            --secondary-color: #5DADE2;
+            --success-color: #52BE80;
+            --danger-color: #EC7063;
+            --warning-color: #F39C12;
+            --info-color: #3498DB;
+            --dark-color: #34495E;
+            --background-color: #ECF0F1;
+            --text-color: #2C3E50;
+            --card-background: #FFFFFF;
+            --border-color: #BDC3C7;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            /* MODIFICATION : Largeur augmentée pour le confort de lecture */
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        nav {
+            flex: 0 0 250px;
+            /* Largeur fixe pour la navigation */
+            padding: 20px;
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
+            height: 90vh;
+            overflow-y: auto;
+        }
+
+        nav h2 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 5px 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        nav ul .part-title {
+            font-weight: bold;
+            color: var(--text-color);
+            margin-top: 20px;
+            font-size: 1rem;
+            padding-left: 12px;
+        }
+
+        main {
+            flex: 1;
+            /* Prend le reste de la largeur (1100px - 250px) */
+            padding: 20px 30px;
+            background-color: var(--card-background);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+            margin-bottom: 40px;
+        }
+
+        section {
+            padding-top: 60px;
+            margin-top: -40px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p,
+        li {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+        }
+
+        ul,
+        ol {
+            padding-left: 30px;
+        }
+
+        code {
+            background-color: var(--background-color);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, 'Courier New', monospace;
+            color: var(--danger-color);
+        }
+
+        .info-box {
+            background-color: #EBF5FB;
+            border-left: 5px solid var(--info-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box {
+            background-color: #FEF9E7;
+            border-left: 5px solid var(--warning-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .success-box {
+            background-color: #E8F8F5;
+            border-left: 5px solid var(--success-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .app-link {
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .app-link::after {
+            content: ' (dans Nexus Pro)';
+            font-style: italic;
+            font-weight: 500;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        /* MODIFICATION : Retrait du 'color' pour que 'strong' hérite de la couleur parente si besoin */
+        strong {
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--background-color);
+            font-weight: 600;
+        }
+
+        td:first-child {
+            font-weight: 500;
+        }
+
+        .print-btn {
+            background-color: var(--success-color);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .print-btn:hover {
+            background-color: #45a049;
+        }
+
+        .close-btn {
+            background-color: var(--danger-color);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .close-btn:hover {
+            background-color: #c0392b;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                color: black;
+            }
+
+            .container {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            main {
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+            }
+
+            header {
+                background-color: #f0f0f0;
+                color: black;
+                text-align: left;
+                padding: 20px;
+            }
+
+            .info-box,
+            .warning-box,
+            .success-box {
+                background-color: #f4f4f4;
+                border: 1px solid #ddd;
+            }
+
+            h2,
+            h3 {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+
+            section {
+                page-break-before: always;
+                padding-top: 20px;
+                margin-top: 0;
+            }
+
+            table {
+                page-break-inside: auto;
+            }
+
+            .print-btn,
+            .close-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Guide Finance Nexus Pro</h1>
+        <p>Devenez le maître de votre avenir financier.</p>
+    </header>
+
+    <div class="container">
+        <nav id="nav">
+            <h2>Table des Matières</h2>
+            <button class="print-btn" onclick="window.print()">Imprimer (PDF)</button>
+            <button class="close-btn" onclick="window.close()">Fermer</button>
+            <ul>
+                <li class="part-title" style="margin-top: 10px;">Introduction</li>
+                <li><a href="#intro">Pourquoi ce guide ?</a></li>
+
+                <li class="part-title">Partie 1 : Les Fondations</li>
+                <li><a href="#chap1">Chap. 1: Le Bon État d'Esprit</a></li>
+                <li><a href="#chap2">Chap. 2: Le Budget, Votre GPS</a></li>
+                <li><a href="#chap3">Chap. 3: Actifs vs Passifs</a></li>
+                <li><a href="#chap4">Chap. 4: Le Fonds d'Urgence</a></li>
+                <li><a href="#chap5">Chap. 5: Gérer ses Dettes</a></li>
+
+                <li class="part-title">Partie 2 : L'Investissement</li>
+                <li><a href="#chap6">Chap. 6: Pourquoi Investir ?</a></li>
+                <li><a href="#chap7">Chap. 7: L'Intérêt Composé</a></li>
+                <li><a href="#chap8">Chap. 8: Le Spectre Risque/Rendement</a></li>
+                <li><a href="#chap9">Chap. 9: Les Types de Placements</a></li>
+                <li><a href="#chap10">Chap. 10: Les Types de Comptes (Canada)</a></li>
+
+                <li class="part-title">Partie 3 : La Bourse en Détail</li>
+                <li><a href="#chap11">Chap. 11: Qu'est-ce qu'une Action ?</a></li>
+                <li><a href="#chap12">Chap. 12: Analyse Fondamentale</a></li>
+                <li><a href="#chap13">Chap. 13: Comprendre les Ratios Clés</a></li>
+                <li><a href="#chap14">Chap. 14: L'Investissement Dividendes</a></li>
+                <li><a href="#chap15">Chap. 15: Bâtir son Portefeuille</a></li>
+                <li><a href="#chap16">Chap. 16: La Psychologie de l'Investisseur</a></li>
+
+                <li class="part-title">Partie 4 : Vos Objectifs</li>
+                <li><a href="#chap17">Chap. 17: Définir ses Objectifs</a></li>
+                <li><a href="#chap18">Chap. 18: Planifier sa Retraite</a></li>
+
+                <li class="part-title">Partie 5 : Stratégies Avancées</li>
+                <li><a href="#chap19">Chap. 19: Fondamentale vs Technique</a></li>
+                <li><a href="#chap20">Chap. 20: Les Ordres de Bourse</a></li>
+                <li><a href="#chap21">Chap. 21: Fiscalité Avancée (ACB, PCAA)</a></li>
+                <li><a href="#chap22">Chap. 22: Le Rééquilibrage</a></li>
+                <li><a href="#chap23">Chap. 23: Pièges Psychologiques (Biais)</a></li>
+
+                <li class="part-title">Annexe</li>
+                <li><a href="#chap24">Chap. 24: Glossaire des Termes Clés</a></li>
+            </ul>
+        </nav>
+
+        <main>
+
+            <section id="intro">
+                <h2>Introduction: Pourquoi ce guide ?</h2>
+                <p>Vous avez entre les mains un outil puissant : <strong>Nexus Finance Pro</strong>. C'est une
+                    calculatrice sophistiquée, un gestionnaire de portefeuille précis et un planificateur de dettes
+                    stratégique, tout en un.</p>
+                <p>Mais un outil, aussi puissant soit-il, n'est efficace que si l'artisan sait comment et
+                    <strong>pourquoi</strong> l'utiliser.</p>
+                <div class="info-box">
+                    <p style="margin: 0;">Ce guide est le <strong>"Pourquoi"</strong>. L'application Nexus Finance Pro
+                        est le <strong>"Comment"</strong>.</p>
+                </div>
+                <p>Vous n'avez pas besoin d'être un expert pour utiliser Nexus Pro, mais comprendre les concepts
+                    fondamentaux de la finance personnelle transformera votre expérience. Vous ne cliquerez plus
+                    seulement sur des boutons ; vous exécuterez un plan.</p>
+
+                <h3>Ce que vous allez apprendre</h3>
+                <p>Ce guide vous enseignera les principes intemporels de la gestion de l'argent. Nous couvrirons :</p>
+                <ul>
+                    <li><strong>La Psychologie :</strong> Comment maîtriser vos émotions pour éviter les erreurs
+                        coûteuses.</li>
+                    <li><strong>Les Fondations :</strong> Bâtir un budget solide, créer un fonds d'urgence et attaquer
+                        vos dettes.</li>
+                    <li><strong>L'Investissement :</strong> Comprendre pourquoi et comment faire travailler votre argent
+                        pour vous.</li>
+                    <li><strong>La Bourse :</strong> Démystifier les actions, les FNB et les ratios financiers pour
+                        investir avec confiance.</li>
+                    <li><strong>Les Stratégies Avancées :</strong> Des concepts de niveau intermédiaire pour optimiser
+                        votre fiscalité et la gestion de votre portefeuille.</li>
+                </ul>
+                <p>À la fin de ce guide, chaque module de Nexus Finance Pro ne sera plus un simple onglet, mais une arme
+                    dans votre arsenal pour bâtir votre indépendance financière.</p>
+            </section>
+
+            <section id="chap1">
+                <h2>Chapitre 1: Le Bon État d'Esprit</h2>
+                <p>Bienvenue dans ce guide ! Avant de parler de chiffres, de ratios ou de stratégies, nous devons parler
+                    de l'outil le plus puissant à votre disposition : votre état d'esprit.</p>
+                <p>La gestion financière n'est pas une question de chance. Ce n'est pas un secret réservé à une élite.
+                    C'est un ensemble d'habitudes, de décisions et de systèmes que <strong>n'importe qui</strong> peut
+                    apprendre et appliquer.</p>
+                <p>Le plus grand obstacle n'est pas le manque d'argent, c'est la psychologie. C'est la peur de regarder
+                    ses comptes, la procrastination, ou le sentiment d'être "nul avec les chiffres".</p>
+
+                <h3>Les Mythes à Déboulonner</h3>
+                <ul>
+                    <li><strong>Mythe 1: "Il faut de l'argent pour faire de l'argent."</strong>
+                        <br>Faux. Il faut des <strong>habitudes</strong> pour faire de l'argent. Une personne qui
+                        épargne 100 $ par mois avec un plan battra toujours une personne qui gagne 10 000 $ par mois
+                        mais dépense 10 100 $.
+                    </li>
+                    <li><strong>Mythe 2: "Investir, c'est comme jouer au casino."</strong>
+                        <br>Faux. La <strong>spéculation</strong> à court terme (day trading) s'apparente au jeu.
+                        L'<strong>investissement</strong> à long terme, basé sur l'analyse de la santé des entreprises,
+                        est une participation à la croissance économique mondiale. C'est posséder une part d'une vraie
+                        entreprise.
+                    </li>
+                    <li><strong>Mythe 3: "Je suis trop jeune / trop vieux pour commencer."</strong>
+                        <br>Faux. Si vous êtes jeune, votre plus grand atout est le temps (voir Chapitre 7 sur l'intérêt
+                        composé). Si vous êtes plus âgé, votre plus grand atout est (souvent) un revenu plus élevé et la
+                        discipline. Le meilleur moment pour commencer était il y a 10 ans. Le deuxième meilleur moment,
+                        c'est <strong>aujourd'hui</strong>.
+                    </li>
+                </ul>
+                <div class="info-box">
+                    <strong>Votre Objectif Principal :</strong> L'indépendANCE financière. Ce n'est pas devenir riche
+                    pour acheter une voiture de luxe. C'est avoir suffisamment d'actifs (investissements) qui
+                    travaillent pour vous, afin que vous n'ayez plus <strong>besoin</strong> de travailler pour payer
+                    vos factures. Le travail devient un choix, pas une obligation.
+                </div>
+            </section>
+
+            <section id="chap2">
+                <h2>Chapitre 2: Le Budget, Votre GPS</h2>
+                <p>Vous ne pouvez pas atteindre une destination si vous ne savez pas où vous êtes. Le budget est votre
+                    "Vous êtes ici" sur la carte financière. Ce n'est pas une prison conçue pour vous empêcher de
+                    dépenser ; c'est un outil conçu pour vous donner la <strong>permission</strong> de dépenser sans
+                    culpabilité.</p>
+                <p>Un budget répond à une seule question : <strong>Où va mon argent ?</strong></p>
+
+                <h3>Le Budget Zéro</h3>
+                <p>La méthode la plus efficace est le "Budget Zéro". L'idée est simple : à la fin du mois, la différence
+                    entre vos revenus et vos sorties d'argent doit être de zéro. Cela ne veut pas dire qu'il ne vous
+                    reste rien ! Cela veut dire que <strong>chaque dollar a reçu une mission</strong>.</p>
+                <p><code>Revenus - Dépenses - Épargne - Investissements = 0 $</code></p>
+                <p>Si vous gagnez 3000 $ et que vous avez 2500 $ de dépenses, il vous reste 500 $. Avec un budget zéro,
+                    vous décidez à l'avance ce que ces 500 $ vont faire : "200 $ iront dans le fonds d'urgence", "100 $
+                    iront dans le CELI", "200 $ iront dans l'épargne pour les vacances".</p>
+
+                <div class="success-box">
+                    <strong>Passez à l'action :</strong> Utilisez le <span class="app-link">Module Budget</span> de
+                    Nexus Finance Pro. Listez TOUS vos revenus et TOUTES vos dépenses, même le café à 3 $. Utilisez les
+                    fréquences (annuel, mensuel) pour que l'outil calcule votre flux de trésorerie mensuel exact. C'est
+                    la première étape de tout votre plan.
+                </div>
+            </section>
+
+            <section id="chap3">
+                <h2>Chapitre 3: Actifs vs Passifs</h2>
+                <p>C'est le concept le plus important de la finance personnelle, popularisé par Robert Kiyosaki dans
+                    "Père Riche, Père Pauvre".</p>
+
+                <h3>La Définition Simple</h3>
+                <ul>
+                    <li>Un <strong>ACTIF</strong> met de l'argent dans votre poche.</li>
+                    <li>Un <strong>PASSIF</strong> sort de l'argent de votre poche.</li>
+                </ul>
+                <p>C'est aussi simple que cela. L'objectif de votre vie financière est d'utiliser vos revenus pour
+                    acheter des actifs, afin que ces actifs génèrent de nouveaux revenus pour acheter encore plus
+                    d'actifs.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Exemples d'Actifs</th>
+                            <th>Exemples de Passifs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Une action qui verse un dividende.</td>
+                            <td>Un prêt automobile.</td>
+                        </tr>
+                        <tr>
+                            <td>Un FNB (ETF) qui prend de la valeur.</td>
+                            <td>Le solde de votre carte de crédit.</td>
+                        </tr>
+                        <tr>
+                            <td>Un immeuble locatif qui génère un loyer.</td>
+                            <td>Un prêt étudiant.</td>
+                        </tr>
+                        <tr>
+                            <td>Un compte épargne qui génère de l'intérêt.</td>
+                            <td>Un abonnement que vous n'utilisez pas.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning-box">
+                    <strong>Le piège de la résidence principale :</strong> "Ma maison est mon plus gros actif !"
+                    Vraiment ? Chaque mois, elle <strong>sort</strong> de l'argent de votre poche (hypothèque, taxes,
+                    assurances, réparations). Selon la définition stricte, votre résidence principale est un passif.
+                    <br><br>
+                    Elle <strong>peut</strong> devenir un actif le jour où vous la vendez (si elle a pris de la valeur),
+                    ou si vous louez le sous-sol (elle génère un revenu). Mais ne confondez pas un passif (qui vous
+                    coûte de l'argent) avec un investissement.
+                </div>
+                <p>Votre <strong>Patrimoine Net</strong> (ou Valeur Nette) est la mesure de votre santé financière.
+                    C'est ce que vous voyez sur votre <span class="app-link">Tableau de Bord</span>.</p>
+                <p><code>Patrimoine Net = Total de vos Actifs - Total de vos Passifs</code></p>
+                <p>Votre but est de faire augmenter ce chiffre, mois après mois, année après année.</p>
+            </section>
+
+            <section id="chap4">
+                <h2>Chapitre 4: Le Fonds d'Urgence</h2>
+                <p>La vie est imprévisible. La voiture tombe en panne. Le toit se met à couler. Vous perdez votre
+                    emploi. La différence entre un imprévu et une catastrophe financière s'appelle un fonds d'urgence.
+                </p>
+                <p>Un fonds d'urgence est votre bouclier. C'est de l'argent mis de côté, <strong>exclusivement</strong>
+                    pour les urgences. Cet argent n'est pas investi, il n'est pas là pour "performer". Il est là pour
+                    être liquide, accessible et ennuyeux.</p>
+
+                <h3>Combien ?</h3>
+                <p>L'objectif standard est de détenir <strong>3 à 6 mois de dépenses de subsistance</strong>.</p>
+                <p>Calculez combien vous <strong>devez</strong> dépenser chaque mois pour vivre (loyer/hypothèque,
+                    nourriture de base, électricité, transport minimum). Si ce montant est de 2 500 $, votre fonds
+                    d'urgence devrait se situer entre 7 500 $ et 15 000 $.</p>
+
+                <h3>Où le placer ?</h3>
+                <p>Dans un endroit sûr et accessible, mais pas <strong>trop</strong> accessible (pas votre compte chèque
+                    de tous les jours). Un <strong>compte d'épargne à intérêt élevé</strong> (HISA) est idéal. Il est
+                    séparé de vos opérations quotidiennes, mais vous pouvez y accéder en 1 ou 2 jours.</p>
+
+                <div class="info-box">
+                    <strong>La priorité absolue :</strong> Avant de payer vos dettes (sauf le minimum) et avant
+                    d'investir un seul dollar en bourse, bâtissez un "mini-fonds" d'urgence de 1 000 $. Cet argent vous
+                    évitera de vous endetter davantage la prochaine fois qu'un pneu crève.
+                </div>
+            </section>
+
+            <section id="chap5">
+                <h2>Chapitre 5: Gérer ses Dettes</h2>
+                <p>Il existe deux types de dettes : les "bonnes" dettes et les "mauvaises" dettes.</p>
+                <ul>
+                    <li><strong>Bonnes dettes (Dettes d'investissement) :</strong> Dettes utilisées pour acheter un
+                        actif qui prend de la valeur. Ex: Une hypothèque (pour acheter un bien immobilier), un prêt
+                        étudiant (pour investir en vous-même et augmenter votre revenu futur).</li>
+                    <li><strong>Mauvaises dettes (Dettes de consommation) :</strong> Dettes utilisées pour acheter un
+                        passif qui perd de la valeur. Ex: Un prêt auto, le solde d'une carte de crédit pour des vacances
+                        ou un restaurant.</li>
+                </ul>
+                <p>Votre objectif est de rembourser les mauvaises dettes le plus vite possible. Pour cela, il existe
+                    deux stratégies principales, que vous pouvez simuler dans le <span class="app-link">Module
+                        Plan</span>.</p>
+
+                <h3>Stratégie 1 : L'Avalanche (La plus logique)</h3>
+                <p>Vous listez toutes vos dettes par ordre de <strong>taux d'intérêt décroissant</strong> (du plus élevé
+                    au plus bas). Vous payez le minimum sur toutes vos dettes, et vous mettez tout l'argent
+                    supplémentaire que vous avez sur la dette avec le taux d'intérêt le plus élevé. Une fois celle-ci
+                    remboursée, vous reportez tout ce montant (le minimum + l'extra) sur la suivante.</p>
+                <p><strong>Avantage :</strong> C'est la méthode qui vous fera économiser le plus d'argent en intérêts.
+                    C'est la plus efficace mathématiquement.</p>
+
+                <h3>Stratégie 2 : La Boule de Neige (La plus motivante)</h3>
+                <p>Vous listez toutes vos dettes par ordre de <strong>solde croissant</strong> (du plus petit au plus
+                    grand), sans tenir compte du taux d'intérêt. Vous payez le minimum sur tout, et vous attaquez la
+                    plus petite dette avec tout votre argent supplémentaire. Une fois remboursée, vous passez à la
+                    suivante.</p>
+                <p><strong>Avantage :</strong> Vous obtenez des "victoires" rapides. Rembourser une petite dette de 500
+                    $ en deux mois crée un élan psychologique et une motivation immenses pour continuer.</p>
+
+                <div class="success-box">
+                    <strong>Quelle méthode choisir ?</strong> Celle qui vous gardera motivé. Si vous êtes motivé par les
+                    chiffres, choisissez l'Avalanche. Si vous avez besoin de victoires rapides pour rester dans la
+                    course, choisissez la Boule de Neige. Le <span class="app-link">Module Plan</span> vous montrera
+                    l'impact des deux.
+                </div>
+            </section>
+
+            <section id="chap6">
+                <h2>Chapitre 6: Pourquoi Investir ?</h2>
+                <p>Si vous avez déjà un budget et un fonds d'urgence, félicitations ! Vous avez terminé le "mode
+                    défense". Il est temps de passer en "mode attaque" : l'investissement.</p>
+                <p>L'épargne (mettre de l'argent dans un compte) vous protège. L'investissement (acheter des actifs)
+                    vous enrichit.</p>
+
+                <h3>Votre Ennemi No. 1 : L'Inflation</h3>
+                <p>L'inflation est l'augmentation générale des prix au fil du temps. Si l'inflation est de 3% par an,
+                    cela signifie que 100 $ aujourd'hui n'achètera que 97 $ de biens et services l'année prochaine.
+                    Votre argent perd de sa valeur s'il dort.</p>
+                <p>Si vous laissez 10 000 $ dans un compte chèque (qui rapporte 0%) pendant 25 ans avec une inflation
+                    moyenne de 2.5%, votre "pouvoir d'achat" ne sera plus que de 5 394 $. Vous aurez
+                    <strong>perdu</strong> près de la moitié de votre argent, sans rien faire.</p>
+                <p><strong>L'objectif de l'investissement est simple : obtenir un rendement supérieur à l'inflation pour
+                        que votre pouvoir d'achat augmente avec le temps.</strong></p>
+
+                <div class="info-box">
+                    Nexus Finance Pro vous aide à voir cet impact. Dans les modules <span class="app-link">Valeur
+                        Future</span> et <span class="app-link">Retrait</span>, l'outil calcule toujours la "Valeur
+                    Nominale" (le montant total) et le "Pouvoir d'Achat Réel" (ce que cet argent vaudra vraiment après
+                    inflation).
+                </div>
+            </section>
+
+            <section id="chap7">
+                <h2>Chapitre 7: L'Intérêt Composé</h2>
+                <p>Albert Einstein aurait dit que l'intérêt composé est "la huitième merveille du monde". C'est le
+                    moteur de la création de richesse.</p>
+                <p>L'intérêt composé, c'est simplement <strong>gagner de l'intérêt sur votre intérêt</strong>. C'est un
+                    effet boule de neige.</p>
+
+                <h3>Exemple Simple</h3>
+                <p>Vous investissez 10 000 $ avec un rendement de 8% par an.</p>
+                <ul>
+                    <li><strong>Année 1 :</strong> Vous gagnez 8% de 10 000 $ (800 $). Votre solde est de 10 800 $.</li>
+                    <li><strong>Année 2 :</strong> Vous gagnez 8% de 10 800 $ (864 $). Votre solde est de 11 664 $.</li>
+                    <li><strong>Année 3 :</strong> Vous gagnez 8% de 11 664 $ (933 $). Votre solde est de 12 597 $.</li>
+                </ul>
+                <p>Votre argent travaille pour vous, et les "employés" (vos gains) commencent eux-mêmes à travailler et
+                    à avoir des enfants !</p>
+
+                <h3>Le Facteur Temps</h3>
+                <p>La variable la plus importante est le <strong>temps</strong>. Regardez la différence :</p>
+                <ul>
+                    <li><strong>Personne A (Alex) :</strong> Investit 5 000 $ par an de 25 ans à 35 ans (10 ans
+                        seulement). Il investit un total de 50 000 $. Puis il arrête de verser.</li>
+                    <li><strong>Personne B (Ben) :</strong> Commence à 35 ans et investit 5 000 $ par an jusqu'à 65 ans
+                        (30 ans !). Il investit un total de 150 000 $.</li>
+                </ul>
+                <p>À 65 ans (avec un rendement de 8%) :</p>
+                <ul>
+                    <li>Alex (qui n'a versé que 50 000 $) aura : <strong>1 028 000 $</strong></li>
+                    <li>Ben (qui a versé 150 000 $) aura : <strong>611 000 $</strong></li>
+                </ul>
+                <p>Alex gagne, simplement parce qu'il a commencé 10 ans plus tôt. Ses 50 000 $ ont eu plus de temps pour
+                    "composer".</p>
+
+                <div class="success-box">
+                    <strong>Passez à l'action :</strong> Allez dans le <span class="app-link">Module Valeur
+                        Future</span>. Entrez votre capital initial, vos versements mensuels, et un rendement (ex: 8%).
+                    Regardez ce que le graphique vous montre sur 30 ans. Vous serez stupéfait par la courbe
+                    exponentielle.
+                </div>
+            </section>
+
+            <section id="chap8">
+                <h2>Chapitre 8: Le Spectre Risque/Rendement</h2>
+                <p>Il n'y a pas de repas gratuit en finance. La règle d'or est la suivante :</p>
+                <p><strong>Plus le rendement potentiel est élevé, plus le risque de perte est élevé.</strong></p>
+                <p>Votre travail en tant qu'investisseur n'est pas d'éviter le risque, mais de le <strong>gérer</strong>
+                    et de prendre un niveau de risque avec lequel vous êtes à l'aise.</p>
+
+                <h3>Le Spectre</h3>
+                <ul>
+                    <li><strong>Risque Faible / Rendement Faible :</strong> Comptes d'épargne, CPG (Certificats de
+                        Placement Garanti), Obligations gouvernementales. Votre capital est (presque) garanti, mais
+                        votre rendement peine à battre l'inflation. C'est là que va votre fonds d'urgence.</li>
+                    <li><strong>Risque Moyen / Rendement Moyen :</strong> Obligations de sociétés de haute qualité, FNB
+                        (Fonds Négociés en Bourse) d'indices larges (comme le S&P 500 ou le TSX), actions de grandes
+                        entreprises "blue chip" (ex: banques, services publics).</li>
+                    <li><strong>Risque Élevé / Rendement Élevé :</strong> Actions individuelles de petites entreprises,
+                        actions de "croissance" (technologie), crypto-monnaies. Vous pourriez doubler votre argent en un
+                        an, ou en perdre 80%.</li>
+                </ul>
+
+                <h3>Qu'est-ce que le Risque ?</h3>
+                <p>Le risque, c'est la <strong>volatilité</strong>. C'est la vitesse à laquelle le prix monte et
+                    descend. Si vous investissez 10 000 $ et que 3 mois plus tard, votre portefeuille vaut 7 000 $,
+                    comment réagissez-vous ?</p>
+                <ul>
+                    <li><strong>A)</strong> "Panique ! Je vends tout avant de tout perdre !" -> Votre tolérance au
+                        risque est faible.</li>
+                    <li><strong>B)</strong> "Ouch. Bon, mon plan est sur 20 ans, je n'y touche pas." -> Tolérance
+                        moyenne.</li>
+                    <li><strong>C)</strong> "Super ! Les actions sont en solde ! J'achète plus !" -> Tolérance élevée.
+                    </li>
+                </ul>
+                <p>Il n'y a pas de bonne ou de mauvaise réponse. Il est juste crucial de vous connaître
+                    <strong>avant</strong> que la baisse n'arrive.</p>
+            </section>
+
+            <section id="chap9">
+                <h2>Chapitre 9: Les Types de Placements</h2>
+                <p>Voici les "blocs Lego" de base que vous pouvez utiliser pour bâtir votre portefeuille.</p>
+
+                <h3>1. Les Actions (Stocks / Equities)</h3>
+                <p>Acheter une action (ex: `AAPL` pour Apple), c'est acheter une petite part de l'entreprise. Vous
+                    devenez co-propriétaire. Vous gagnez de l'argent de deux façons :
+                <ol>
+                    <li><strong>Plus-value :</strong> L'entreprise devient plus profitable, d'autres investisseurs
+                        veulent l'acheter, le prix de l'action monte. Vous la revendez plus cher que vous l'avez payée.
+                    </li>
+                    <li><strong>Dividendes :</strong> L'entreprise réalise des profits et décide d'en distribuer une
+                        partie à ses propriétaires (vous). C'est un revenu passif. (Voir Chapitre 14).</li>
+                </ol>
+                </p>
+
+                <h3>2. Les Obligations (Bonds)</h3>
+                <p>Acheter une obligation, c'est <strong>prêter de l'argent</strong> à un gouvernement ou à une grande
+                    entreprise. En retour, ils s'engagent à vous payer un intérêt fixe (le "coupon") pendant une période
+                    donnée, et à vous rembourser votre argent à la fin (la "maturité"). C'est généralement moins risqué
+                    que les actions, mais offre un rendement plus faible.</p>
+
+                <h3>3. Les Fonds Négociés en Bourse (FNB / ETF)</h3>
+                <p>C'est souvent le meilleur point de départ. Un FNB est un "panier" qui contient des centaines, voire
+                    des milliers, d'actions ou d'obligations différentes, mais qui s'achète comme une seule action.</p>
+                <p>Par exemple, au lieu d'essayer de deviner si Apple ou Microsoft performera mieux, vous pouvez acheter
+                    un FNB qui suit l'indice S&P 500 (comme `VOO` ou `VFV`). Vous possédez alors une minuscule partie
+                    des 500 plus grosses entreprises américaines. Si une entreprise fait faillite, l'impact sur votre
+                    portefeuille est minime.</p>
+                <p><strong>C'est la diversification instantanée à très faible coût.</strong></p>
+            </section>
+
+            <section id="chap10">
+                <h2>Chapitre 10: Les Types de Comptes (Canada)</h2>
+                <p>Avant d'acheter un investissement (une action, un FNB), vous devez choisir le "contenant" fiscal dans
+                    lequel le placer. Au Canada, les trois principaux sont le CELI, le REER et le compte non enregistré.
+                </p>
+                <p><strong>C'est crucial :</strong> Le CELI et le REER ne sont pas des investissements. Ce sont des
+                    <strong>types de comptes</strong> avec des avantages fiscaux. Vous pouvez détenir des actions, des
+                    FNB ou des CPG <strong>à l'intérieur</strong> d'un CELI ou d'un REER.</p>
+
+                <h3>1. CELI (Compte d'Épargne Libre d'Impôt)</h3>
+                <ul>
+                    <li><strong>Principe :</strong> Vous investissez de l'argent <strong>après</strong> avoir payé de
+                        l'impôt dessus.</li>
+                    <li><strong>Avantage :</strong> TOUS les gains (plus-values, dividendes, intérêts) que vous faites à
+                        l'intérieur sont <strong>100% libres d'impôt, à vie</strong>.</li>
+                    <li><strong>Retraits :</strong> Vous pouvez retirer votre argent n'importe quand, pour n'importe
+                        quelle raison, sans payer un sou d'impôt. Les montants retirés sont rajoutés à vos droits de
+                        cotisation l'année suivante.</li>
+                    <li><strong>Idéal pour :</strong> Fonds d'urgence, épargne pour une maison (Mise de fonds),
+                        investissements à long terme, épargne-retraite.</li>
+                </ul>
+
+                <h3>2. REER (Régime Enregistré d'Épargne-Retraite)</h3>
+                <ul>
+                    <li><strong>Principe :</strong> Vous investissez de l'argent <strong>avant</strong> de payer
+                        l'impôt.</li>
+                    <li><strong>Avantage :</strong> Le montant que vous cotisez est déduit de votre revenu imposable de
+                        l'année. Si vous gagnez 60 000 $ et cotisez 5 000 $ à votre REER, vous ne payez de l'impôt que
+                        sur 55 000 $. Vous recevez donc un <strong>remboursement d'impôt</strong> immédiat.</li>
+                    <li><strong>Retraits :</strong> L'argent croît à l'abri de l'impôt, MAIS lorsque vous le retirez
+                        (idéalement à la retraite), chaque dollar retiré est considéré comme un revenu et est
+                        <strong>100% imposable</strong>.</li>
+                    <li><strong>Idéal pour :</strong> L'épargne-retraite à long terme, surtout si vous êtes dans une
+                        tranche d'imposition élevée (vous obtenez un gros remboursement) et que vous prévoyez être dans
+                        une tranche plus basse à la retraite.</li>
+                </ul>
+
+                <h3>3. Compte Non Enregistré (Compte "Taxable")</h3>
+                <p>C'est un compte d'investissement de base, sans avantage fiscal. Chaque année, vous devez payer de
+                    l'impôt sur les dividendes ou intérêts reçus, et vous paierez de l'impôt sur 50% de vos plus-values
+                    (gains en capital) lorsque vous vendrez vos placements.</p>
+
+                <div class="success-box">
+                    <strong>La Stratégie Gagnante :</strong> Pour la plupart des Canadiens, l'ordre de priorité est :
+                    <ol>
+                        <li>Maximiser son <strong>CELI</strong> en premier.</li>
+                        <li>Une fois le CELI plein, maximiser son <strong>REER</strong>.</li>
+                        <li>Une fois les deux pleins, investir dans un compte <strong>Non Enregistré</strong>.</li>
+                    </ol>
+                    Nexus Finance Pro vous aide à suivre vos comptes (CELI, REER, etc.) dans les modules <span
+                        class="app-link">Investissement</span> et <span class="app-link">Dépôts</span>.
+                </div>
+            </section>
+
+            <section id="chap11">
+                <h2>Chapitre 11: Qu'est-ce qu'une Action ?</h2>
+                <p>Acheter une action, c'est acheter une part de propriété d'une entreprise. Si une entreprise a émis 1
+                    000 000 d'actions et que vous en achetez 100, vous possédez 0.01% de cette entreprise.</p>
+                <p>Vous êtes maintenant un propriétaire. Vous avez le droit de voter aux assemblées annuelles et vous
+                    avez droit à une part des profits (les dividendes, s'il y en a).</p>
+
+                <h3>Le Marché Boursier (La Bourse)</h3>
+                <p>La bourse (ex: TSX à Toronto, NYSE à New York) n'est rien de plus qu'un grand marché public où les
+                    acheteurs et les vendeurs se rencontrent pour échanger ces parts d'entreprises. Le prix est
+                    déterminé par l'offre et la demande.</p>
+                <ul>
+                    <li>Si plus de gens veulent <strong>acheter</strong> une action (demande élevée) que la vendre, le
+                        prix monte.</li>
+                    <li>Si plus de gens veulent <strong>vendre</strong> une action (offre élevée) que l'acheter, le prix
+                        baisse.</li>
+                </ul>
+                <p>Ce qui influence l'offre et la demande, ce sont les <strong>anticipations</strong> des investisseurs
+                    sur les profits futurs de l'entreprise. Si Apple annonce un nouvel iPhone révolutionnaire, les gens
+                    anticipent des profits records, et la demande pour l'action `AAPL` augmente.</p>
+            </section>
+
+            <section id="chap12">
+                <h2>Chapitre 12: Analyse Fondamentale</h2>
+                <p>L'analyse fondamentale est l'art d'évaluer la <strong>santé financière</strong> et la <strong>valeur
+                        réelle</strong> d'une entreprise. L'objectif est de trouver des entreprises extraordinaires à un
+                    prix ordinaire.</p>
+                <p>Vous ne regardez pas le graphique du prix de l'action. Vous regardez les <strong>comptes</strong> de
+                    l'entreprise :</p>
+                <ul>
+                    <li><strong>Bilan (Balance Sheet) :</strong> Ce que l'entreprise possède (actifs) et ce qu'elle doit
+                        (passifs). C'est son patrimoine net.</li>
+                    <li><strong>État des résultats (Income Statement) :</strong> Combien l'entreprise a vendu (revenus),
+                        combien elle a dépensé (dépenses) et ce qu'il lui reste (profits ou pertes).</li>
+                    <li><strong>Flux de trésorerie (Cash Flow) :</strong> D'où vient l'argent et où va-t-il ? Une
+                        entreprise peut être "profitable" sur papier mais faire faillite si elle n'a pas de liquidités.
+                    </li>
+                </ul>
+                <p>Le <span class="app-link">Module Analyse Action</span> de Nexus Pro est un outil d'analyse
+                    fondamentale simplifié. Il vous aide à évaluer une entreprise sur la base des ratios financiers les
+                    plus importants.</p>
+            </section>
+
+            <section id="chap13">
+                <h2>Chapitre 13: Comprendre les Ratios Clés</h2>
+                <p>Les ratios sont des raccourcis pour comprendre la santé d'une entreprise sans avoir à lire des
+                    rapports de 100 pages. Nexus Pro utilise ces ratios pour calculer son "Nexus Score".</p>
+
+                <h3>Ratios d'Analyse d'Actions (Module Analyse Action)</h3>
+                <p>Voici les indicateurs fondamentaux que vous devez maîtriser :</p>
+
+                <div class="info-box">
+                    <strong>Pensez Immobilier ?</strong> Si vous cherchez les explications complètes sur le **LTV**, le
+                    **Cap Rate**, le **Debt Yield** et le **ROE immobilier**, veuillez consulter le nouveau <a
+                        href="Guide_immobilier.html" target="_blank"
+                        style="font-weight: bold; color: var(--info-color); text-decoration: none;">Guide
+                        d'Investissement Immobilier</a>.
+                </div>
+
+                <h4>1. Valorisation et Croissance</h4>
+                <ul>
+                    <li><strong>Ratio C/B (P/E Ratio) :</strong> Combien les investisseurs paient pour chaque dollar de
+                        profit. Un P/E de 20 signifie que vous payez 20$ pour 1$ de bénéfice.</li>
+                    <li><strong>Croissance du BPA (EPS Growth) :</strong> L'augmentation (en %) du Bénéfice Par Action
+                        par rapport à l'année précédente. C'est le moteur du cours de l'action.</li>
+                    <li><strong>Ratio PEG :</strong> Le P/E divisé par la Croissance.
+                        <br><code>PEG = P/E Réel / Taux de Croissance</code>. <br>Un PEG <strong>inférieur à
+                            1.0</strong> suggère que l'action est potentiellement sous-évaluée par rapport à sa vitesse
+                        de croissance.</li>
+                </ul>
+
+                <h4>2. Rentabilité et Efficacité</h4>
+                <ul>
+                    <li><strong>Marge Nette (Net Margin) :</strong> Pour chaque 100 $ de ventes, combien de dollars
+                        restent en profit pur ? Une marge élevée protège l'entreprise en temps de crise.</li>
+                    <li><strong>Rendement des Fonds Propres (ROE) :</strong> L'entreprise est-elle efficace pour
+                        utiliser l'argent des actionnaires pour générer du profit ? Un ROE > 15% est excellent.</li>
+                </ul>
+
+                <h4>3. Santé Financière (Bilan)</h4>
+                <ul>
+                    <li><strong>Ratio Dette/Fonds Propres (Debt-to-Equity) :</strong> Mesure l'endettement. Si le ratio
+                        est > 1.0, l'entreprise a plus de dettes que de valeur pour les actionnaires. Un ratio > 2.0 est
+                        risqué.</li>
+                    <li><strong>Ratio de Liquidité (Current Ratio) :</strong>
+                        <code>Actifs Court Terme / Dettes Court Terme</code>. Mesure la capacité à payer les factures
+                        immédiates. Un ratio < 1.0 signifie que l'entreprise pourrait manquer de cash à court
+                            terme.</li>
+                </ul>
+
+            </section>
+
+            <section id="chap14">
+                <h2>Chapitre 14: L'Investissement Dividendes</h2>
+                <p>C'est une stratégie très populaire, axée sur la génération de <strong>revenu passif</strong>.
+                    L'objectif n'est pas (seulement) de voir le prix de l'action monter, mais de détenir des actions
+                    d'entreprises matures et stables qui vous versent une partie de leurs profits chaque trimestre.</p>
+                <p>C'est comme posséder un verger : vous ne voulez pas vendre vos pommiers (les actions), vous voulez
+                    juste récolter et vendre les pommes (les dividendes).</p>
+
+                <h3>Le "Rendement du Dividende" (Dividend Yield)</h3>
+                <p>C'est le montant total que vous recevez en dividendes par an, divisé par le prix de l'action.
+                    <br><code>(Dividende Annuel / Prix de l'Action) * 100</code>
+                </p>
+                <p>Si une action coûte 100 $ et qu'elle verse 4 $ de dividende par an, son rendement est de 4%. C'est un
+                    rendement de 4% que vous recevez en argent comptant, <strong>en plus</strong> de toute augmentation
+                    (ou baisse) du prix de l'action.</p>
+
+                <h3>Le Piège à Rendement (> 12%)</h3>
+                <div class="warning-box">
+                    <strong>Règle Nexus Pro :</strong> Dans le module Analyse, tout rendement supérieur à
+                    <strong>12%</strong> reçoit automatiquement un score de <strong>0</strong>. Ce n'est pas un bug,
+                    c'est une sécurité. Voici pourquoi.
+                </div>
+                <p>En bourse, l'adage <em>"Si c'est trop beau pour être vrai, c'est probablement faux"</em> s'applique
+                    parfaitement. Un rendement astronomique cache souvent une catastrophe imminente.</p>
+
+                <h4>1. La Mécanique Mathématique (Le dénominateur)</h4>
+                <p>Le rendement et le prix de l'action fonctionnent comme une balançoire : <strong>Si le prix baisse, le
+                        rendement monte.</strong></p>
+                <ul>
+                    <li>Imaginez une entreprise "Solide Inc." qui vaut <strong>100 $</strong> et verse <strong>5
+                            $</strong> (Rendement = 5%).</li>
+                    <li>Une catastrophe arrive (procès, perte de clients). Les investisseurs vendent et le prix
+                        s'effondre à <strong>40 $</strong>.</li>
+                    <li>Le dividende n'a pas encore été coupé officiellement. Le calcul devient :
+                        <code>5 $ / 40 $ = 12,5 %</code>.</li>
+                </ul>
+                <p>L'investisseur débutant voit "12,5 %" et pense faire une affaire. En réalité, il achète une
+                    entreprise en train de couler. Le marché a déjà "intégré" que le dividende va être coupé
+                    prochainement.</p>
+
+                <h4>2. L'Insoutenabilité (Le Payout Ratio)</h4>
+                <p>Une entreprise ne peut pas distribuer plus d'argent qu'elle n'en gagne. Si le rendement est de 15%,
+                    cela signifie souvent que l'entreprise distribue <strong>plus de 100% de ses bénéfices</strong> (ou
+                    s'endette) pour payer ce dividende et tenter de retenir les investisseurs. C'est une spirale
+                    mortelle qui mène souvent à une coupe brutale du dividende.</p>
+
+                <h4>3. La Prime de Risque</h4>
+                <p>Si une action offre 14%, c'est que les gros investisseurs (banques, fonds) refusent de l'acheter à un
+                    prix plus élevé car ils estiment que le <strong>risque de faillite</strong> est immense. Le
+                    rendement élevé est la "prime" nécessaire pour convaincre quelqu'un de prendre ce risque.</p>
+
+                <div class="info-box">
+                    <strong>Les Zones de Rendement (Guide général) :</strong><br>
+                    <ul>
+                        <li><strong>0% - 2% :</strong> Entreprise en croissance ou marché très cher.</li>
+                        <li><strong>3% - 6% :</strong> La "Zone Idéale". Dividende sain et durable (ex: Banques,
+                            Télécoms, Énergie).</li>
+                        <li><strong>7% - 10% :</strong> Zone de prudence. Souvent des secteurs spécifiques (REITs,
+                            Split-Corps) ou des entreprises en difficulté légère.</li>
+                        <li><strong>> 12% :</strong> <strong>Zone de Danger (Yield Trap).</strong> À éviter sauf si vous
+                            êtes un expert en redressement d'entreprises.</li>
+                    </ul>
+                </div>
+
+                <h3>La Croissance du Dividende</h3>
+                <p>La vraie magie, ce sont les "Aristocrates du Dividende" : des entreprises qui non seulement versent
+                    un dividende, mais qui l'<strong>augmentent chaque année</strong>. Acheter une action qui verse 3%
+                    aujourd'hui, mais qui augmente son versement de 10% par an, est bien plus puissant à long terme
+                    qu'une action qui verse 6% mais ne l'augmente jamais.</p>
+
+                <div class="info-box">
+                    Dans le <span class="app-link">Module Investissement</span>, vous pouvez enregistrer vos
+                    transactions de type "Dividende". Cela vous permet de suivre les revenus passifs générés par votre
+                    portefeuille, séparément des gains en capital.
+                </div>
+            </section>
+
+            <section id="chap15">
+                <h2>Chapitre 15: Bâtir son Portefeuille</h2>
+                <p>Votre portefeuille est simplement la collection de tous vos investissements. Le but est de le bâtir
+                    de manière à ce qu'il corresponde à votre tolérance au risque (Chapitre 8) et à vos objectifs
+                    (Chapitre 17).</p>
+
+                <h3>La Diversification</h3>
+                <p>C'est la seule règle à ne jamais enfreindre. <strong>Ne mettez pas tous vos œufs dans le même
+                        panier.</strong></p>
+                <p>Si vous mettez 100% de votre argent dans une seule action, même une "bonne" action, vous êtes à la
+                    merci d'un seul PDG, d'un seul produit, d'un seul scandale. C'est du risque inutile.</p>
+                <p>Un portefeuille bien diversifié répartit le risque :</p>
+                <ul>
+                    <li><strong>Par classe d'actifs :</strong> Un mélange d'Actions (pour la croissance) et
+                        d'Obligations (pour la stabilité).</li>
+                    <li><strong>Par secteur :</strong> Ne pas tout mettre en Technologie. Détenir aussi des banques, de
+                        l'énergie, de la santé, des services publics...</li>
+                    <li><strong>Par géographie :</strong> Ne pas tout mettre au Canada. Détenir aussi des actions
+                        américaines, européennes et asiatiques.</li>
+                </ul>
+                <p>C'est pour cela que les <strong>FNB (ETFs)</strong> sont si puissants : ils vous donnent cette
+                    diversification instantanément.</p>
+
+                <h3>L'Allocation d'Actifs</h3>
+                <p>C'est la décision la plus importante que vous prendrez. C'est le pourcentage de votre argent que vous
+                    mettez en Actions (risqué/croissance) vs en Obligations (sûr/stabilité).</p>
+                <ul>
+                    <li><strong>Jeune (20-35 ans) :</strong> Vous avez le temps. Vous pouvez vous permettre d'être
+                        agressif. Ex: <strong>90% Actions, 10% Obligations</strong>.</li>
+                    <li><strong>Milieu de carrière (35-50 ans) :</strong> Vous commencez à vouloir protéger vos gains.
+                        Ex: <strong>70% Actions, 30% Obligations</strong>.</li>
+                    <li><strong>Près de la retraite (50-65 ans) :</strong> Vous ne pouvez pas vous permettre une grosse
+                        chute. Ex: <strong>50% Actions, 50% Obligations</strong>.</li>
+                    <li><strong>À la retraite :</strong> La préservation est clé. Ex: <strong>30% Actions, 70%
+                            Obligations</strong>.</li>
+                </ul>
+                <p>Le <span class="app-link">Module Investissement</span> vous montre votre répartition (allocation)
+                    actuelle dans le graphique "Répartition du Portefeuille".</p>
+            </section>
+
+            <section id="chap16">
+                <h2>Chapitre 16: La Psychologie de l'Investisseur</h2>
+                <p>Investir est simple, mais ce n'est pas facile. C'est simple parce que la stratégie gagnante est
+                    connue : acheter des actifs diversifiés (comme des FNB indiciels) et ne <strong>jamais</strong> y
+                    toucher pendant 30 ans. C'est difficile parce que nous sommes humains.</p>
+                <p>Votre pire ennemi en investissement, c'est <strong>vous</strong>. C'est votre cerveau émotionnel qui
+                    prend le dessus sur votre cerveau logique.</p>
+
+                <h3>Les Deux Émotions Destructrices</h3>
+
+                <h4>1. La Cupidité (Greed)</h4>
+                <p><strong>Symptôme :</strong> "Tout le monde fait de l'argent avec l'action X ! Le prix monte de 10%
+                    par jour ! Je dois tout acheter maintenant avant qu'il ne soit trop tard !" (Aussi appelé FOMO :
+                    Fear Of Missing Out).</p>
+                <p><strong>Résultat :</strong> Vous achetez au <strong>sommet</strong> du marché, juste avant que la
+                    bulle n'éclate, et vous perdez 50% en une semaine.</p>
+
+                <h4>2. La Peur (Fear)</h4>
+                <p><strong>Symptôme :</strong> "Le marché s'effondre ! Les nouvelles disent que c'est la fin du monde !
+                    Mon portefeuille a perdu 30% ! Je dois vendre maintenant avant de tout perdre !"</p>
+                <p><strong>Résultat :</strong> Vous vendez au <strong>creux</strong> du marché. Vous "verrouillez" vos
+                    pertes, les rendant permanentes. Vous attendez ensuite que tout redevienne "sûr" pour racheter...
+                    mais le marché a déjà remonté, et vous avez racheté plus cher que vous n'aviez vendu.</p>
+
+                <p>La règle d'or de Warren Buffett : <strong>"Ayez peur quand les autres sont cupides, et soyez cupide
+                        quand les autres ont peur."</strong></p>
+
+                <h3>La Solution : Le DCA (Dollar-Cost Averaging)</h3>
+                <p>La meilleure façon de vaincre vos émotions est de mettre votre plan sur pilote automatique. C'est la
+                    stratégie d'<strong>achats périodiques par sommes fixes</strong> (DCA).</p>
+                <p>Vous décidez d'investir 500 $ par mois, quoi qu'il arrive.
+                <ul>
+                    <li><strong>Mois 1 (le marché est haut) :</strong> Votre 500 $ achète 5 actions à 100 $.</li>
+                    <li><strong>Mois 2 (le marché s'effondre) :</strong> Votre 500 $ achète 10 actions à 50 $.</li>
+                    <li><strong>Mois 3 (le marché stagne) :</strong> Votre 500 $ achète 8.3 actions à 60 $.</li>
+                </ul>
+                </p>
+                <p>Sans y penser, vous avez automatiquement acheté <strong>plus</strong> d'actions quand le prix était
+                    bas et <strong>moins</strong> d'actions quand le prix était haut. Vous avez retiré l'émotion de
+                    l'équation.</p>
+            </section>
+
+            <section id="chap17">
+                <h2>Chapitre 17: Définir ses Objectifs</h2>
+                <p>Vous n'épargnez pas pour épargner. Vous épargnez pour un <strong>but</strong>. Définir des objectifs
+                    clairs est la différence entre "essayer d'épargner" et "réussir à épargner".</p>
+                <p>Un bon objectif est S.M.A.R.T. :</p>
+                <ul>
+                    <li><strong>S</strong>pécifique : "Je veux un fonds d'urgence."</li>
+                    <li><strong>M</strong>esurable : "Je veux 10 000 $ dans mon fonds d'urgence."</li>
+                    <li><strong>A</strong>tteignable : "Je peux épargner 500 $ par mois."</li>
+                    <li><strong>R</strong>éaliste : (Lié à Atteignable).</li>
+                    <li><strong>T</strong>emporel : "J'aurai 10 000 $ en 20 mois."</li>
+                </ul>
+                <p><strong>Mauvais objectif :</strong> "Je veux devenir riche."
+                    <br><strong>Bon objectif :</strong> "Je veux accumuler 500 000 $ dans mon CELI d'ici 18 ans pour ma
+                    retraite."
+                </p>
+
+                <div class="success-box">
+                    <strong>Passez à l'action :</strong> Le <span class="app-link">Module Objectif</span> est conçu pour
+                    cela. Entrez votre objectif (ex: 50 000 $ pour une mise de fonds), votre capital initial et votre
+                    horizon de temps, et l'outil vous dira <strong>exactement</strong> combien vous devez épargner
+                    chaque mois pour y arriver.
+                </div>
+            </section>
+
+            <section id="chap18">
+                <h2>Chapitre 18: Planifier sa Retraite</h2>
+                <p>La retraite est le plus grand objectif financier de votre vie. C'est le moment où votre "machine à
+                    argent" (votre portefeuille) est enfin assez grosse pour payer votre style de vie, indéfiniment.</p>
+
+                <h3>La "Règle des 4%"</h3>
+                <p>C'est une règle empirique célèbre pour savoir combien d'argent il vous faut. Elle stipule que vous
+                    pouvez retirer <strong>4% de votre portefeuille</strong> la première année de votre retraite, puis
+                    ajuster ce montant à l'inflation chaque année suivante, avec une très forte probabilité que votre
+                    argent dure au moins 30 ans.</p>
+                <p>Cela nous donne un moyen facile de calculer notre "chiffre magique" :</p>
+                <p><code>Revenu Annuel Désiré / 0.04 = Montant Total Nécessaire</code></p>
+                <p>Ou plus simple : <strong><code>Revenu Annuel Désiré * 25</code></strong></p>
+
+                <ul>
+                    <li>Si vous voulez vivre avec 40 000 $ par an à la retraite, il vous faut : 40 000 $ * 25 =
+                        <strong>1 000 000 $</strong>.</li>
+                    <li>If you want to live with 80 000 $ per year in retirement, you need: 80 000 $ * 25 = <strong>2
+                            000 000 $</strong>.</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>Passez à l'action :</strong> Le <span class="app-link">Module Retrait</span> est une version
+                    avancée de cette règle. Vous pouvez y entrer votre capital total, le montant que vous voulez
+                    retirer, et voir combien de temps votre argent durera en simulant la croissance continue de votre
+                    portefeuille. C'est l'outil ultime pour répondre à la question : "En ai-je assez ?".
+                </div>
+            </section>
+
+            <section id="chap19">
+                <h2>Chapitre 19: Analyse Fondamentale vs Technique</h2>
+                <p>Vous avez appris les bases de l'analyse fondamentale (Chapitre 12). C'est l'étude de la
+                    <strong>santé</strong> de l'entreprise. Mais il existe une autre école de pensée : l'analyse
+                    technique.</p>
+
+                <h3>Analyse Fondamentale (L'Investisseur)</h3>
+                <ul>
+                    <li><strong>Question posée :</strong> "Est-ce que cette entreprise est <strong>bonne</strong> ?"
+                    </li>
+                    <li><strong>Outils :</strong> Ratios financiers (C/B, Dette/FP, ROE), bilans, communiqués de presse,
+                        qualité de la direction, avantage concurrentiel.</li>
+                    <li><strong>Objectif :</strong> Acheter des entreprises de haute qualité à un prix juste (ou
+                        sous-évalué) et les détenir à long terme. C'est ce que fait Warren Buffett.</li>
+                    <li><strong>Nexus Pro :</strong> Le <span class="app-link">Module Analyse Action</span> est un outil
+                        100% fondamental.</li>
+                </ul>
+
+                <h3>Analyse Technique (Le Trader)</h3>
+                <ul>
+                    <li><strong>Question posée :</strong> "Où le <strong>prix</strong> de l'action va-t-il aller ?"</li>
+                    <li><strong>Outils :</strong> Graphiques de prix, moyennes mobiles, RSI (Relative Strength Index),
+                        volumes de transaction, figures chartistes (tête-épaules, drapeaux...).</li>
+                    <li><strong>Objectif :</strong> Identifier des tendances et des "patterns" dans l'historique des
+                        prix pour prédire les mouvements à court terme (jours, semaines, mois). L'analyse technique se
+                        fiche de savoir si l'entreprise fait des profits ; elle ne s'intéresse qu'à la psychologie du
+                        marché reflétée dans le prix.</li>
+                </ul>
+                <div class="info-box">
+                    <strong>Notre Point de Vue :</strong> Pour l'investissement à long terme (la création de richesse),
+                    l'analyse fondamentale est reine. L'analyse technique est un outil utile pour le
+                    <strong>timing</strong> (décider <strong>quand</strong> acheter ou vendre une action que vous avez
+                    déjà analysée fondamentalement), mais elle ne devrait jamais être la seule base de votre décision.
+                </div>
+            </section>
+
+            <section id="chap20">
+                <h2>Chapitre 20: Les Ordres de Bourse Essentiels</h2>
+                <p>Quand vous décidez d'acheter ou de vendre une action, votre courtier vous demandera
+                    <strong>comment</strong> vous voulez le faire. Le type d'ordre que vous placez est crucial.</p>
+
+                <h3>1. Ordre au Marché (Market Order)</h3>
+                <ul>
+                    <li><strong>Ce que c'est :</strong> "Achetez-moi [X] actions au meilleur prix disponible
+                        <strong>maintenant</strong> !"</li>
+                    <li><strong>Avantage :</strong> Votre transaction est garantie d'être exécutée immédiatement (tant
+                        que le marché est ouvert).</li>
+                    <li><strong>Inconvénient :</strong> Vous n'avez aucune garantie sur le prix. Si le prix bouge vite,
+                        vous pourriez payer 102 $ pour une action que vous pensiez acheter à 100 $.</li>
+                    <li><strong>Quand l'utiliser :</strong> Pour les FNB ou les très grosses actions ("blue chips") où
+                        le prix bouge peu (liquidité élevée). À éviter pour les petites actions volatiles.</li>
+                </ul>
+
+                <h3>2. Ordre à Cours Limité (Limit Order)</h3>
+                <ul>
+                    <li><strong>Ce que c'est :</strong> "Achetez-moi [X] actions à [Prix Y] <strong>ou moins</strong>."
+                        (ou "Vendez... à [Prix Y] <strong>ou plus</strong>.")</li>
+                    <li><strong>Avantage :</strong> Vous contrôlez le prix. Votre ordre d'achat à 100 $ ne s'exécutera
+                        jamais à 100.01 $.</li>
+                    <li><strong>Inconvénient :</strong> Votre transaction n'est pas garantie. Si le prix ne descend
+                        jamais à 100 $, votre ordre ne passera pas et vous pourriez "manquer le bateau".</li>
+                    <li><strong>Quand l'utiliser :</strong> Presque tout le temps. C'est l'ordre par défaut pour
+                        l'investisseur patient et discipliné.</li>
+                </ul>
+
+                <h3>3. Ordre Stop (Stop-Loss)</h3>
+                <ul>
+                    <li><strong>Ce que c'est :</strong> Un ordre dormant. "Si le prix de l'action (que je possède) tombe
+                        à [Prix Y], transformez cet ordre en Ordre au Marché et vendez-moi tout !"</li>
+                    <li><strong>Avantage :</strong> C'est votre "assurance". Il protège vos gains ou limite vos pertes
+                        si le marché s'effondre pendant que vous êtes en vacances.</li>
+                    <li><strong>Inconvénient :</strong> Un "flash crash" (une baisse très rapide suivie d'une remontée)
+                        peut déclencher votre vente au pire moment, vous faisant sortir d'une position que vous vouliez
+                        garder.</li>
+                    <li><strong>Quand l'utiliser :</strong> Avec prudence, pour protéger des gains à court terme. Les
+                        investisseurs à très long terme ("buy and hold") l'utilisent rarement.</li>
+                </ul>
+            </section>
+
+            <section id="chap21">
+                <h2>Chapitre 21: Fiscalité Avancée (PCAA / ACB)</h2>
+                <p>Ce chapitre est crucial pour tout investisseur qui détient des placements dans un <strong>compte non
+                        enregistré (taxable)</strong>. Dans un CELI ou un REER, vous n'avez pas à vous soucier de cela.
+                </p>
+                <p>Quand vous vendez une action dans un compte taxable, vous payez de l'impôt sur le <strong>gain en
+                        capital</strong>. Ce n'est pas (Prix de Vente - Prix d'Achat). C'est (Prix de Vente - PCAA).</p>
+
+                <h3>Le PCAA (Prix de Cbase Ajusté) / ACB (Adjusted Cost Base)</h3>
+                <p>Le PCAA (ou ACB en anglais) est le <strong>coût moyen pondéré</strong> de toutes vos actions d'une
+                    même entreprise, <strong>incluant les frais de commission</strong>.</p>
+                <p>Vous devez le calculer vous-même. C'est votre responsabilité, pas celle du courtier.</p>
+
+                <h4>Exemple de calcul du PCAA :</h4>
+                <ol>
+                    <li>Vous achetez 100 actions de BMO à 120 $. Frais de 10 $.
+                        <ul>
+                            <li>Coût total : (100 * 120) + 10 = 12 010 $</li>
+                            <li>PCAA total : 12 010 $ / 100 actions = <strong>120.10 $ / action</strong></li>
+                        </ul>
+                    </li>
+                    <li>Le prix monte. Vous achetez 50 actions de plus à 130 $. Frais de 10 $.
+                        <ul>
+                            <li>Nouveau coût : (50 * 130) + 10 = 6 510 $</li>
+                            <li>Nouveau PCAA total : 12 010 $ (ancien) + 6 510 $ (nouveau) = 18 520 $</li>
+                            <li>Nombre total d'actions : 100 + 50 = 150</li>
+                            <li>Nouveau PCAA : 18 520 $ / 150 actions = <strong>123.47 $ / action</strong></li>
+                        </ul>
+                    </li>
+                    <li>Vous vendez 75 actions à 140 $.
+                        <ul>
+                            <li>Prix de vente : 75 * 140 = 10 500 $</li>
+                            <li>Coût de base (PCAA) de ces 75 actions : 75 * 123.47 = 9 260.25 $</li>
+                            <li><strong>Gain en capital imposable : 10 500 $ - 9 260.25 $ = 1 239.75 $</strong></li>
+                        </ul>
+                    </li>
+                </ol>
+                <div class="success-box">
+                    <strong>Nexus Pro vous aide :</strong> Le <span class="app-link">Module Investissement</span>
+                    calcule automatiquement votre coût moyen (colonne "Prix Moyen") et vos gains/pertes latents en
+                    utilisant cette méthode PCAA/ACB. Il le fait même en gérant les ventes partielles (ce qu'on appelle
+                    une "vente proportionnelle" du coût de base).
+                </div>
+            </section>
+
+            <section id="chap22">
+                <h2>Chapitre 22: Le Rééquilibrage de Portefeuille</h2>
+                <p>Vous avez bâti un portefeuille parfait : 70% en actions, 30% en obligations. Mais un an passe, et le
+                    marché des actions a explosé.</p>
+                <p>Votre portefeuille vaut maintenant 120 000 $. Les actions (qui ont super bien performé) valent 90 000
+                    $ et les obligations (stables) valent 30 000 $. Votre allocation est devenue <strong>75% Actions /
+                        25% Obligations</strong>.</p>
+                <p>Vous êtes maintenant surexposé au risque. Votre portefeuille est devenu plus agressif que vous ne le
+                    souhaitiez.</p>
+
+                <h3>Qu'est-ce que le Rééquilibrage ?</h3>
+                <p>C'est l'action de <strong>vendre ce qui a bien performé</strong> pour <strong>racheter ce qui a mal
+                        performé</strong>, afin de revenir à votre cible (70/30).</p>
+                <p>Dans notre exemple, vous devriez vendre 6 000 $ d'actions et acheter 6 000 $ d'obligations.
+                <ul>
+                    <li>Total : 120 000 $</li>
+                    <li>Nouvelles Actions : 90 000 - 6 000 = 84 000 $ (soit 70% de 120k)</li>
+                    <li>Nouvelles Obligations : 30 000 + 6 000 = 36 000 $ (soit 30% de 120k)</li>
+                </ul>
+                </p>
+                <p>C'est la chose la plus difficile à faire psychologiquement ("Quoi ? Vendre ce qui gagne pour acheter
+                    ce qui stagne ?"), mais c'est le summum de la discipline. Cela vous force à <strong>vendre haut et
+                        acheter bas</strong>, automatiquement.</p>
+
+                <h3>Quand rééquilibrer ?</h3>
+                <p>Il y a deux méthodes :</p>
+                <ol>
+                    <li><strong>Par le temps :</strong> Une fois par an, à votre anniversaire par exemple. Vous
+                        rééquilibrez, peu importe ce que le marché a fait. Simple et efficace.</li>
+                    <li><strong>Par seuil :</strong> Vous décidez que si une classe d'actifs dévie de plus de 5% de sa
+                        cible (ex: vos actions de 70% montent à 75%), vous rééquilibrez.</li>
+                </ol>
+                <div class="info-box">
+                    <strong>Astuce fiscale :</strong> Si vous rééquilibrez dans un compte non enregistré, vendre vos
+                    gagnants déclenche un gain en capital imposable. Essayez de rééquilibrer <strong>d'abord</strong>
+                    avec vos nouvelles cotisations : si vos actions sont trop hautes, dirigez vos 500 $ du mois vers vos
+                    obligations pour "rattraper" l'écart sans avoir à vendre.
+                </div>
+            </section>
+
+            <section id="chap23">
+                <h2>Chapitre 23: Pièges Psychologiques (Biais Comportementaux)</h2>
+                <p>Le Chapitre 16 parlait de la Peur et de la Cupidité. Voici des pièges plus subtils dans lesquels
+                    tombent même les investisseurs expérimentés.</p>
+
+                <h3>1. Biais de Confirmation (Confirmation Bias)</h3>
+                <p><strong>Le piège :</strong> Vous <strong>pensez</strong> qu'une action (ex: Tesla) est géniale. Vous
+                    allez donc lire uniquement les articles et regarder les vidéos qui disent que Tesla est géniale.
+                    Vous ignorez inconsciemment toutes les analyses négatives.</p>
+                <p><strong>La solution :</strong> Cherchez activement les opinions <strong>opposées</strong>.
+                    Demandez-vous : "Pourquoi quelqu'un vendrait cette action aujourd'hui ? Qu'est-ce qu'il sait que je
+                    ne sais pas ?"</p>
+
+                <h3>2. Ancrage (Anchoring)</h3>
+                <p><strong>Le piège :</strong> Une action valait 300 $ l'an dernier. Elle s'effondre à 150 $. Vous vous
+                    dites : "Wow ! C'est 50% de rabais, c'est forcément une aubaine !". Vous vous "ancrez" sur le prix
+                    de 300 $.</p>
+                <p><strong>La réalité :</strong> Le prix de 300 $ était peut-être complètement fou, ou l'entreprise a de
+                    vrais problèmes maintenant. Le prix passé n'a <strong>aucune</strong> pertinence. La seule question
+                    est : "Est-ce que l'entreprise vaut 150 $ <strong>aujourd'hui</strong> ?"</p>
+
+                <h3>3. Aversion à la Perte (Loss Aversion)</h3>
+                <p><strong>Le piège :</strong> La douleur de perdre 100 $ est deux fois plus forte que le plaisir de
+                    gagner 100 $. Cela mène à des décisions irrationnelles.
+                    <br>Exemple : Vous avez deux actions. L'Action A a un gain de 1 000 $. L'Action B a une perte de 1
+                    000 $. Vous avez besoin d'argent. La plupart des gens vont <strong>vendre l'Action A</strong> ("On
+                    n'est jamais perdant en prenant un profit !") et <strong>garder l'Action B</strong> ("Je vais
+                    attendre qu'elle remonte à mon prix d'achat pour vendre.").
+                </p>
+                <p><strong>La réalité :</strong> C'est souvent l'inverse qu'il faut faire ! Vous devriez garder vos
+                    gagnants (l'entreprise performe bien) et vendre vos perdants (l'entreprise performe mal) pour
+                    réallouer l'argent. C'est ce qu'on appelle "couper ses pertes et laisser courir ses gains".</p>
+            </section>
+
+            <section id="chap24">
+                <h2>Chapitre 24: Glossaire des Termes Clés</h2>
+                <p>Voici un rappel rapide des termes que vous rencontrerez.</p>
+                <ul>
+                    <li><strong>Actif :</strong> Quelque chose qui met de l'argent dans votre poche.</li>
+                    <li><strong>Allocation d'Actifs :</strong> La répartition de votre portefeuille entre différentes
+                        classes (ex: 60% actions, 40% obligations).</li>
+                    <li><strong>BPA (Bénéfice Par Action) :</strong> Le profit net d'une entreprise divisé par son
+                        nombre d'actions.</li>
+                    <li><strong>C/B (Ratio Cours/Bénéfice) :</strong> Le prix d'une action divisé par son BPA. Mesure si
+                        une action est "chère".</li>
+                    <li><strong>CELI (Compte d'Épargne Libre d'Impôt) :</strong> Compte enregistré canadien où les gains
+                        en capital et les dividendes sont 100% libres d'impôt.</li>
+                    <li><strong>Dividende :</strong> Part des profits d'une entreprise distribuée aux actionnaires.</li>
+                    <li><strong>Diversification :</strong> Le principe de ne pas mettre tous ses œufs dans le même
+                        panier pour réduire le risque.</li>
+                    <li><strong>FNB (Fonds Négocié en Bourse) :</strong> Un "panier" d'investissements (actions,
+                        obligations) qui s'achète et se vend comme une seule action.</li>
+                    <li><strong>Fiscalité (Imposition) :</strong> La manière dont vos gains sont taxés. Différente dans
+                        un CELI (0%), un REER (à la sortie) ou un compte non enregistré (annuellement).</li>
+                    <li><strong>Inflation :</strong> L'augmentation générale des prix, qui érode le pouvoir d'achat de
+                        l'argent.</li>
+                    <li><strong>Intérêt Composé :</strong> Gagner de l'intérêt sur l'intérêt.</li>
+                    <li><strong>Liquidité :</strong> La facilité avec laquelle vous pouvez convertir un actif en argent
+                        comptant.</li>
+                    <li><strong>Ordre Limite :</strong> Un ordre d'achat ou de vente à un prix spécifique ou mieux.</li>
+                    <li><strong>Passif :</strong> Quelque chose qui sort de l'argent de votre poche.</li>
+                    <li><strong>Patrimoine Net :</strong> Vos Actifs moins vos Passifs. La vraie mesure de votre
+                        richesse.</li>
+                    <li><strong>PCAA / ACB (Prix de Cbase Ajusté) :</strong> Le coût moyen <strong>réel</strong> de vos
+                        actions, incluant les frais, pour le calcul de l'impôt en compte non enregistré.</li>
+                    <li><strong>REER (Régime Enregistré d'Épargne-Retraite) :</strong> Compte enregistré canadien où les
+                        cotisations donnent un remboursement d'impôt, mais les retraits sont imposables.</li>
+                    <li><strong>Rééquilibrage :</strong> L'action de vendre ses gagnants et d'acheter ses perdants pour
+                        revenir à son allocation d'actifs cible.</li>
+                    <li><strong>Rendement (Yield) :</strong> Le gain (en %) d'un investissement sur une période donnée.
+                    </li>
+                    <li><strong>Volatilité :</strong> L'amplitude des variations de prix d'un actif. La mesure la plus
+                        courante du risque.</li>
+                </ul>
+                <p>Ce guide vous a donné les fondations. L'outil Nexus Finance Pro vous donne le pouvoir de les
+                    appliquer. Votre avenir financier est maintenant entre vos mains.</p>
+                <p><strong>Bonne planification !</strong></p>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // Script simple pour le "scroll spy" de la navigation
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('#nav ul li a');
+
+            const onScroll = () => {
+                let current = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 100) { // 100px offset
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(a => {
+                    a.classList.remove('active');
+                    if (a.getAttribute('href') === '#' + current) {
+                        a.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', onScroll);
+        });
+    </script>
+</body>
+
+</html>
