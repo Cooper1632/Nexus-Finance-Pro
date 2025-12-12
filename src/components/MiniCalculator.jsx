@@ -23,15 +23,15 @@ const styles = {
     displayContainer: {
         backgroundColor: 'var(--background-color)', color: 'var(--text-color)', padding: '15px',
         textAlign: 'right', borderBottom: '1px solid var(--border-color)', display: 'flex',
-        flexDirection: 'column', justifyContent: 'flex-end', height: '90px', position: 'relative'
+        flexDirection: 'column', justifyContent: 'flex-end', minHeight: '90px', height: 'auto', position: 'relative'
     },
     historyText: {
         fontSize: '0.85rem', color: 'var(--secondary-color)', minHeight: '1.2em', overflow: 'hidden',
         opacity: 0.7, marginBottom: '2px', marginRight: '25px'
     },
     mainText: {
-        fontSize: '2rem', fontWeight: '700', lineHeight: 1.1, overflowX: 'auto',
-        overflowY: 'hidden', whiteSpace: 'nowrap'
+        fontSize: '2rem', fontWeight: '700', lineHeight: 1.2, wordBreak: 'break-all',
+        whiteSpace: 'normal', overflowWrap: 'anywhere'
     },
     memoryIndicator: {
         position: 'absolute', top: '5px', left: '10px', fontSize: '0.75rem', fontWeight: 'bold', color: '#F1C40F'
@@ -100,12 +100,23 @@ export default function MiniCalculator({ onClose }) {
 
     // --- LOGIQUE CALCULATRICE ---
     const handleNum = (val) => {
-        if (resetNext) { setInput(val); setResetNext(false); }
-        else { setInput(prev => prev === '0' ? val : prev + val); }
+        const errorMsg = t('calculator.error');
+        if (resetNext || input === errorMsg || input === 'Infinity' || input === 'NaN') {
+            setInput(val);
+            setResetNext(false);
+        } else {
+            setInput(prev => prev === '0' ? val : prev + val);
+        }
     };
 
     const handleOp = (op) => {
         setResetNext(false);
+        const errorMsg = t('calculator.error');
+        if (input === errorMsg || input === 'Infinity' || input === 'NaN') {
+            setInput('0');
+            return;
+        }
+
         const lastChar = input.slice(-1);
         const stdOp = op === '×' ? '*' : (op === '÷' ? '/' : op);
         if (['+', '-', '*', '/'].includes(lastChar)) { setInput(prev => prev.slice(0, -1) + stdOp); }
@@ -115,7 +126,8 @@ export default function MiniCalculator({ onClose }) {
     const handleClear = () => { setInput('0'); setHistory(''); };
 
     const handleBackspace = () => {
-        if (input.length === 1 || input === t('calculator.error') || input === 'Infinity') { setInput('0'); }
+        const errorMsg = t('calculator.error');
+        if (input.length === 1 || input === errorMsg || input === 'Infinity' || input === 'NaN') { setInput('0'); }
         else { setInput(prev => prev.slice(0, -1)); }
     };
 
@@ -127,6 +139,7 @@ export default function MiniCalculator({ onClose }) {
             const expression = input.replace(/×/g, '*').replace(/÷/g, '/');
             // eslint-disable-next-line no-new-func
             const result = new Function('return ' + expression)();
+            if (!isFinite(result) || isNaN(result)) throw new Error('Invalid');
             setMemory(prev => prev + result);
             setResetNext(true);
         } catch (e) { setInput(t('calculator.error')); }
@@ -136,6 +149,7 @@ export default function MiniCalculator({ onClose }) {
             const expression = input.replace(/×/g, '*').replace(/÷/g, '/');
             // eslint-disable-next-line no-new-func
             const result = new Function('return ' + expression)();
+            if (!isFinite(result) || isNaN(result)) throw new Error('Invalid');
             setMemory(prev => prev - result);
             setResetNext(true);
         } catch (e) { setInput(t('calculator.error')); }
