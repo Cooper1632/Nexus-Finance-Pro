@@ -18,7 +18,8 @@ const styles = {
         backgroundColor: '#000000', // BLACK
         color: '#F1C40F', // YELLOW TEXT
         padding: '10px 15px', display: 'flex', justifyContent: 'space-between',
-        alignItems: 'center', cursor: 'grab', userSelect: 'none', borderBottom: '2px solid #F1C40F' // Yellow accent
+        alignItems: 'center', cursor: 'grab', userSelect: 'none', borderBottom: '2px solid #F1C40F', // Yellow accent
+        touchAction: 'none' // CRITICAL: Tells browser not to scroll/zoom, letting us handle the drag
     },
     displayContainer: {
         backgroundColor: 'var(--background-color)', color: 'var(--text-color)', padding: '15px',

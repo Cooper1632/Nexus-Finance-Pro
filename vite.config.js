@@ -8,15 +8,17 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+      includeAssets: ['logo.png', 'pwa-192x192.png', 'pwa-512x512.png'],
       manifest: {
         name: 'Nexus Finance Pro',
         short_name: 'Nexus Finance Pro',
         description: 'Votre tableau de bord financier intégral',
         theme_color: '#ffffff',
         background_color: '#ffffff',
-        display: 'standalone', // C'est ce qui cache la barre d'adresse
+        display: 'standalone',
         orientation: 'any',
+        start_url: '/',
+        scope: '/',
         icons: [
           {
             src: 'pwa-192x192.png',
