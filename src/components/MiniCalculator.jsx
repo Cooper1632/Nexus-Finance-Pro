@@ -72,15 +72,24 @@ export default function MiniCalculator({ onClose }) {
     const [memory, setMemory] = useState(0);
     const [resetNext, setResetNext] = useState(false);
 
-    // --- LOGIQUE DRAG & DROP ---
+    // --- LOGIQUE DRAG & DROP (SOURIS ET TOUCH) ---
     const handleMouseDown = (e) => {
         setIsDragging(true);
         dragStartPos.current = { x: e.clientX - position.x, y: e.clientY - position.y };
     };
 
+    const handleTouchStart = (e) => {
+        // Prevent scrolling while starting to drag
+        if (e.cancelable) e.preventDefault();
+        setIsDragging(true);
+        const touch = e.touches[0];
+        dragStartPos.current = { x: touch.clientX - position.x, y: touch.clientY - position.y };
+    };
+
     useEffect(() => {
         const handleMouseMove = (e) => {
             if (!isDragging) return;
+            e.preventDefault(); // Prevent text selection
             const newX = e.clientX - dragStartPos.current.x;
             const newY = e.clientY - dragStartPos.current.y;
             const boundedX = Math.max(0, Math.min(window.innerWidth - 320, newX));
@@ -88,13 +97,30 @@ export default function MiniCalculator({ onClose }) {
             setPosition({ x: boundedX, y: boundedY });
         };
         const handleMouseUp = () => { setIsDragging(false); };
+
+        const handleTouchMove = (e) => {
+            if (!isDragging) return;
+            if (e.cancelable) e.preventDefault(); // Prevent scrolling
+            const touch = e.touches[0];
+            const newX = touch.clientX - dragStartPos.current.x;
+            const newY = touch.clientY - dragStartPos.current.y;
+            const boundedX = Math.max(0, Math.min(window.innerWidth - 320, newX));
+            const boundedY = Math.max(0, Math.min(window.innerHeight - 600, newY));
+            setPosition({ x: boundedX, y: boundedY });
+        };
+        const handleTouchEnd = () => { setIsDragging(false); };
+
         if (isDragging) {
             window.addEventListener('mousemove', handleMouseMove);
             window.addEventListener('mouseup', handleMouseUp);
+            window.addEventListener('touchmove', handleTouchMove, { passive: false });
+            window.addEventListener('touchend', handleTouchEnd);
         }
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseup', handleMouseUp);
+            window.removeEventListener('touchmove', handleTouchMove);
+            window.removeEventListener('touchend', handleTouchEnd);
         };
     }, [isDragging]);
 
@@ -197,7 +223,7 @@ export default function MiniCalculator({ onClose }) {
     }, [input, resetNext]);
     return (
         <div style={styles.container(position)}>
-            <div style={{ ...styles.header, cursor: isDragging ? 'grabbing' : 'grab' }} onMouseDown={handleMouseDown}>
+            <div style={{ ...styles.header, cursor: isDragging ? 'grabbing' : 'grab' }} onMouseDown={handleMouseDown} onTouchStart={handleTouchStart}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <Bars3Icon style={{ width: '20px', opacity: 0.8 }} />
                     <span style={{ fontWeight: '600', letterSpacing: '0.5px' }}>Nexus</span>
