@@ -792,7 +792,7 @@ button,
 }
 
 /* Tablet Optimization for Budget Row (Stacking to avoid centering issues) */
-@media (max-width: 1366px) {
+@media (max-width: 900px) {
     .budget-item {
         /* Fallback to Flex Column (Mobile Style) */
         display: flex;

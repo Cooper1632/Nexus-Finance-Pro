@@ -461,7 +461,17 @@ function Plan() {
     const totalPlanned = debts.reduce((sum, d) => sum + d.paiement, 0);
     const currentBudget = parseLocaleNumber(calcParams.budgetTotal);
     const isBudgetInsufficient = currentBudget > 0 && currentBudget < totalMinReq;
-    const getMonthLabel = (m) => { if (!calcParams.startDate) return `${t('common.months')} ${m}`; const d = new Date(calcParams.startDate); d.setMonth(d.getMonth() + m); return d.toLocaleDateString('fr-CA', { month: 'short', year: 'numeric' }); };
+    const getMonthLabel = (m) => {
+        try {
+            if (!calcParams.startDate) return `${t('common.months')} ${m}`;
+            const d = new Date(calcParams.startDate);
+            if (isNaN(d.getTime())) return `${t('common.months')} ${m}`; // Fallback if invalid date
+            d.setMonth(d.getMonth() + m);
+            return d.toLocaleDateString('fr-CA', { month: 'short', year: 'numeric' });
+        } catch (e) {
+            return `${t('common.months')} ${m}`;
+        }
+    };
     const getChartData = () => {
         if (!simulationResults) return null;
         const scatterPoints = simulationResults.current.events.map(e => { const debt = e.paidDebts[0]; return { x: e.month, y: simulationResults.current.progressData.find(p => p.month === e.month)?.totalDebt || 0, title: e.paidDebts.map(d => d.titre).join(', '), color: getDebtColor(debt.originalIndex) }; });
@@ -564,29 +574,30 @@ function Plan() {
                                 <th style={{ width: '160px', whiteSpace: 'nowrap', verticalAlign: 'bottom', color: '#7f8c8d', paddingBottom: '15px' }}>{t('plan.monthly_equivalent')}</th>
                                 <th style={{ width: '120px', whiteSpace: 'nowrap', verticalAlign: 'bottom', paddingBottom: '15px' }}>{t('plan.amortization_years')}</th>
 
-                                <th style={{ textAlign: 'center', whiteSpace: 'nowrap', verticalAlign: 'bottom', paddingBottom: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                                    {t('plan.include_calc_short')}
-                                    <button
-                                        onClick={() => setShowIncludeHelp(true)}
-                                        style={{
-                                            background: '#ddd',
-                                            color: '#555',
-                                            border: 'none',
-                                            borderRadius: '50%',
-                                            width: '18px',
-                                            height: '18px',
-                                            minWidth: '18px',
-                                            flexShrink: 0,
-                                            marginLeft: '5px',
-                                            cursor: 'pointer',
-                                            fontWeight: 'bold',
-                                            fontSize: '0.8rem',
-                                            padding: 0,
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}
-                                    >?</button>
+                                <th style={{ textAlign: 'center', whiteSpace: 'nowrap', verticalAlign: 'bottom', paddingBottom: '15px' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                                        <span>{t('plan.include_calc_short')}</span>
+                                        <button
+                                            onClick={() => setShowIncludeHelp(true)}
+                                            style={{
+                                                background: '#ddd',
+                                                color: '#555',
+                                                border: 'none',
+                                                borderRadius: '50%',
+                                                width: '18px',
+                                                height: '18px',
+                                                minWidth: '18px',
+                                                flexShrink: 0,
+                                                cursor: 'pointer',
+                                                fontWeight: 'bold',
+                                                fontSize: '0.8rem',
+                                                padding: 0,
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center'
+                                            }}
+                                        >?</button>
+                                    </div>
                                 </th>
                                 <th style={{ width: '40px' }}></th>
                             </tr>
@@ -768,9 +779,17 @@ function Plan() {
                                                     const monthOffset = context.raw.x;
                                                     let dateLabel = "";
                                                     if (calcParams.startDate) {
-                                                        const d = new Date(calcParams.startDate);
-                                                        d.setMonth(d.getMonth() + monthOffset);
-                                                        dateLabel = d.toLocaleDateString('fr-CA', { month: 'short', year: 'numeric' });
+                                                        try {
+                                                            const d = new Date(calcParams.startDate);
+                                                            if (!isNaN(d.getTime())) {
+                                                                d.setMonth(d.getMonth() + monthOffset);
+                                                                dateLabel = d.toLocaleDateString('fr-CA', { month: 'short', year: 'numeric' });
+                                                            } else {
+                                                                dateLabel = `${t('common.months')} ${monthOffset}`;
+                                                            }
+                                                        } catch (e) {
+                                                            dateLabel = `${t('common.months')} ${monthOffset}`;
+                                                        }
                                                     } else {
                                                         dateLabel = `${t('common.months')} ${monthOffset}`;
                                                     }

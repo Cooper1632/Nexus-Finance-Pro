@@ -216,13 +216,13 @@ const WelcomeModal = ({ isOpen, onClose, dontShowAgain, setDontShowAgain }) => {
 
                 {/* BOUTONS D'ACTION (BAS) */}
                 <div style={{ width: '100%', marginTop: '30px', borderTop: '1px solid #eee', paddingTop: '20px' }}>
-                    <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
-                        <button onClick={() => onClose(true)} style={{ ...styles.btnSuccess, width: 'auto', padding: '12px 30px', marginBottom: 0 }}>
+                    <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                        <button onClick={() => onClose(true)} style={{ ...styles.btnSuccess, width: 'auto', flex: '1 1 250px', padding: '12px 30px', marginBottom: 0 }}>
                             <BookOpenIcon style={{ width: '22px' }} />
                             {t('onboarding.guide_btn')}
                         </button>
 
-                        <button onClick={() => onClose(false)} style={{ ...styles.btnSecondary, width: 'auto', padding: '12px 30px' }}>
+                        <button onClick={() => onClose(false)} style={{ ...styles.btnSecondary, width: 'auto', flex: '1 1 250px', padding: '12px 30px' }}>
                             {t('onboarding.explore_btn')}
                         </button>
                     </div>
