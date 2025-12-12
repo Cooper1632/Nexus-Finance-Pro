@@ -129,7 +129,7 @@ function Plan() {
     const { t } = useTranslation();
 
     const planData = appState.plan || { debts: [], strategy: 'avalanche', budgetTotal: '', startDate: '' };
-    const { debts, strategy } = planData;
+    const { debts = [], strategy = 'avalanche' } = planData;
 
     const [calcParams, setCalcParams] = useState({ budgetTotal: '', startDate: '' });
     const [simulationResults, setSimulationResults] = useState(null);
@@ -384,7 +384,7 @@ function Plan() {
         if (planData.mortgages) {
             planData.mortgages.filter(m => m.includeInPlan).forEach(m => {
                 // Convertir le paiement en mensuel pour la simulation
-                let monthlyPayment = parseFloat(m.paiement) || 0;
+                let monthlyPayment = parseLocaleNumber(m.paiement);
                 let freq = m.frequency || 'monthly';
 
                 if (freq === 'weekly' || freq === 'weekly_acc') monthlyPayment = (monthlyPayment * 52) / 12;
@@ -393,11 +393,11 @@ function Plan() {
                 combinedDebts.push({
                     id: m.id,
                     titre: m.titre || t('plan.mortgage_title'),
-                    montant: parseFloat(m.solde) || 0,
-                    taux: parseFloat(m.taux) || 0,
+                    montant: parseLocaleNumber(m.solde),
+                    taux: parseLocaleNumber(m.taux),
                     paiementMin: monthlyPayment,
                     paiement: monthlyPayment,
-                    montantInitial: parseFloat(m.solde) || 0,
+                    montantInitial: parseLocaleNumber(m.solde),
                     checked: true
                 });
             });
@@ -660,7 +660,7 @@ function Plan() {
                     <div className="fieldset-grid" style={{ alignItems: 'end' }}>
                         <div className="input-group">
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px' }}>
-                                <label htmlFor="budgetTotal" style={{ marginBottom: 0 }}>{t('plan.budget_monthly')} <button onClick={() => setShowBudgetHelp(true)} style={{ background: '#ddd', color: '#555', border: 'none', borderRadius: '50%', width: '18px', height: '18px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 'bold', cursor: 'pointer', marginLeft: '5px', padding: 0, minWidth: '18px', flexShrink: 0 }}>?</button></label>
+                                <label htmlFor="budgetTotal" style={{ marginBottom: 0, display: 'flex', alignItems: 'center' }}>{t('plan.budget_monthly')} <button onClick={() => setShowBudgetHelp(true)} style={{ background: '#ddd', color: '#555', border: 'none', borderRadius: '50%', width: '18px', height: '18px', minWidth: '18px', minHeight: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 'bold', cursor: 'pointer', marginLeft: '5px', padding: 0, flexShrink: 0 }}>?</button></label>
                                 <button onClick={() => applyTotalToBudget()} className="utility-btn-small" title={t('plan.copy_total_tooltip')} style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem', color: 'var(--info-color)', cursor: 'pointer', background: 'transparent', border: 'none' }}><ArrowDownTrayIcon style={{ width: '16px' }} /> {t('plan.copy_total')}</button>
                             </div>
                             <CurrencyInput id="budgetTotal" name="budgetTotal" value={calcParams.budgetTotal} onChange={handleCalcParamChange} placeholder={`Min: ${formatCurrency(totalMinReq)}`} className="currency-input" style={{ border: '2px solid var(--primary-color)' }} />
