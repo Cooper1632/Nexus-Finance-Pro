@@ -8,11 +8,12 @@ import {
     PlusIcon, ArrowDownTrayIcon, TrashIcon, CalculatorIcon, CalendarIcon, StarIcon, ArrowUpCircleIcon, ExclamationTriangleIcon
 } from '@heroicons/react/24/outline';
 import {
-    Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler
+    Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler, ScatterController
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler, ScatterController);
+
 
 const parseLocaleNumber = (stringNumber) => {
     if (stringNumber === '' || stringNumber === null || stringNumber === undefined) return 0;
@@ -376,8 +377,35 @@ function Plan() {
         return { months, totalInterest, events, progressData, stepsOrder };
     };
 
+    // Validation State
+    const [validationErrors, setValidationErrors] = useState({ budget: false, date: false });
+    const [showValidationModal, setShowValidationModal] = useState(false);
+
     const calculatePlan = (currentStrategy = strategy) => {
         const budgetTotal = parseLocaleNumber(calcParams.budgetTotal);
+        const startDate = calcParams.startDate;
+
+        // VALIDATION STRICTE
+        let errors = { budget: false, date: false };
+        let hasError = false;
+
+        if (budgetTotal <= 0) {
+            errors.budget = true;
+            hasError = true;
+        }
+        if (!startDate) {
+            errors.date = true;
+            hasError = true;
+        }
+
+        if (hasError) {
+            setValidationErrors(errors);
+            setShowValidationModal(true);
+            return; // STOP execution
+        } else {
+            // Reset errors if valid
+            setValidationErrors({ budget: false, date: false });
+        }
 
         // --- Fusionner les dettes régulières et les hypothèques incluses ---
         let combinedDebts = [...debts];
@@ -484,6 +512,14 @@ function Plan() {
     return (
         <div className="printable-content" style={{ display: 'block' }}>
             <div className="module-header-with-reset"><h2>{t('plan.title')}</h2></div>
+
+            {/* VALIDATION MODAL */}
+            <Modal isOpen={showValidationModal} onClose={() => setShowValidationModal(false)} title={`⚠️ ${t('plan.validation_error_title')}`}>
+                <div style={{ padding: '20px', textAlign: 'center', color: 'var(--text-color)' }}>
+                    <p style={{ fontSize: '1.1rem' }}>{t('plan.validation_error_msg')}</p>
+                    <button onClick={() => setShowValidationModal(false)} className="btn-primary" style={{ marginTop: '20px', padding: '10px 30px' }}>{t('common.close')}</button>
+                </div>
+            </Modal>
             <div style={{ marginBottom: '15px', display: 'flex', gap: '10px' }}>
                 <button onClick={addEmptyDebtRow} className="btn-success btn-text-white" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><PlusIcon style={{ width: '18px' }} /> {t('plan.add_line')}</button>
                 <button onClick={importFromBudget} className="btn-info btn-text-white" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><ArrowDownTrayIcon style={{ width: '18px' }} /> {t('plan.import_budget')}</button>
@@ -663,13 +699,31 @@ function Plan() {
                                 <label htmlFor="budgetTotal" style={{ marginBottom: 0, display: 'flex', alignItems: 'center' }}>{t('plan.budget_monthly')} <button onClick={() => setShowBudgetHelp(true)} style={{ background: '#ddd', color: '#555', border: 'none', borderRadius: '50%', width: '18px', height: '18px', minWidth: '18px', minHeight: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 'bold', cursor: 'pointer', marginLeft: '5px', padding: 0, flexShrink: 0 }}>?</button></label>
                                 <button onClick={() => applyTotalToBudget()} className="utility-btn-small" title={t('plan.copy_total_tooltip')} style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem', color: 'var(--info-color)', cursor: 'pointer', background: 'transparent', border: 'none' }}><ArrowDownTrayIcon style={{ width: '16px' }} /> {t('plan.copy_total')}</button>
                             </div>
-                            <CurrencyInput id="budgetTotal" name="budgetTotal" value={calcParams.budgetTotal} onChange={handleCalcParamChange} placeholder={`Min: ${formatCurrency(totalMinReq)}`} className="currency-input" style={{ border: '2px solid var(--primary-color)' }} />
+                            <CurrencyInput
+                                id="budgetTotal"
+                                name="budgetTotal"
+                                value={calcParams.budgetTotal}
+                                onChange={(e) => { handleCalcParamChange(e); if (parseLocaleNumber(e.target.value) > 0) setValidationErrors(prev => ({ ...prev, budget: false })); }}
+                                placeholder={`Min: ${formatCurrency(totalMinReq)}`}
+                                className="currency-input"
+                                style={validationErrors.budget ? { border: '2px solid #E74C3C' } : { border: '2px solid var(--primary-color)' }}
+                            />
                         </div>
                         <div className="input-group">
                             <label htmlFor="startDate">{t('plan.start_date')}</label>
                             <div className="date-input-group-row">
-                                <div className="date-input-wrapper"><input id="startDate" type="date" name="startDate" value={calcParams.startDate} onChange={handleCalcParamChange} style={{ flex: 1 }} /></div>
-                                <div className="today-btn-wrapper"><span className="today-label">{t('plan.today')}</span><button className="icon-btn" onClick={setTodayDate} title="Mettre à aujourd'hui"><CalendarIcon style={{ width: '22px' }} /></button></div>
+                                <div className="date-input-wrapper">
+                                    <input
+                                        id="startDate"
+                                        type="date"
+                                        name="startDate"
+                                        value={calcParams.startDate}
+                                        onChange={(e) => { handleCalcParamChange(e); if (e.target.value) setValidationErrors(prev => ({ ...prev, date: false })); }}
+                                        className=""
+                                        style={validationErrors.date ? { flex: 1, border: '2px solid #E74C3C', borderRadius: '6px' } : { flex: 1, border: '1px solid var(--border-color)' }}
+                                    />
+                                </div>
+                                <div className="today-btn-wrapper"><span className="today-label">{t('plan.today')}</span><button className="icon-btn" onClick={() => { setTodayDate(); setValidationErrors(prev => ({ ...prev, date: false })); }} title="Mettre à aujourd'hui"><CalendarIcon style={{ width: '22px' }} /></button></div>
                             </div>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100%' }}>{isBudgetInsufficient && <div className="budget-warning-pulse">⚠️ {t('plan.budget_insufficient', { min: formatCurrency(totalMinReq) })}</div>}<button onClick={() => calculatePlan()} className="btn-primary btn-calculate-plan" style={{ height: '45px', fontSize: '1rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}><CalculatorIcon style={{ width: '24px' }} /> {t('plan.calculate')}</button></div>

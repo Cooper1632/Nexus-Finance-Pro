@@ -584,7 +584,11 @@ function Remboursement() {
             const solde = parseLocaleNumber(inputs.carteSolde);
             // Si le solde change et que le paiement est vide ou nul, on propose le minimum
             if (solde > 0 && (!inputs.cartePaiement || parseLocaleNumber(inputs.cartePaiement) === 0)) {
-                const minPayment = Math.max(10, roundMoney(solde * 0.03));
+                // Formule synchronisée avec Plan.jsx : Intérêts + 1% du solde (ou 10$ min)
+                const tauxMensuel = (parseLocaleNumber(inputs.carteTaux) / 100) / 12;
+                const interets = solde * tauxMensuel;
+                const capitalUnPourcent = solde * 0.01;
+                const minPayment = Math.ceil(Math.max(10, interets + capitalUnPourcent));
 
                 // Mise à jour de l'état sans écraser si l'utilisateur tape
                 setAppState(prev => {
