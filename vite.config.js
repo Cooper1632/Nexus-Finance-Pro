@@ -15,14 +15,12 @@ export default defineConfig({
       },
       manifest: {
         name: 'Nexus Finance Pro',
-        short_name: 'Nexus Finance Pro',
+        short_name: 'Nexus Pro',
         description: 'Votre tableau de bord financier intégral',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
-        orientation: 'any',
-        start_url: '/',
-        scope: '/',
+        orientation: 'portrait',
         icons: [
           {
             src: '/pwa-192x192.png',
