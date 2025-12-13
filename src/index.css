@@ -1877,3 +1877,12 @@ input:checked+.toggle-slider:before {
         grid-template-columns: 1fr !important; 
     }
 }
+
+/* Force full width on tablet vertical/horizontal (up to 1200px) */
+@media (max-width: 1200px) {
+    .app-container-wrapper {
+        max-width: 100% !important;
+        --user-max-width: 100% !important;
+        padding: 0 15px 40px 15px !important;
+    }
+}

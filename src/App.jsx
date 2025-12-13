@@ -99,7 +99,7 @@ const AppContent = () => {
         className="app-container-wrapper"
         style={{
           '--user-max-width': maxWidth,
-          maxWidth: maxWidth, // Direct application for robustness
+          maxWidth: 'var(--user-max-width)', // Use variable to allow CSS override
           width: '100%',
           margin: '0 auto',
           flex: 1,
