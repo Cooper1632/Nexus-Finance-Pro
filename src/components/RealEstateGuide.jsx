@@ -10,6 +10,9 @@ import {
 
 import { realEstateGuideData as frData, realEstateGuideDataIntl as frDataIntl } from '../data/locales/fr/realEstateGuideData.jsx';
 import { realEstateGuideData as enData, realEstateGuideDataIntl as enDataIntl } from '../data/locales/en/realEstateGuideData.jsx';
+import { realEstateGuideData as esData, realEstateGuideDataIntl as esDataIntl } from '../data/locales/es/realEstateGuideData.jsx';
+import { realEstateGuideData as deData, realEstateGuideDataIntl as deDataIntl } from '../data/locales/de/realEstateGuideData.jsx';
+import { realEstateGuideData as ptData, realEstateGuideDataIntl as ptDataIntl } from '../data/locales/pt/realEstateGuideData.jsx';
 
 const styles = {
     overlay: { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(4px)', zIndex: 3000, display: 'flex', alignItems: 'center', justifyContent: 'center' },
@@ -61,10 +64,13 @@ export default function RealEstateGuide({ isOpen, onClose }) {
 
     const data = useMemo(() => {
         const isCAD = (appState?.settings?.currentCurrency || 'CAD') === 'CAD';
-        const frSource = isCAD ? frData : frDataIntl;
-        const enSource = isCAD ? enData : enDataIntl;
 
-        return i18n.language.startsWith('fr') ? frSource : enSource;
+        if (i18n.language.startsWith('fr')) return isCAD ? frData : frDataIntl;
+        if (i18n.language.startsWith('es')) return isCAD ? esData : esDataIntl;
+        if (i18n.language.startsWith('de')) return isCAD ? deData : deDataIntl;
+        if (i18n.language.startsWith('pt')) return isCAD ? ptData : ptDataIntl;
+
+        return isCAD ? enData : enDataIntl;
     }, [i18n.language, appState?.settings?.currentCurrency]);
 
     const scrollTo = (id) => {

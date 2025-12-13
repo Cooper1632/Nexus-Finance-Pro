@@ -5,6 +5,9 @@ import LanguageDetector from 'i18next-browser-languagedetector'; // Détecte la 
 // Importation des fichiers de traduction
 import translationEN from './locales/en/translation_en.json';
 import translationFR from './locales/fr/translation_fr.json';
+import translationES from './locales/es/translation_es.json';
+import translationDE from './locales/de/translation_de.json';
+import translationPT from './locales/pt/translation_pt.json';
 
 const resources = {
   en: {
@@ -12,6 +15,15 @@ const resources = {
   },
   fr: {
     translation: translationFR
+  },
+  es: {
+    translation: translationES
+  },
+  de: {
+    translation: translationDE
+  },
+  pt: {
+    translation: translationPT
   }
 };
 
@@ -25,7 +37,7 @@ i18n
     // On retire 'lng: "en"' pour laisser le détecteur faire son travail
     // Le détecteur va regarder : localStorage > navigator (navigateur) > htmlTag
     fallbackLng: 'en', // Si la langue détectée n'est pas dispo, on met l'anglais
-    
+
     detection: {
       // Ordre de priorité pour la détection
       order: ['localStorage', 'navigator', 'htmlTag'],
@@ -34,7 +46,7 @@ i18n
     },
 
     interpolation: {
-      escapeValue: false 
+      escapeValue: false
     }
   });
 

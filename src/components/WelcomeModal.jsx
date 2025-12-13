@@ -134,7 +134,7 @@ const WelcomeModal = ({ isOpen, onClose, dontShowAgain, setDontShowAgain }) => {
 
     const currentCurrency = appState.settings?.currentCurrency || 'CAD';
     const isFr = i18n.language.startsWith('fr');
-    const currentLang = isFr ? 'fr' : 'en';
+    const currentLang = i18n.language.startsWith('fr') ? 'fr' : (i18n.language.startsWith('es') ? 'es' : (i18n.language.startsWith('de') ? 'de' : (i18n.language.startsWith('pt') ? 'pt' : 'en')));
 
     return (
         <div style={styles.overlay}>
@@ -176,6 +176,9 @@ const WelcomeModal = ({ isOpen, onClose, dontShowAgain, setDontShowAgain }) => {
                         >
                             <option value="fr">🇫🇷 Français</option>
                             <option value="en">🇺🇸 English</option>
+                            <option value="es">🇪🇸 Español</option>
+                            <option value="de">🇩🇪 Deutsch</option>
+                            <option value="pt">🇵🇹 Português</option>
                         </select>
 
                         {/* Choix Devise */}

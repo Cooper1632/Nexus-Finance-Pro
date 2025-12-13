@@ -253,9 +253,12 @@ function Header({ activeMode, setActiveMode, openUserGuide, openFinanceCourse, o
                             </div>
                             <div style={modalStyles.optionRow}>
                                 <label htmlFor="setting-lang" style={modalStyles.label}><GlobeAltIcon style={{ width: '18px' }} /> {t('settings.language')}</label>
-                                <select id="setting-lang" name="setting-lang" value={i18n.language?.startsWith('fr') ? 'fr' : 'en'} onChange={(e) => changeLanguage(e.target.value)} style={modalStyles.select}>
+                                <select id="setting-lang" name="setting-lang" value={i18n.language?.startsWith('fr') ? 'fr' : (i18n.language?.startsWith('es') ? 'es' : (i18n.language?.startsWith('de') ? 'de' : (i18n.language?.startsWith('pt') ? 'pt' : 'en')))} onChange={(e) => changeLanguage(e.target.value)} style={modalStyles.select}>
                                     <option value="fr">🇫🇷 Français</option>
                                     <option value="en">🇺🇸 English</option>
+                                    <option value="es">🇪🇸 Español</option>
+                                    <option value="de">🇩🇪 Deutsch</option>
+                                    <option value="pt">🇵🇹 Português</option>
                                 </select>
                             </div>
                             <div style={modalStyles.optionRow}>

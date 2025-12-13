@@ -13,6 +13,9 @@ import {
 
 import { userGuideData as frData } from '../data/locales/fr/userGuideData';
 import { userGuideData as enData } from '../data/locales/en/userGuideData';
+import { userGuideData as esData } from '../data/locales/es/userGuideData';
+import { userGuideData as deData } from '../data/locales/de/userGuideData';
+import { userGuideData as ptData } from '../data/locales/pt/userGuideData';
 
 const styles = {
     overlay: { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)', zIndex: 3000, display: 'flex', alignItems: 'center', justifyContent: 'center' },
@@ -96,7 +99,11 @@ export default function UserGuide({ isOpen, onClose, onOpenRealEstateGuide, onOp
 
     // Select Data based on language
     const data = useMemo(() => {
-        return i18n.language.startsWith('fr') ? frData : enData;
+        if (i18n.language.startsWith('fr')) return frData;
+        if (i18n.language.startsWith('es')) return esData;
+        if (i18n.language.startsWith('de')) return deData;
+        if (i18n.language.startsWith('pt')) return ptData;
+        return enData;
     }, [i18n.language]);
 
     const scrollTo = (id) => {

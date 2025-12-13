@@ -13,6 +13,9 @@ import {
 
 import { financeCourseData as frData, comparisonRatios as frRatios } from '../data/locales/fr/financeCourseData';
 import { financeCourseData as enData, comparisonRatios as enRatios } from '../data/locales/en/financeCourseData';
+import { financeCourseData as esData, comparisonRatios as esRatios } from '../data/locales/es/financeCourseData';
+import { financeCourseData as deData, comparisonRatios as deRatios } from '../data/locales/de/financeCourseData';
+import { financeCourseData as ptData, comparisonRatios as ptRatios } from '../data/locales/pt/financeCourseData';
 
 // Styles
 const styles = {
@@ -63,8 +66,21 @@ export default function FinanceCourse({ isOpen, onClose }) {
     const [showSidebar, setShowSidebar] = useState(true);
 
     // Data Selection
-    const data = useMemo(() => i18n.language.startsWith('fr') ? frData : enData, [i18n.language]);
-    const comparisonRatios = useMemo(() => i18n.language.startsWith('fr') ? frRatios : enRatios, [i18n.language]);
+    const data = useMemo(() => {
+        if (i18n.language.startsWith('fr')) return frData;
+        if (i18n.language.startsWith('es')) return esData;
+        if (i18n.language.startsWith('de')) return deData;
+        if (i18n.language.startsWith('pt')) return ptData;
+        return enData;
+    }, [i18n.language]);
+
+    const comparisonRatios = useMemo(() => {
+        if (i18n.language.startsWith('fr')) return frRatios;
+        if (i18n.language.startsWith('es')) return esRatios;
+        if (i18n.language.startsWith('de')) return deRatios;
+        if (i18n.language.startsWith('pt')) return ptRatios;
+        return enRatios;
+    }, [i18n.language]);
 
     const scrollTo = (id) => {
         const element = document.getElementById(id);
