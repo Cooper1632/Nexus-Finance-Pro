@@ -283,7 +283,7 @@ function Projections() {
                 activeColor={COLORS[activeTab]}
             />
 
-            <div className="budget-category" style={{ marginBottom: '20px', padding: '25px', background: 'var(--card-background)' }}>
+            <div className="budget-category card-hover-fix" style={{ marginBottom: '20px', padding: '25px', background: 'var(--card-background)' }}>
                 {activeTab === 'fv' && (
                     <div className="fieldset-grid">
                         <div className="input-group"><label>{t('projections.initial_capital')}</label><CurrencyInput name="fvInitial" value={scenario.fvInitial} onChange={(e) => updateScenario('fvInitial', e.target.value)} /></div>
@@ -314,7 +314,7 @@ function Projections() {
             <ProjectionInputs scenario={scenario} updateScenario={updateScenario} />
 
             <div className="projection-results-wrapper" style={{ marginTop: '30px', display: 'flex', gap: '30px', alignItems: 'stretch' }}>
-                <div style={{ flex: 1, background: 'var(--card-background)', padding: '25px', borderRadius: '8px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column' }}>
+                <div className="card-hover-fix" style={{ flex: 1, background: 'var(--card-background)', padding: '25px', borderRadius: '8px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column' }}>
                     <h3 style={{ marginTop: 0, marginBottom: '25px', color: 'var(--secondary-color)' }}>{t('common.results')}</h3>
                     <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '20px', flexWrap: 'wrap' }}>
                         <div style={{ flex: 1, minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '12px' }}>

@@ -96,11 +96,17 @@ function Performance({ currency = 'CAD' }) {
     };
 
     // --- MOTEUR DE CALCUL ---
+    const parseLocalDate = (dateString) => {
+        if (!dateString) return null;
+        const [year, month, day] = dateString.split('-').map(Number);
+        return new Date(year, month - 1, day);
+    };
+
     const results = useMemo(() => {
         const { initial, final, startDate, endDate } = currentScenario;
 
-        const start = startDate ? new Date(startDate + 'T00:00:00') : null;
-        const end = endDate ? new Date(endDate + 'T00:00:00') : null;
+        const start = parseLocalDate(startDate);
+        const end = parseLocalDate(endDate);
 
         const initialVal = parseFloat(initial) || 0;
         const finalVal = parseFloat(final) || 0;

@@ -4,7 +4,7 @@ import { XMarkIcon, ChartPieIcon } from '@heroicons/react/24/outline'; // Utilis
 import { Radar } from 'react-chartjs-2';
 
 const styles = {
-    overlay: { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(3px)', zIndex: 2200, display: 'flex', alignItems: 'center', justifyContent: 'center' },
+    overlay: { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(3px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' },
     content: { backgroundColor: 'var(--card-background)', width: '90%', maxWidth: '650px', borderRadius: '16px', boxShadow: '0 15px 35px rgba(0,0,0,0.25)', maxHeight: '90vh', overflowY: 'auto', padding: '0', display: 'flex', flexDirection: 'column' },
     header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 25px', borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--background-color)' },
     title: { margin: 0, fontSize: '1.4rem', color: 'var(--text-color)', display: 'flex', alignItems: 'center', gap: '10px' },

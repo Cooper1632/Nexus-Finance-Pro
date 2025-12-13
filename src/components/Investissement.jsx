@@ -692,11 +692,11 @@ export default function Investissement() {
             <div className="module-header-with-reset"><h2>{t('investment.title')}</h2></div>
 
             <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', marginBottom: '20px' }}>
-                <div style={styles.kpiCard}><div style={styles.kpiTitle}>{t('perf_modal.current_value')}</div><div style={styles.kpiValue}>{formatCurrency(portfolio.totalVal)}</div></div>
-                <div style={styles.kpiCard}><div style={styles.kpiTitle}>{t('perf_modal.total_invested')}</div><div style={styles.kpiValue}>{formatCurrency(portfolio.totalCost)}</div></div>
-                <div style={styles.kpiCard}><div style={styles.kpiTitle}>{t('perf_modal.gain_loss')}</div><div style={{ ...styles.kpiValue, color: portfolio.totalGain >= 0 ? 'var(--success-color)' : 'var(--danger-color)' }}>{formatCurrency(portfolio.totalGain)}</div></div>
-                <div style={styles.kpiCard}><div style={styles.kpiTitle}>{t('dashboard.return')}</div><div style={{ ...styles.kpiValue, color: portfolio.totalReturn >= 0 ? 'var(--success-color)' : 'var(--danger-color)' }}>{portfolio.totalReturn.toFixed(2)}%</div></div>
-                <div style={styles.kpiCard}>
+                <div className="card-hover-fix" style={styles.kpiCard}><div style={styles.kpiTitle}>{t('perf_modal.current_value')}</div><div style={styles.kpiValue}>{formatCurrency(portfolio.totalVal)}</div></div>
+                <div className="card-hover-fix" style={styles.kpiCard}><div style={styles.kpiTitle}>{t('perf_modal.total_invested')}</div><div style={styles.kpiValue}>{formatCurrency(portfolio.totalCost)}</div></div>
+                <div className="card-hover-fix" style={styles.kpiCard}><div style={styles.kpiTitle}>{t('perf_modal.gain_loss')}</div><div style={{ ...styles.kpiValue, color: portfolio.totalGain >= 0 ? 'var(--success-color)' : 'var(--danger-color)' }}>{formatCurrency(portfolio.totalGain)}</div></div>
+                <div className="card-hover-fix" style={styles.kpiCard}><div style={styles.kpiTitle}>{t('dashboard.return')}</div><div style={{ ...styles.kpiValue, color: portfolio.totalReturn >= 0 ? 'var(--success-color)' : 'var(--danger-color)' }}>{portfolio.totalReturn.toFixed(2)}%</div></div>
+                <div className="card-hover-fix" style={styles.kpiCard}>
                     <div style={styles.kpiTitle}>{t('performance.cagr')}</div>
                     <div style={{ ...styles.kpiValue, color: portfolio.cagr >= 0 ? 'var(--success-color)' : 'var(--danger-color)' }}>{portfolio.cagr.toFixed(2)}%</div>
                     {portfolio.isSimpleReturn && <div style={{ fontSize: '0.7rem', color: '#888' }}>{t('performance.simple')}</div>}
@@ -786,7 +786,7 @@ export default function Investissement() {
                     const isAnyLoading = isGlobalLoading || isRowLoading;
 
                     return (
-                        <div key={h.symbol} className="holding-card-container" style={styles.holdingCard(h.color)}>
+                        <div key={h.symbol} className="holding-card-container card-hover-fix" style={styles.holdingCard(h.color)}>
                             <div><div style={{ fontWeight: 'bold', color: h.color, fontSize: '1.1rem' }}>{h.symbol}</div><div className="card-label" style={{ fontSize: '0.8rem', color: '#888' }}>{t('investment.quantity')}: {h.quantity}</div></div>
                             <div><div className="card-label" style={{ fontSize: '0.8rem', color: '#888' }}>{t('investment.avg_price')}</div><div className="card-value" style={{ fontWeight: 'bold' }}>{formatPrecise(h.avgPrice)}</div></div>
                             <div><div className="card-label" style={{ fontSize: '0.8rem', color: '#888' }}>{t('investment.curr_price')}</div><input type="number" value={h.currentPrice} onChange={(e) => handlePriceChange(h.symbol, e.target.value)} style={styles.priceInput} /></div>
@@ -814,11 +814,11 @@ export default function Investissement() {
 
             {portfolio.holdings.length > 0 && (
                 <div className="investment-charts-grid">
-                    <div style={{ height: '350px', textAlign: 'center' }}>
+                    <div className="card-hover-fix" style={{ height: '280px', textAlign: 'center', marginBottom: '30px' }}>
                         <h4 style={{ fontSize: '0.9rem', marginBottom: '10px' }}>{t('investment.distribution')}</h4>
                         <Doughnut data={donutData} options={{ maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }} />
                     </div>
-                    <div style={{ height: '350px', textAlign: 'center' }}>
+                    <div className="card-hover-fix" style={{ height: '350px', textAlign: 'center' }}>
                         <h4 style={{ fontSize: '0.9rem', marginBottom: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
                             {t('investment.performance_bubble')} <BubbleHelp t={t} />
                         </h4>

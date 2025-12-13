@@ -61,7 +61,7 @@ const AppContent = () => {
   const renderContent = () => {
     // DEBUG CURRENCY
     if (activeMode === 'perf') {
-      console.log('App.jsx - Currency passed to Performance:', appState.settings?.currency);
+      console.log('App.jsx - Currency passed to Performance:', appState.settings?.currentCurrency);
     }
     switch (activeMode) {
       case 'dashboard': return <Dashboard setActiveMode={setActiveMode} />;

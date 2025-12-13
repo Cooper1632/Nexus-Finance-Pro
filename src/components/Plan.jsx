@@ -94,7 +94,7 @@ const PhaseStep = ({ phaseIndex, focusDebt, rangeLabel, extraAmount, totalPaymen
     const themeColor = focusDebt.color || DEBT_COLORS[0];
     const paleBg = hexToRgba(themeColor, 0.08);
     return (
-        <div className="step-box focus" style={{ background: `linear-gradient(to right, ${paleBg}, transparent)`, border: `2px solid ${themeColor}`, borderRadius: '8px', padding: '20px', margin: '20px 0' }}>
+        <div className="step-box focus card-hover-fix" style={{ background: `linear-gradient(to right, ${paleBg}, transparent)`, border: `2px solid ${themeColor}`, borderRadius: '8px', padding: '20px', margin: '20px 0' }}>
             <div className="step-title" style={{ fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '10px', color: 'var(--text-color)' }}>
                 {t('plan.phase', { number: phaseIndex })} <strong style={{ color: themeColor }}>{focusDebt.titre}</strong> <small style={{ fontWeight: 'normal', color: 'var(--secondary-color)' }}>({rangeLabel})</small>
             </div>
@@ -592,7 +592,7 @@ function Plan() {
             </div>
 
             {/* SECTION HYPOTHÈQUES */}
-            <div style={{ marginTop: '40px', marginBottom: '40px', backgroundColor: '#FEF9E7', padding: '20px', borderRadius: '12px', border: '1px solid #F7DC6F' }}>
+            <div className="card-hover-fix" style={{ marginTop: '40px', marginBottom: '40px', backgroundColor: '#FEF9E7', padding: '20px', borderRadius: '12px', border: '1px solid #F7DC6F' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
                     <h3 style={{ margin: 0, color: '#F39C12' }}>{t('plan.mortgage_section_title')}</h3>
                     <button onClick={addMortgageRow} className="btn-success btn-text-white" style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.9rem' }}><PlusIcon style={{ width: '16px' }} /> {t('plan.add_mortgage')}</button>
@@ -692,7 +692,7 @@ function Plan() {
                 </div>
             </div>
             {debts.length > 0 && (
-                <div className="budget-category" style={{ marginTop: '30px', padding: '25px', background: 'var(--card-background)' }}>
+                <div className="budget-category card-hover-fix" style={{ marginTop: '30px', padding: '25px', background: 'var(--card-background)' }}>
                     <div className="fieldset-grid" style={{ alignItems: 'end' }}>
                         <div className="input-group">
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px' }}>

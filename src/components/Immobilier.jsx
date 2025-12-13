@@ -178,8 +178,23 @@ const styles = {
     }
 };
 
-const InfoTooltip = ({ text }) => {
+const InfoTooltip = ({ text, align = 'center' }) => {
     const [hover, setHover] = useState(false);
+
+    // Dynamic positioning
+    let posStyle = { left: '50%', transform: 'translateX(-50%)' };
+    let arrowPosStyle = { left: '50%', marginLeft: '-6px' };
+
+    if (align === 'left') {
+        // Aligned Left (Icon is on Left) -> Tooltip goes Right (Interior)
+        posStyle = { left: '0', transform: 'none' };
+        arrowPosStyle = { left: '10px' };
+    } else if (align === 'right') {
+        // Aligned Right (Icon is on Right) -> Tooltip goes Left (Interior)
+        posStyle = { right: '0', left: 'auto', transform: 'none' };
+        arrowPosStyle = { right: '10px', left: 'auto', marginLeft: '0' };
+    }
+
     return (
         <div
             style={styles.tooltipContainer}
@@ -187,9 +202,9 @@ const InfoTooltip = ({ text }) => {
             onMouseLeave={() => setHover(false)}
         >
             <QuestionMarkCircleIcon style={{ width: '16px', color: 'var(--info-color)', opacity: 0.7 }} />
-            <div style={{ ...styles.tooltipText, visibility: hover ? 'visible' : 'hidden', opacity: hover ? 1 : 0 }}>
+            <div style={{ ...styles.tooltipText, visibility: hover ? 'visible' : 'hidden', opacity: hover ? 1 : 0, ...posStyle }}>
                 {text}
-                <div style={{ position: 'absolute', top: '100%', left: '14px', borderWidth: '5px', borderStyle: 'solid', borderColor: '#34495E transparent transparent transparent' }}></div>
+                <div style={{ position: 'absolute', top: '100%', borderWidth: '5px', borderStyle: 'solid', borderColor: '#34495E transparent transparent transparent', ...arrowPosStyle }}></div>
             </div>
         </div>
     );
@@ -572,27 +587,27 @@ export default function Immobilier() {
 
             {/* KPI */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px', marginBottom: '30px' }}>
-                <div style={{ ...styles.kpiCard, borderLeftColor: 'var(--primary-color)' }}><span style={styles.kpiLabel}>{t('realestate.kpi_cap_rate')} <InfoTooltip text={t('realestate.tooltip_cap_rate')} /></span><span style={{ ...styles.kpiValue, color: getScoreColor(metrics.capRate, 5, 'min') }}>{metrics.capRate.toFixed(2)}%</span><span style={styles.kpiTarget}>{t('realestate.target_min')}: &gt; 5.0%</span></div>
-                <div style={{ ...styles.kpiCard, borderLeftColor: 'var(--info-color)' }}><span style={styles.kpiLabel}>{t('realestate.kpi_cash_on_cash')} <InfoTooltip text={t('realestate.tooltip_cash_on_cash')} /></span><span style={{ ...styles.kpiValue, color: getScoreColor(metrics.cashOnCash, 8, 'min') }}>{metrics.cashOnCash.toFixed(2)}%</span><span style={styles.kpiTarget}>{t('realestate.target_min')}: &gt; 8.0%</span></div>
-                <div style={{ ...styles.kpiCard, borderLeftColor: 'var(--success-color)' }}><span style={styles.kpiLabel}>{t('realestate.kpi_dscr')} <InfoTooltip text={t('realestate.tooltip_dscr')} /></span><span style={{ ...styles.kpiValue, color: getScoreColor(metrics.dscr, 1.2, 'min') }}>{metrics.dscr.toFixed(2)}x</span><span style={styles.kpiTarget}>{t('realestate.target_bank')}: &gt; 1.20x</span></div>
-                <div style={{ ...styles.kpiCard, borderLeftColor: 'var(--warning-color)' }}><span style={styles.kpiLabel}>{t('realestate.kpi_cashflow_door')} <InfoTooltip text={t('realestate.tooltip_cashflow_door')} /></span><span style={{ ...styles.kpiValue, color: getScoreColor(metrics.cashFlowMensuel / (parseInt(localData.nombreLogements) || 1), 75, 'min') }}>{formatCurrency(metrics.cashFlowMensuel / (parseInt(localData.nombreLogements) || 1))}</span><span style={styles.kpiTarget}>{t('realestate.target_monthly')}</span></div>
+                <div className="card-hover-fix" style={{ ...styles.kpiCard, borderLeftColor: 'var(--primary-color)' }}><span style={styles.kpiLabel}>{t('realestate.kpi_cap_rate')} <InfoTooltip text={t('realestate.tooltip_cap_rate')} /></span><span style={{ ...styles.kpiValue, color: getScoreColor(metrics.capRate, 5, 'min') }}>{metrics.capRate.toFixed(2)}%</span><span style={styles.kpiTarget}>{t('realestate.target_min')}: &gt; 5.0%</span></div>
+                <div className="card-hover-fix" style={{ ...styles.kpiCard, borderLeftColor: 'var(--info-color)' }}><span style={styles.kpiLabel}>{t('realestate.kpi_cash_on_cash')} <InfoTooltip text={t('realestate.tooltip_cash_on_cash')} /></span><span style={{ ...styles.kpiValue, color: getScoreColor(metrics.cashOnCash, 8, 'min') }}>{metrics.cashOnCash.toFixed(2)}%</span><span style={styles.kpiTarget}>{t('realestate.target_min')}: &gt; 8.0%</span></div>
+                <div className="card-hover-fix" style={{ ...styles.kpiCard, borderLeftColor: 'var(--success-color)' }}><span style={styles.kpiLabel}>{t('realestate.kpi_dscr')} <InfoTooltip text={t('realestate.tooltip_dscr')} /></span><span style={{ ...styles.kpiValue, color: getScoreColor(metrics.dscr, 1.2, 'min') }}>{metrics.dscr.toFixed(2)}x</span><span style={styles.kpiTarget}>{t('realestate.target_bank')}: &gt; 1.20x</span></div>
+                <div className="card-hover-fix" style={{ ...styles.kpiCard, borderLeftColor: 'var(--warning-color)' }}><span style={styles.kpiLabel}>{t('realestate.kpi_cashflow_door')} <InfoTooltip text={t('realestate.tooltip_cashflow_door')} /></span><span style={{ ...styles.kpiValue, color: getScoreColor(metrics.cashFlowMensuel / (parseInt(localData.nombreLogements) || 1), 75, 'min') }}>{formatCurrency(metrics.cashFlowMensuel / (parseInt(localData.nombreLogements) || 1))}</span><span style={styles.kpiTarget}>{t('realestate.target_monthly')}</span></div>
             </div>
 
             {/* GRILLE PRINCIPALE */}
             <div className="responsive-dashboard-grid">
 
                 {/* Acquisition */}
-                <div style={styles.inputCardAcquisition}>
+                <div className="card-hover-fix" style={styles.inputCardAcquisition}>
                     <div style={styles.sectionTitle}><HomeIcon style={{ width: '20px', color: 'var(--info-color)' }} /> {t('realestate.acquisition')}</div>
                     <div className="fieldset-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-                        <div className="input-group"><label htmlFor="prixAchat">{t('realestate.purchase_price')}</label><CurrencyInput id="prixAchat" name="prixAchat" value={localData.prixAchat} onChange={handleChange} placeholder="0.00" /></div>
-                        <div className="input-group"><label htmlFor="miseDeFonds">{t('realestate.down_payment')}</label><CurrencyInput id="miseDeFonds" name="miseDeFonds" value={localData.miseDeFonds} onChange={handleChange} placeholder="0.00" /></div>
-                        <div className="input-group"><label htmlFor="hypothequeAnnuelle">{t('realestate.mortgage_payment')}</label><CurrencyInput id="hypothequeAnnuelle" name="hypothequeAnnuelle" value={localData.hypothequeAnnuelle} onChange={handleChange} placeholder={t('common.placeholders.total_year')} /></div>
-                        <div className="input-group"><label htmlFor="amortissementCapital">{t('realestate.capital_repayment')}</label><CurrencyInput id="amortissementCapital" name="amortissementCapital" value={localData.amortissementCapital} onChange={handleChange} placeholder={t('common.placeholders.capital')} /></div>
+                        <div className="input-group"><label htmlFor="prixAchat">{t('realestate.purchase_price')} <InfoTooltip text={t('realestate.tooltip_purchase_price')} align="left" /></label><CurrencyInput id="prixAchat" name="prixAchat" value={localData.prixAchat} onChange={handleChange} placeholder="0.00" /></div>
+                        <div className="input-group"><label htmlFor="miseDeFonds">{t('realestate.down_payment')} <InfoTooltip text={t('realestate.tooltip_down_payment')} align="right" /></label><CurrencyInput id="miseDeFonds" name="miseDeFonds" value={localData.miseDeFonds} onChange={handleChange} placeholder="0.00" /></div>
+                        <div className="input-group"><label htmlFor="hypothequeAnnuelle">{t('realestate.mortgage_payment')} <InfoTooltip text={t('realestate.tooltip_mortgage_payment')} align="left" /></label><CurrencyInput id="hypothequeAnnuelle" name="hypothequeAnnuelle" value={localData.hypothequeAnnuelle} onChange={handleChange} placeholder={t('common.placeholders.total_year')} /></div>
+                        <div className="input-group"><label htmlFor="amortissementCapital">{t('realestate.capital_repayment')} <InfoTooltip text={t('realestate.tooltip_capital_repayment')} align="right" /></label><CurrencyInput id="amortissementCapital" name="amortissementCapital" value={localData.amortissementCapital} onChange={handleChange} placeholder={t('common.placeholders.capital')} /></div>
                     </div>
                 </div>
 
-                <div style={{ ...styles.resultCard, textAlign: 'center' }}>
+                <div className="card-hover-fix" style={{ ...styles.resultCard, textAlign: 'center' }}>
                     <h4 style={{ color: 'var(--secondary-color)', fontSize: '0.9rem', marginBottom: '10px' }}>{t('realestate.finance_structure')}</h4>
                     <div style={{ flex: 1, position: 'relative', minHeight: '150px', width: '100%' }}>
                         <Bar data={chartFinancement} options={chartFinancementOptions} />
@@ -603,14 +618,14 @@ export default function Immobilier() {
                 </div>
 
                 {/* Opérations */}
-                <div style={styles.inputCardOperation}>
+                <div className="card-hover-fix" style={styles.inputCardOperation}>
                     <div style={styles.sectionTitle}><BanknotesIcon style={{ width: '20px', color: 'var(--warning-color)' }} /> {t('realestate.operations')}</div>
                     <div className="fieldset-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-                        <div className="input-group"><label htmlFor="revenusBruts">{t('realestate.gross_revenue')}</label><CurrencyInput id="revenusBruts" name="revenusBruts" value={localData.revenusBruts} onChange={handleChange} placeholder={t('common.placeholders.total_rent')} /></div>
+                        <div className="input-group"><label htmlFor="revenusBruts">{t('realestate.gross_revenue')} <InfoTooltip text={t('realestate.tooltip_gross_revenue')} align="left" /></label><CurrencyInput id="revenusBruts" name="revenusBruts" value={localData.revenusBruts} onChange={handleChange} placeholder={t('common.placeholders.total_rent')} /></div>
 
                         <div className="input-group">
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px' }}>
-                                <label htmlFor="depensesExploitation" style={{ margin: 0 }}>{t('realestate.operating_expenses')}</label>
+                                <label htmlFor="depensesExploitation" style={{ margin: 0 }}>{t('realestate.operating_expenses')} <InfoTooltip text={t('realestate.tooltip_operating_expenses')} align="right" /></label>
                                 <button onClick={openExpensesModal} title="Détail" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--info-color)' }}>
                                     <ListBulletIcon style={{ width: '20px' }} />
                                 </button>
@@ -618,11 +633,11 @@ export default function Immobilier() {
                             <CurrencyInput id="depensesExploitation" name="depensesExploitation" value={localData.depensesExploitation} onChange={handleChange} placeholder={t('common.placeholders.taxes_insurance')} />
                         </div>
 
-                        <div className="input-group"><label htmlFor="tauxVacance">{t('realestate.vacancy_rate')}</label><input type="number" id="tauxVacance" name="tauxVacance" value={localData.tauxVacance} onChange={handleChange} style={{ padding: '12px', borderRadius: '6px', border: '1px solid var(--border-color)', width: '100%' }} /></div>
+                        <div className="input-group"><label htmlFor="tauxVacance">{t('realestate.vacancy_rate')} <InfoTooltip text={t('realestate.tooltip_vacancy_rate')} align="left" /></label><input type="number" id="tauxVacance" name="tauxVacance" value={localData.tauxVacance} onChange={handleChange} style={{ padding: '12px', borderRadius: '6px', border: '1px solid var(--border-color)', width: '100%' }} /></div>
 
                         <div className="input-group">
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px' }}>
-                                <label htmlFor="autresRevenus" style={{ margin: 0 }}>{t('realestate.other_revenue')}</label>
+                                <label htmlFor="autresRevenus" style={{ margin: 0 }}>{t('realestate.other_revenue')} <InfoTooltip text={t('realestate.tooltip_other_revenue')} align="right" /></label>
                                 <button onClick={openIncomeModal} title="Détail" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--info-color)' }}>
                                     <ListBulletIcon style={{ width: '20px' }} />
                                 </button>
@@ -632,12 +647,12 @@ export default function Immobilier() {
                     </div>
                     <div style={{ marginTop: 'auto', paddingTop: '15px' }}>
                         <div style={{ padding: '10px', backgroundColor: 'rgba(255,255,255,0.5)', borderRadius: '6px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span style={{ fontWeight: '600' }}>RNE (NOI)</span><span style={{ fontWeight: '700', color: 'var(--primary-color)', fontSize: '1.1rem' }}>{formatCurrency(metrics.rne)}</span>
+                            <span style={{ fontWeight: '600', display: 'flex', alignItems: 'center', gap: '5px' }}>RNE (NOI) <InfoTooltip text={t('realestate.tooltip_rne')} align="center" /></span><span style={{ fontWeight: '700', color: 'var(--primary-color)', fontSize: '1.1rem' }}>{formatCurrency(metrics.rne)}</span>
                         </div>
                     </div>
                 </div>
 
-                <div style={{ ...styles.resultCard, textAlign: 'center' }}>
+                <div className="card-hover-fix" style={{ ...styles.resultCard, textAlign: 'center' }}>
                     <h4 style={{ color: 'var(--secondary-color)', fontSize: '0.9rem', marginBottom: '10px' }}>{t('realestate.cashflow')}</h4>
                     <div style={{ flex: 1, position: 'relative', minHeight: '200px' }}>
                         <Bar data={chartCashflow} options={{ maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: true, ticks: { color: 'var(--text-color)', font: { size: 10 } } } } }} />
@@ -645,34 +660,34 @@ export default function Immobilier() {
                 </div>
 
                 {/* Paramètres Avancés */}
-                <div style={styles.inputCardAdvanced}>
+                <div className="card-hover-fix" style={styles.inputCardAdvanced}>
                     <div style={styles.sectionTitle}><CalculatorIcon style={{ width: '20px', color: 'var(--perf-color)' }} /> {t('realestate.advanced')}</div>
                     <div className="fieldset-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
-                        <div className="input-group"><label htmlFor="nombreLogements">{t('realestate.units')}</label><input type="number" id="nombreLogements" name="nombreLogements" value={localData.nombreLogements} onChange={handleChange} style={{ padding: '12px', borderRadius: '6px', border: '1px solid var(--border-color)', width: '100%' }} /></div>
-                        <div className="input-group"><label htmlFor="tauxAppreciation">{t('realestate.appreciation')}</label><input type="number" id="tauxAppreciation" name="tauxAppreciation" value={localData.tauxAppreciation} onChange={handleChange} style={{ padding: '12px', borderRadius: '6px', border: '1px solid var(--border-color)', width: '100%' }} /></div>
-                        <div className="input-group"><label htmlFor="tauxImposition">{t('realestate.tax_rate')}</label><input type="number" id="tauxImposition" name="tauxImposition" value={localData.tauxImposition} onChange={handleChange} style={{ padding: '12px', borderRadius: '6px', border: '1px solid var(--border-color)', width: '100%' }} /></div>
+                        <div className="input-group"><label htmlFor="nombreLogements">{t('realestate.units')} <InfoTooltip text={t('realestate.tooltip_units')} align="left" /></label><input type="number" id="nombreLogements" name="nombreLogements" value={localData.nombreLogements} onChange={handleChange} style={{ padding: '12px', borderRadius: '6px', border: '1px solid var(--border-color)', width: '100%' }} /></div>
+                        <div className="input-group"><label htmlFor="tauxAppreciation">{t('realestate.appreciation')} <InfoTooltip text={t('realestate.tooltip_appreciation')} align="center" /></label><input type="number" id="tauxAppreciation" name="tauxAppreciation" value={localData.tauxAppreciation} onChange={handleChange} style={{ padding: '12px', borderRadius: '6px', border: '1px solid var(--border-color)', width: '100%' }} /></div>
+                        <div className="input-group"><label htmlFor="tauxImposition">{t('realestate.tax_rate')} <InfoTooltip text={t('realestate.tooltip_tax_rate')} align="right" /></label><input type="number" id="tauxImposition" name="tauxImposition" value={localData.tauxImposition} onChange={handleChange} style={{ padding: '12px', borderRadius: '6px', border: '1px solid var(--border-color)', width: '100%' }} /></div>
                     </div>
                     <div className="fieldset-grid" style={{ marginTop: '10px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-                        <div className="input-group"><label htmlFor="valeurActuelle">{t('realestate.current_value')}</label><CurrencyInput id="valeurActuelle" name="valeurActuelle" value={localData.valeurActuelle} onChange={handleChange} placeholder={t('common.placeholders.diff_purchase')} /></div>
-                        <div className="input-group"><label htmlFor="soldeHypothequeRestant">{t('realestate.mortgage_balance')}</label><CurrencyInput id="soldeHypothequeRestant" name="soldeHypothequeRestant" value={localData.soldeHypothequeRestant} onChange={handleChange} placeholder={t('common.placeholders.diff_loan')} /></div>
+                        <div className="input-group"><label htmlFor="valeurActuelle">{t('realestate.current_value')} <InfoTooltip text={t('realestate.tooltip_current_value')} align="left" /></label><CurrencyInput id="valeurActuelle" name="valeurActuelle" value={localData.valeurActuelle} onChange={handleChange} placeholder={t('common.placeholders.diff_purchase')} /></div>
+                        <div className="input-group"><label htmlFor="soldeHypothequeRestant">{t('realestate.mortgage_balance')} <InfoTooltip text={t('realestate.tooltip_mortgage_balance')} align="right" /></label><CurrencyInput id="soldeHypothequeRestant" name="soldeHypothequeRestant" value={localData.soldeHypothequeRestant} onChange={handleChange} placeholder={t('common.placeholders.diff_loan')} /></div>
                     </div>
                     <div className="fieldset-grid" style={{ marginTop: '10px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-                        <div className="input-group"><label htmlFor="montantTotalPret">{t('realestate.total_loan_amount')}</label><CurrencyInput id="montantTotalPret" name="montantTotalPret" value={localData.montantTotalPret} onChange={handleChange} placeholder={t('common.placeholders.optional')} /></div>
-                        <div className="input-group"><label htmlFor="amortissementFiscal">{t('realestate.tax_amortization')}</label><CurrencyInput id="amortissementFiscal" name="amortissementFiscal" value={localData.amortissementFiscal} onChange={handleChange} placeholder={t('common.placeholders.optional')} /></div>
+                        <div className="input-group"><label htmlFor="montantTotalPret">{t('realestate.total_loan_amount')} <InfoTooltip text={t('realestate.tooltip_total_loan_amount')} align="left" /></label><CurrencyInput id="montantTotalPret" name="montantTotalPret" value={localData.montantTotalPret} onChange={handleChange} placeholder={t('common.placeholders.optional')} /></div>
+                        <div className="input-group"><label htmlFor="amortissementFiscal">{t('realestate.tax_amortization')} <InfoTooltip text={t('realestate.tooltip_tax_amortization')} align="right" /></label><CurrencyInput id="amortissementFiscal" name="amortissementFiscal" value={localData.amortissementFiscal} onChange={handleChange} placeholder={t('common.placeholders.optional')} /></div>
                     </div>
                 </div>
 
                 {/* --- CARTE : COÛTS DE DÉMARRAGE --- */}
-                <div style={styles.inputCardStartup}>
+                <div className="card-hover-fix" style={styles.inputCardStartup}>
                     <div style={styles.sectionTitle}><WrenchScrewdriverIcon style={{ width: '20px', color: 'var(--success-color)' }} /> {t('realestate.startup_costs')}</div>
                     <div className="fieldset-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-                        <div className="input-group"><label htmlFor="fraisBienvenue">{t('realestate.welcome_tax')}</label><CurrencyInput id="fraisBienvenue" name="fraisBienvenue" value={localData.fraisBienvenue} onChange={handleChange} placeholder={t('common.placeholders.transfer')} /></div>
-                        <div className="input-group"><label htmlFor="fraisNotaire">{t('realestate.notary')}</label><CurrencyInput id="fraisNotaire" name="fraisNotaire" value={localData.fraisNotaire} onChange={handleChange} placeholder={t('common.placeholders.fees')} /></div>
-                        <div className="input-group"><label htmlFor="fraisRenovations">{t('realestate.renovations')}</label><CurrencyInput id="fraisRenovations" name="fraisRenovations" value={localData.fraisRenovations} onChange={handleChange} placeholder={t('common.placeholders.renovations')} /></div>
+                        <div className="input-group"><label htmlFor="fraisBienvenue">{t('realestate.welcome_tax')} <InfoTooltip text={t('realestate.tooltip_welcome_tax')} align="left" /></label><CurrencyInput id="fraisBienvenue" name="fraisBienvenue" value={localData.fraisBienvenue} onChange={handleChange} placeholder={t('common.placeholders.transfer')} /></div>
+                        <div className="input-group"><label htmlFor="fraisNotaire">{t('realestate.notary')} <InfoTooltip text={t('realestate.tooltip_notary')} align="right" /></label><CurrencyInput id="fraisNotaire" name="fraisNotaire" value={localData.fraisNotaire} onChange={handleChange} placeholder={t('common.placeholders.fees')} /></div>
+                        <div className="input-group"><label htmlFor="fraisRenovations">{t('realestate.renovations')} <InfoTooltip text={t('realestate.tooltip_renovations')} align="left" /></label><CurrencyInput id="fraisRenovations" name="fraisRenovations" value={localData.fraisRenovations} onChange={handleChange} placeholder={t('common.placeholders.renovations')} /></div>
 
                         <div className="input-group">
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px' }}>
-                                <label htmlFor="fraisDivers" style={{ margin: 0 }}>{t('realestate.misc_fees')}</label>
+                                <label htmlFor="fraisDivers" style={{ margin: 0 }}>{t('realestate.misc_fees')} <InfoTooltip text={t('realestate.tooltip_misc_fees')} align="right" /></label>
                                 <button onClick={openFraisModal} title="Détail" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--info-color)' }}>
                                     <ListBulletIcon style={{ width: '20px' }} />
                                 </button>
@@ -686,36 +701,36 @@ export default function Immobilier() {
                 </div>
 
                 {/* --- CARTE RATIOS DÉTAILLÉS --- */}
-                <div style={{ ...styles.resultCard, gridColumn: '1 / -1' }}>
+                <div className="card-hover-fix" style={{ ...styles.resultCard, gridColumn: '1 / -1' }}>
                     <div style={styles.sectionTitle}><TableCellsIcon style={{ width: '20px', color: 'var(--info-color)' }} /> {t('realestate.kpi_detail_title')}</div>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
                         <div>
                             <h5 style={{ margin: '0 0 10px 0', color: 'var(--secondary-color)', borderBottom: '1px solid #eee', paddingBottom: '5px', textTransform: 'uppercase', fontSize: '0.85rem' }}>{t('realestate.cat_profitability')}</h5>
-                            <RatioRow label={t('realestate.gross_yield')} value={`${metrics.grossYield.toFixed(2)}%`} />
-                            <RatioRow label={t('realestate.mrb')} value={`${metrics.mrb.toFixed(1)}x`} />
-                            <RatioRow label={t('realestate.oer')} value={`${metrics.oer.toFixed(1)}%`} />
-                            <RatioRow label={t('realestate.roi_total')} value={`${metrics.roiTotal.toFixed(2)}%`} />
-                            <RatioRow label={t('realestate.tri_10')} value={`${metrics.tri.toFixed(2)}%`} />
+                            <RatioRow label={t('realestate.gross_yield')} value={`${metrics.grossYield.toFixed(2)}%`} tooltip={t('realestate.tooltip_gross_yield')} />
+                            <RatioRow label={t('realestate.mrb')} value={`${metrics.mrb.toFixed(1)}x`} tooltip={t('realestate.tooltip_mrb')} />
+                            <RatioRow label={t('realestate.oer')} value={`${metrics.oer.toFixed(1)}%`} tooltip={t('realestate.tooltip_oer')} />
+                            <RatioRow label={t('realestate.roi_total')} value={`${metrics.roiTotal.toFixed(2)}%`} tooltip={t('realestate.tooltip_roi_total')} />
+                            <RatioRow label={t('realestate.tri_10')} value={`${metrics.tri.toFixed(2)}%`} tooltip={t('realestate.tooltip_tri_10')} />
                         </div>
                         <div>
                             <h5 style={{ margin: '0 0 10px 0', color: 'var(--danger-color)', borderBottom: '1px solid #eee', paddingBottom: '5px', textTransform: 'uppercase', fontSize: '0.85rem' }}>{t('realestate.cat_risk')}</h5>
-                            <RatioRow label={t('realestate.break_even')} value={`${metrics.breakEvenRatio.toFixed(1)}%`} />
-                            <RatioRow label={t('realestate.safety_margin')} value={`${metrics.safetyMargin.toFixed(1)}%`} />
-                            <RatioRow label={t('realestate.ltv')} value={`${metrics.ltv.toFixed(1)}%`} />
-                            <RatioRow label={t('realestate.debt_yield')} value={`${metrics.debtYield.toFixed(1)}%`} />
+                            <RatioRow label={t('realestate.break_even')} value={`${metrics.breakEvenRatio.toFixed(1)}%`} tooltip={t('realestate.tooltip_break_even')} />
+                            <RatioRow label={t('realestate.safety_margin')} value={`${metrics.safetyMargin.toFixed(1)}%`} tooltip={t('realestate.tooltip_safety_margin')} />
+                            <RatioRow label={t('realestate.ltv')} value={`${metrics.ltv.toFixed(1)}%`} tooltip={t('realestate.tooltip_ltv')} />
+                            <RatioRow label={t('realestate.debt_yield')} value={`${metrics.debtYield.toFixed(1)}%`} tooltip={t('realestate.tooltip_debt_yield')} />
                         </div>
                         <div>
                             <h5 style={{ margin: '0 0 10px 0', color: 'var(--success-color)', borderBottom: '1px solid #eee', paddingBottom: '5px', textTransform: 'uppercase', fontSize: '0.85rem' }}>{t('realestate.cat_valuation')}</h5>
-                            <RatioRow label={t('realestate.price_per_door')} value={formatCurrency(metrics.pricePerDoor)} />
-                            <RatioRow label={t('realestate.cap_rate')} value={`${metrics.capRate.toFixed(2)}%`} />
-                            <RatioRow label={t('realestate.roe')} value={`${metrics.roe.toFixed(2)}%`} />
-                            <RatioRow label={t('realestate.tax_efficiency')} value={`${metrics.taxEfficiency.toFixed(1)}%`} />
+                            <RatioRow label={t('realestate.price_per_door')} value={formatCurrency(metrics.pricePerDoor)} tooltip={t('realestate.tooltip_price_per_door')} />
+                            <RatioRow label={t('realestate.cap_rate')} value={`${metrics.capRate.toFixed(2)}%`} tooltip={t('realestate.tooltip_cap_rate_long')} />
+                            <RatioRow label={t('realestate.roe')} value={`${metrics.roe.toFixed(2)}%`} tooltip={t('realestate.tooltip_roe')} />
+                            <RatioRow label={t('realestate.tax_efficiency')} value={`${metrics.taxEfficiency.toFixed(1)}%`} tooltip={t('realestate.tooltip_tax_efficiency')} />
                         </div>
                     </div>
                 </div>
 
                 {/* --- CARTE : SCORE DE SANTÉ --- */}
-                <div style={styles.resultCard}>
+                <div className="card-hover-fix" style={styles.resultCard}>
                     <div style={styles.sectionTitle}><ChartBarIcon style={{ width: '20px', color: 'var(--immobilier-color)' }} /> {t('realestate.score_health')}</div>
                     {localData.prixAchat > 0 ? (
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', height: '100%' }}>
@@ -738,7 +753,7 @@ export default function Immobilier() {
                     )}
                 </div>
 
-                <div style={styles.resultCard}>
+                <div className="card-hover-fix" style={styles.resultCard}>
                     <div style={styles.sectionTitle}><ArrowTrendingUpIcon style={{ width: '20px', color: 'var(--immobilier-color)' }} /> {t('realestate.equity_projection')}</div>
                     <div style={{ flex: 1, minHeight: '300px', position: 'relative' }}>
                         <Line

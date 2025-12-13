@@ -747,7 +747,7 @@ function Remboursement() {
             />
 
             {activeTab === 'hypotheque' && (
-                <div className="budget-category" style={{ padding: '25px', background: 'var(--card-background)' }}>
+                <div className="budget-category card-hover-fix" style={{ padding: '25px', background: 'var(--card-background)' }}>
 
                     {/* SWITCH CORRIGÉE : Utilisation de Classes CSS Responsive (Desktop=Absolute, Mobile=Flex Column) */}
                     <div className="remboursement-switch-container">
@@ -867,7 +867,7 @@ function Remboursement() {
             )}
 
             {activeTab === 'pret' && (
-                <div className="budget-category" style={{ padding: '25px', background: 'var(--card-background)' }}>
+                <div className="budget-category card-hover-fix" style={{ padding: '25px', background: 'var(--card-background)' }}>
                     <div className="fieldset-grid">
                         <div className="input-group"><label htmlFor={`pretMontant-${activeIndex}`}>{t('common.amount')}</label><CurrencyInput id={`pretMontant-${activeIndex}`} name="pretMontant" value={inputs.pretMontant} onChange={handleChange} placeholder="0.00" /></div>
                         <div className="input-group"><label htmlFor={`pretTaux-${activeIndex}`}>{t('common.rate')} (%)</label><input id={`pretTaux-${activeIndex}`} name="pretTaux" type="number" value={inputs.pretTaux} onChange={handleChange} placeholder="0.0" onFocus={(e) => e.target.select()} style={{ padding: '10px', borderRadius: '6px', border: '1px solid var(--border-color)', width: '100%' }} /></div>
@@ -878,7 +878,7 @@ function Remboursement() {
             )}
 
             {activeTab === 'carte' && (
-                <div className="budget-category" style={{ padding: '25px', background: 'var(--card-background)' }}>
+                <div className="budget-category card-hover-fix" style={{ padding: '25px', background: 'var(--card-background)' }}>
                     <div className="fieldset-grid">
                         <div className="input-group"><label htmlFor={`carteSolde-${activeIndex}`}>{t('common.balance')}</label><CurrencyInput id={`carteSolde-${activeIndex}`} name="carteSolde" value={inputs.carteSolde} onChange={handleChange} placeholder="0.00" /></div>
                         <div className="input-group"><label htmlFor={`carteTaux-${activeIndex}`}>{t('common.rate')} (%)</label><input id={`carteTaux-${activeIndex}`} name="carteTaux" type="number" value={inputs.carteTaux} onChange={handleChange} placeholder="0.0" onFocus={(e) => e.target.select()} style={{ padding: '10px', borderRadius: '6px', border: '1px solid var(--border-color)', width: '100%' }} /></div>
@@ -890,7 +890,7 @@ function Remboursement() {
             {results ? (
                 <div className="results-section" style={{ marginTop: '30px' }}>
                     <div className="repayment-results-grid">
-                        <div style={{ background: 'var(--card-background)', padding: '20px', borderRadius: '10px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column' }}>
+                        <div className="card-hover-fix" style={{ background: 'var(--card-background)', padding: '20px', borderRadius: '10px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column' }}>
                             <h3 style={{ marginTop: 0, color: 'var(--primary-color)' }}>{t('common.results')} ({inputs.name})</h3>
 
                             {activeTab === 'hypotheque' && (

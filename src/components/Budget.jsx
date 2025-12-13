@@ -52,6 +52,7 @@ const BudgetRow = ({ item, section, category, updateItem, removeItem, formatCurr
 function Budget() {
     const { appState, saveGlobalState, formatCurrency } = useData();
     const { t, i18n } = useTranslation();
+    const currency = appState.settings?.currentCurrency || 'CAD';
     const [hoveredTooltip, setHoveredTooltip] = useState(null);
     const [scenarios, setScenarios] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -247,7 +248,7 @@ function Budget() {
                     <button onClick={handleGenerateYear} title={t('budget.generate_year')} style={{ padding: '8px 15px', borderRadius: '6px', border: '1px solid var(--info-color)', background: 'var(--card-background)', color: 'var(--info-color)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', fontWeight: 'bold' }}><CalendarIcon style={{ width: '20px' }} /> {t('budget.generate_year')}</button>
                 </div>
 
-                <div className="budget-card bg-revenus">
+                <div className="budget-card bg-revenus card-hover-fix">
                     <div className="budget-card-header"><h4>{t('budget.income')}</h4><button onClick={() => resetCategory('revenus')} className="icon-clean icon-blue" title={t('budget.reset')}><ArrowPathIcon style={{ width: '18px' }} /></button></div>
                     {renderHeader(t('budget.income'), 'revenus', null, 'tooltip-revenus')}
                     {budget.revenus.map((item, index) => (<div key={item.id} draggable onDragStart={(e) => handleDragStart(e, index, 'revenus', null)} onDragEnter={(e) => handleDragEnter(e, index, 'revenus', null)} onDragEnd={handleDragEnd} onDragOver={(e) => e.preventDefault()}><BudgetRow item={item} section="revenus" updateItem={updateItem} removeItem={removeItem} formatCurrency={formatCurrency} t={t} /></div>))}
@@ -258,7 +259,7 @@ function Budget() {
                     const catTotal = budget.depenses[cat].reduce((s, i) => s + normalizeToMonthly(i.cost, i.freq), 0);
                     const translatedCat = translateCategory(cat);
                     return (
-                        <div key={cat} className="budget-card bg-depenses">
+                        <div key={cat} className="budget-card bg-depenses card-hover-fix">
                             <div className="budget-card-header"><h4>{translatedCat}</h4><button onClick={() => resetCategory('depenses', cat)} className="icon-clean icon-blue" title={t('budget.reset')}><ArrowPathIcon style={{ width: '18px' }} /></button></div>
                             {renderHeader(translatedCat, 'depenses', cat, `tooltip-${cat}`)}
                             {budget.depenses[cat].map((item, index) => (<div key={item.id} draggable onDragStart={(e) => handleDragStart(e, index, 'depenses', cat)} onDragEnter={(e) => handleDragEnter(e, index, 'depenses', cat)} onDragEnd={handleDragEnd} onDragOver={(e) => e.preventDefault()}><BudgetRow item={item} section="depenses" category={cat} updateItem={updateItem} removeItem={removeItem} formatCurrency={formatCurrency} t={t} /></div>))}
@@ -267,14 +268,14 @@ function Budget() {
                     );
                 })}
 
-                <div className="budget-card bg-epargne">
+                <div className="budget-card bg-epargne card-hover-fix">
                     <div className="budget-card-header"><h4>{t('budget.savings')}</h4><button onClick={() => resetCategory('epargne')} className="icon-clean icon-blue" title={t('budget.reset')}><ArrowPathIcon style={{ width: '18px' }} /></button></div>
                     {renderHeader(t('budget.savings'), 'epargne', null, 'tooltip-epargne')}
                     {budget.epargne.map((item, index) => (<div key={item.id} draggable onDragStart={(e) => handleDragStart(e, index, 'epargne', null)} onDragEnter={(e) => handleDragEnter(e, index, 'epargne', null)} onDragEnd={handleDragEnd} onDragOver={(e) => e.preventDefault()}><BudgetRow item={item} section="epargne" updateItem={updateItem} removeItem={removeItem} formatCurrency={formatCurrency} t={t} /></div>))}
                     <div className="budget-card-footer"><button className="btn-add-line" onClick={() => addItem('epargne')}><PlusIcon style={{ width: '16px' }} /> {t('budget.add_line')}</button><div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#2C3E50' }}>{t('common.total')}: <span style={{ color: '#48C9B0' }}>{formatCurrency(totalEpargne)}</span></div></div>
                 </div>
 
-                <div className="budget-card bg-actifs">
+                <div className="budget-card bg-actifs card-hover-fix">
                     <div className="budget-card-header"><h4>{t('budget.assets')}</h4><button onClick={() => resetCategory('actifs')} className="icon-clean icon-blue" title={t('budget.reset')}><ArrowPathIcon style={{ width: '18px' }} /></button></div>
                     <div style={{ backgroundColor: '#FEF9E7', color: '#000000', padding: '10px 15px', borderRadius: '6px', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.9rem', border: '1px solid #FDEBD0' }}>
                         <ExclamationTriangleIcon style={{ width: '24px', flexShrink: 0, color: '#000000' }} />
@@ -306,7 +307,7 @@ function Budget() {
                                             let label = context.dataset.label || '';
                                             if (label) label += ': ';
                                             if (context.parsed.y !== null) {
-                                                label += new Intl.NumberFormat(i18n.language, { style: 'currency', currency: 'CAD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(context.parsed.y);
+                                                label += new Intl.NumberFormat(i18n.language, { style: 'currency', currency: currency, minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(context.parsed.y);
                                             }
                                             return label;
                                         }
@@ -329,7 +330,7 @@ function Budget() {
                                                 let label = context.label || '';
                                                 if (label) label += ': ';
                                                 if (context.parsed.r !== null) {
-                                                    label += new Intl.NumberFormat(i18n.language, { style: 'currency', currency: 'CAD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(context.parsed.r);
+                                                    label += new Intl.NumberFormat(i18n.language, { style: 'currency', currency: currency, minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(context.parsed.r);
                                                 }
                                                 return label;
                                             }
@@ -357,7 +358,7 @@ function Budget() {
                                             let label = context.dataset.label || '';
                                             if (label) label += ': ';
                                             if (context.parsed.x !== null) {
-                                                label += new Intl.NumberFormat(i18n.language, { style: 'currency', currency: 'CAD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(context.parsed.x);
+                                                label += new Intl.NumberFormat(i18n.language, { style: 'currency', currency: currency, minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(context.parsed.x);
                                             }
                                             return label;
                                         }

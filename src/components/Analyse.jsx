@@ -51,20 +51,36 @@ const getScoreColor = (score) => {
     return '#c0392b';
 };
 
-const InfoIcon = ({ content }) => {
+const InfoIcon = ({ content, align = 'center' }) => {
     const [isVisible, setIsVisible] = useState(false);
 
+    // Dynamic positioning based on alignment
+    let posStyle = { left: '50%', transform: 'translateX(-50%)' };
+    let arrowPosStyle = { left: '50%', marginLeft: '-6px' };
+
+    if (align === 'left') {
+        // Aligned Left (Icon is on Left) -> Tooltip goes Right (Interior)
+        posStyle = { left: '0', transform: 'none' };
+        arrowPosStyle = { left: '10px' };
+    } else if (align === 'right') {
+        // Aligned Right (Icon is on Right) -> Tooltip goes Left (Interior)
+        posStyle = { right: '0', left: 'auto', transform: 'none' };
+        arrowPosStyle = { right: '10px', left: 'auto', marginLeft: '0' };
+    }
+
     const tooltipStyle = {
-        position: 'absolute', bottom: '140%', left: '50%', transform: 'translateX(-50%)',
+        position: 'absolute', bottom: '140%',
         backgroundColor: '#2C3E50', color: '#FFFFFF', padding: '15px', borderRadius: '8px',
-        fontSize: '0.85rem', fontWeight: 'normal', width: 'max-content', maxWidth: '340px',
+        fontSize: '0.85rem', fontWeight: 'normal', width: 'max-content', maxWidth: '280px',
         whiteSpace: 'normal', zIndex: 1000, textAlign: 'left', boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
-        lineHeight: '1.6', border: '1px solid rgba(255,255,255,0.1)'
+        lineHeight: '1.6', border: '1px solid rgba(255,255,255,0.1)',
+        ...posStyle
     };
 
     const arrowStyle = {
-        position: 'absolute', top: '100%', left: '50%', marginLeft: '-6px',
-        borderWidth: '6px', borderStyle: 'solid', borderColor: '#2C3E50 transparent transparent transparent'
+        position: 'absolute', top: '100%',
+        borderWidth: '6px', borderStyle: 'solid', borderColor: '#2C3E50 transparent transparent transparent',
+        ...arrowPosStyle
     };
 
     return (
@@ -418,7 +434,7 @@ function Analyse() {
                     const isYieldCalculated = parseLocaleNumber(card.currentPrice) > 0 && parseLocaleNumber(card.dividendeAnnuel) >= 0;
 
                     return (
-                        <div key={card.id} className="analyse-stock-card" style={{ backgroundColor: 'var(--card-background)', borderTop: `5px solid ${cardThemeColor}`, borderRadius: '12px', padding: '20px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column' }}>
+                        <div key={card.id} className="analyse-stock-card card-hover-fix" style={{ backgroundColor: 'var(--card-background)', borderTop: `5px solid ${cardThemeColor}`, borderRadius: '12px', padding: '20px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column' }}>
 
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid var(--border-color)', paddingBottom: '15px' }}>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
@@ -457,8 +473,8 @@ function Analyse() {
                             </div>
 
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', rowGap: '12px', marginBottom: '20px' }}>
-                                <InputRow idPrefix={`price-${card.id}`} label={t('analysis.price')} content={tooltipsContent.price} value={card.currentPrice} onChange={(v) => updateCard(card.id, 'currentPrice', v)} themeColor={cardThemeColor} t={t} />
-                                <InputRow idPrefix={`bpa-${card.id}`} label={t('analysis.bpa')} content={tooltipsContent.bpa} value={card.bpa} onChange={(v) => updateCard(card.id, 'bpa', v)} themeColor={cardThemeColor} t={t} />
+                                <InputRow idPrefix={`price-${card.id}`} label={t('analysis.price')} content={tooltipsContent.price} value={card.currentPrice} onChange={(v) => updateCard(card.id, 'currentPrice', v)} themeColor={cardThemeColor} t={t} align="left" />
+                                <InputRow idPrefix={`bpa-${card.id}`} label={t('analysis.bpa')} content={tooltipsContent.bpa} value={card.bpa} onChange={(v) => updateCard(card.id, 'bpa', v)} themeColor={cardThemeColor} t={t} align="right" />
 
                                 <InputRow
                                     idPrefix={`pe-${card.id}`}
@@ -471,17 +487,18 @@ function Analyse() {
                                     onToggleExclude={() => toggleExclusion(card.id, 'pe')}
                                     isAutoCalculated={isPECalculated}
                                     t={t}
+                                    align="left"
                                 />
 
-                                <InputRow idPrefix={`growth-${card.id}`} label={t('analysis.growth')} content={tooltipsContent.growth} value={card.growth} onChange={(v) => updateCard(card.id, 'growth', v)} themeColor={cardThemeColor} isExcluded={card.excluded?.growth} onToggleExclude={() => toggleExclusion(card.id, 'growth')} t={t} />
+                                <InputRow idPrefix={`growth-${card.id}`} label={t('analysis.growth')} content={tooltipsContent.growth} value={card.growth} onChange={(v) => updateCard(card.id, 'growth', v)} themeColor={cardThemeColor} isExcluded={card.excluded?.growth} onToggleExclude={() => toggleExclusion(card.id, 'growth')} t={t} align="right" />
 
-                                <InputRow idPrefix={`margin-${card.id}`} label={t('analysis.margin')} content={tooltipsContent.margin} value={card.margin} onChange={(v) => updateCard(card.id, 'margin', v)} themeColor={cardThemeColor} isExcluded={card.excluded?.margin} onToggleExclude={() => toggleExclusion(card.id, 'margin')} t={t} />
-                                <InputRow idPrefix={`debt-${card.id}`} label={t('analysis.debt')} content={tooltipsContent.debt} value={card.debt} onChange={(v) => updateCard(card.id, 'debt', v)} themeColor={cardThemeColor} isExcluded={card.excluded?.debt} onToggleExclude={() => toggleExclusion(card.id, 'debt')} t={t} />
+                                <InputRow idPrefix={`margin-${card.id}`} label={t('analysis.margin')} content={tooltipsContent.margin} value={card.margin} onChange={(v) => updateCard(card.id, 'margin', v)} themeColor={cardThemeColor} isExcluded={card.excluded?.margin} onToggleExclude={() => toggleExclusion(card.id, 'margin')} t={t} align="left" />
+                                <InputRow idPrefix={`debt-${card.id}`} label={t('analysis.debt')} content={tooltipsContent.debt} value={card.debt} onChange={(v) => updateCard(card.id, 'debt', v)} themeColor={cardThemeColor} isExcluded={card.excluded?.debt} onToggleExclude={() => toggleExclusion(card.id, 'debt')} t={t} align="right" />
 
-                                <InputRow idPrefix={`roe-${card.id}`} label={t('analysis.roe')} content={tooltipsContent.roe} value={card.roe} onChange={(v) => updateCard(card.id, 'roe', v)} themeColor={cardThemeColor} isExcluded={card.excluded?.roe} onToggleExclude={() => toggleExclusion(card.id, 'roe')} t={t} />
-                                <InputRow idPrefix={`liq-${card.id}`} label={t('analysis.liquidity')} content={tooltipsContent.liq} value={card.liquidite} onChange={(v) => updateCard(card.id, 'liquidite', v)} themeColor={cardThemeColor} isExcluded={card.excluded?.liquidite} onToggleExclude={() => toggleExclusion(card.id, 'liquidite')} t={t} />
+                                <InputRow idPrefix={`roe-${card.id}`} label={t('analysis.roe')} content={tooltipsContent.roe} value={card.roe} onChange={(v) => updateCard(card.id, 'roe', v)} themeColor={cardThemeColor} isExcluded={card.excluded?.roe} onToggleExclude={() => toggleExclusion(card.id, 'roe')} t={t} align="left" />
+                                <InputRow idPrefix={`liq-${card.id}`} label={t('analysis.liquidity')} content={tooltipsContent.liq} value={card.liquidite} onChange={(v) => updateCard(card.id, 'liquidite', v)} themeColor={cardThemeColor} isExcluded={card.excluded?.liquidite} onToggleExclude={() => toggleExclusion(card.id, 'liquidite')} t={t} align="right" />
 
-                                <InputRow idPrefix={`divA-${card.id}`} label={t('analysis.div_annual')} content={tooltipsContent.divA} value={card.dividendeAnnuel} onChange={(v) => updateCard(card.id, 'dividendeAnnuel', v)} themeColor={cardThemeColor} isExcluded={card.excluded?.dividende} onToggleExclude={() => toggleExclusion(card.id, 'dividende')} t={t} />
+                                <InputRow idPrefix={`divA-${card.id}`} label={t('analysis.div_annual')} content={tooltipsContent.divA} value={card.dividendeAnnuel} onChange={(v) => updateCard(card.id, 'dividendeAnnuel', v)} themeColor={cardThemeColor} isExcluded={card.excluded?.dividende} onToggleExclude={() => toggleExclusion(card.id, 'dividende')} t={t} align="left" />
 
                                 <InputRow
                                     idPrefix={`divP-${card.id}`}
@@ -494,6 +511,7 @@ function Analyse() {
                                     onToggleExclude={() => toggleExclusion(card.id, 'dividende')}
                                     isAutoCalculated={isYieldCalculated}
                                     t={t}
+                                    align="right"
                                 />
                             </div>
 
@@ -540,7 +558,7 @@ function Analyse() {
     );
 }
 
-const InputRow = ({ idPrefix, label, content, value, onChange, themeColor, isExcluded, onToggleExclude, disabled, placeholder, isAutoCalculated, t }) => {
+const InputRow = ({ idPrefix, label, content, value, onChange, themeColor, isExcluded, onToggleExclude, disabled, placeholder, isAutoCalculated, t, align = 'center' }) => {
     const inputStyle = {
         width: '100%',
         maxWidth: '110px',
@@ -559,7 +577,7 @@ const InputRow = ({ idPrefix, label, content, value, onChange, themeColor, isExc
                 <label htmlFor={`curr-input-${idPrefix}`} style={{ fontSize: '0.8rem', fontWeight: '600', color: 'var(--text-color)', margin: 0, whiteSpace: 'nowrap', cursor: 'pointer' }} title={label}>
                     {label}
                 </label>
-                {content && <InfoIcon content={content} />}
+                {content && <InfoIcon content={content} align={align} />}
             </div>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <CurrencyInput

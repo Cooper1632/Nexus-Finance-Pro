@@ -1847,6 +1847,7 @@ input:checked+.toggle-slider:before {
         /* Center toggle perfectly */
     }
 }
+
 /* RESPONSIVE GRID LAYOUTS */
 .responsive-dashboard-grid {
     display: grid;
@@ -1864,7 +1865,8 @@ input:checked+.toggle-slider:before {
 
 @media (max-width: 768px) {
     .responsive-dashboard-grid {
-        grid-template-columns: 1fr !important; /* Force stack on mobile */
+        grid-template-columns: 1fr !important;
+        /* Force stack on mobile */
     }
 
     .responsive-card-split {
@@ -1872,9 +1874,9 @@ input:checked+.toggle-slider:before {
         flex-direction: column;
         gap: 20px;
     }
-    
+
     .fieldset-grid {
-        grid-template-columns: 1fr !important; 
+        grid-template-columns: 1fr !important;
     }
 }
 
@@ -1885,4 +1887,19 @@ input:checked+.toggle-slider:before {
         --user-max-width: 100% !important;
         padding: 0 15px 40px 15px !important;
     }
+}
+
+/* FIX: Stacking Context for Tooltips */
+.chart-container,
+.dashboard-card-fix,
+.card-hover-fix {
+    position: relative;
+    /* Ensure a transition is present for smooth transforms if any, but z-index should be instant */
+    transition: transform 0.2s, background-color 0.3s, z-index 0s;
+}
+
+.chart-container:hover,
+.dashboard-card-fix:hover,
+.card-hover-fix:hover {
+    z-index: 100;
 }
