@@ -10,6 +10,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['logo.png', 'pwa-192x192.png', 'pwa-512x512.png'],
       manifestFilename: 'manifest.json',
+      devOptions: {
+        enabled: true
+      },
       manifest: {
         name: 'Nexus Finance Pro',
         short_name: 'Nexus Finance Pro',
