@@ -1,6 +1,7 @@
 {
   "common": {
-    "save": "Save",
+    "save": "SAVE",
+    "saved": "Saved!",
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
@@ -8,6 +9,9 @@
     "update": "Update",
     "create": "Create",
     "confirm": "Confirm",
+    "got_it": "Got it!",
+    "features_title": "What you can do:",
+    "dont_show_again": "Don't show this message again",
     "total_paid": "Total Paid",
     "back": "Back",
     "next": "Next",
@@ -631,6 +635,7 @@
     "add_line": "Add Debt",
     "import_budget": "Import from Budget",
     "mortgage_section_title": "Mortgage & Real Estate Plan",
+    "mortgage_prepayment_warning": "Important Note: Early mortgage repayment is subject to your contract terms. Check with your financial institution for allowable prepayment limits to avoid penalties.",
     "freq_weekly": "Weekly",
     "freq_biweekly": "Bi-Weekly",
     "freq_weekly_acc": "Weekly Acc.",
@@ -797,7 +802,7 @@
     "remaining_balance": "Remaining Balance"
   },
   "performance": {
-    "title": "Return Calculator",
+    "title": "Performance",
     "params": "Investment Parameters",
     "initial_value": "Initial Value",
     "final_value": "Final Value",
@@ -807,8 +812,15 @@
     "total_return": "Total Return",
     "cagr": "CAGR (Annual)",
     "simple": "Simple",
-    "evolution": "Capital Evolution",
-    "gips_warning": "Note: This calculation uses a simplified Money-Weighted Return (MWRR) method between two dates."
+    "evolution": "Investment Evolution",
+    "gips_warning": "Note: This calculation uses a simplified Money-Weighted Return (MWRR) method between two dates.",
+    "compare_sp500": "Compare with S&P 500",
+    "my_portfolio": "My Investment",
+    "benchmark_disclaimer": "Theoretical simulation based on a 10.5% average annual return (S&P 500). Past performance does not guarantee future results.",
+    "real_data_disclaimer": "✔ Real Data: Historical comparison based on exact dates (Yahoo Finance).",
+    "legend_sp500_real": "S&P 500 (Total Return - Real History)",
+    "legend_sp500_simulated": "S&P 500 (Total Return - Simulated 10.5%)",
+    "warning_min_duration": "Cannot display chart: Duration must be at least 1 year."
   },
   "realestate": {
     "title": "Real Estate Calculator",
@@ -971,7 +983,8 @@
     "chap23_title": "23. Psychological Traps",
     "chap24_title": "24. Tips & Bonus",
     "glossary_title": "25. Glossary",
-    "myths_title": "Myths to Bust"
+    "myths_title": "Myths to Bust",
+    "intro_comparison": "To understand stock ratios, compare them to your own family management."
   },
   "debt_analysis": {
     "title": "Debt Analysis",
@@ -986,5 +999,111 @@
     "col_total_interest": "Total Interest Paid",
     "conclusion": "The higher the payment, the less total interest you pay. With {{paiement}}/month, you would pay interest indefinitely without ever reducing your debt.",
     "button_analyze": "⚠️ Why is my debt not decreasing?"
+  },
+  "intro": {
+    "analyse": {
+      "title": "Analyze your stocks in depth",
+      "text": "This module helps you evaluate the financial health of companies before investing.",
+      "features": [
+        "Simplified fundamental and technical analysis.",
+        "Access to detailed financial data (Earnings, Debt, P/E).",
+        "Interactive charts to visualize trends.",
+        "Comparison of key ratios to identify opportunities."
+      ]
+    },
+    "immobilier": {
+      "title": "Simulate your real estate investments",
+      "text": "A complete tool to analyze the profitability of your real estate projects.",
+      "features": [
+        "Simulation of income property purchases.",
+        "Automatic calculation of Cashflow and profitability.",
+        "Consideration of expenses, taxes, and amortization.",
+        "25-year projection of your wealth value."
+      ]
+    },
+    "performance": {
+      "title": "Measure the performance of your investments",
+      "text": "Analyze your gains and losses with precision over different periods.",
+      "features": [
+        "Calculation of simple and compound return (CAGR).",
+        "Easy comparison between multiple scenarios.",
+        "Visual representation of value evolution.",
+        "S&P 500 Comparison (Total Return & CAGR).",
+        "Exact date calculation for precision."
+      ]
+    },
+    "projections": {
+      "title": "Plan your financial future",
+      "text": "Powerful tools to project your retirement and savings goals.",
+      "features": [
+        "Calculation of future value with compound interest.",
+        "Determination of savings needed to reach a goal.",
+        "Disbursement simulation (periodic withdrawals).",
+        "Consideration of inflation for real results."
+      ]
+    },
+    "budget": {
+      "title": "Master your Budget",
+      "text": "This module is the heart of your daily management. It allows you to plan where your money goes before you spend it.",
+      "features": [
+        "List your income sources (Salary, Dividends, etc.).",
+        "Set precise budgets for each expense category.",
+        "Visualize your Cash Flow immediately (Remaining to live).",
+        "Set your automatic savings goals."
+      ]
+    },
+    "plan": {
+      "title": "Your Repayment Plan",
+      "text": "Free yourself from debt with a clear and optimized strategy. This module helps you take back control.",
+      "features": [
+        "Centralize all your debts (Cards, Loans, Mortgages).",
+        "Compare strategies (Avalanche vs Snowball) to save on interest.",
+        "Visualize your financial freedom date.",
+        "Simulate the impact of accelerated payments."
+      ]
+    },
+    "investissement": {
+      "title": "Track your Portfolio Performance",
+      "text": "This module centralizes all your investments for a deep analysis of your global performance.",
+      "features": [
+        "Overview of current value and total return.",
+        "Asset allocation and performance charts (Bubbles).",
+        "Detailed transaction history (Buy, Sell, Dividends).",
+        "Data source configuration (AlphaVantage, Yahoo, Questrade)."
+      ]
+    },
+    "remboursement": {
+      "title": "Analyze Repayment Strategies",
+      "text": "This module allows you to simulate and compare different repayment options for individual debts.",
+      "features": [
+        "Simulate a Mortgage, Car Loan, or Personal Loan.",
+        "Analyze the impact of accelerated payments on interest.",
+        "Calculate the time needed to pay off a Credit Card.",
+        "Visualize the total interest cost for each scenario."
+      ]
+    },
+    "dashboard": {
+      "title": "Welcome to your Dashboard",
+      "text": "The dashboard is your financial command center. It gives you an instant overview of your financial health.",
+      "features": [
+        "Visualize your Net Worth in real-time.",
+        "Track your asset allocation (cash, investments, real estate).",
+        "Consult your monthly budget status (Income vs Expenses).",
+        "Quick access to key modules via shortcuts."
+      ]
+    }
+  },
+  "help_perf": {
+    "modal_title": "Understanding the Deposits & Performance Module",
+    "modal_intro": "This module allows you to precisely track the real profitability of your investments by taking into account your contributions and withdrawals.",
+    "tab_overview_title": "Overview",
+    "tab_overview_desc": "Visualize a comparative chart between the money you put in (Invested) and the current value of your portfolio. It instantly shows if you are winning or losing.",
+    "tab_overview_example": "If the green line (Value) is above the blue line (Invested), you are making a profit. The gap between the two represents your gain.",
+    "tab_deposits_title": "Manage Deposits",
+    "tab_deposits_desc": "This is where you log every amount of money you transfer to your investment accounts. It is crucial for calculating your real performance.",
+    "tab_deposits_example": "On Jan 1st, I transferred $1000 from my checking account to my TFSA. I add an entry: 01/01/2024 | TFSA | $1000.",
+    "tab_journal_title": "Value Journal",
+    "tab_journal_desc": "Log the total value of your portfolio here at key dates (e.g., end of month). It's like taking a snapshot of your balance to see the evolution over time.",
+    "tab_journal_example": "On Jan 31st, I log into my bank and see my TFSA is worth $1050. I add a snapshot: 01/31/2024 | $1050. The system calculates I gained $50."
   }
 }

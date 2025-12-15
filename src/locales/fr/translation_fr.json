@@ -8,6 +8,9 @@
     "update": "Mettre à jour",
     "create": "Créer",
     "confirm": "Confirmer",
+    "got_it": "Compris !",
+    "features_title": "Ce que vous pouvez faire :",
+    "dont_show_again": "Ne plus afficher ce message",
     "payment": "Paiement",
     "account_types": {
       "celi": "CELI",
@@ -86,8 +89,10 @@
     "remaining_interest": "Intérêts restants",
     "placeholder_amount": "0,00",
     "annual": "Annuel",
+    "saved": "Enregistré !",
     "rate": "Taux",
     "duration": "Durée",
+    "results": "Résultats",
     "scenario_modal_title": "Nouveau Scénario",
     "scenario_modal_question": "Comment souhaitez-vous commencer ?",
     "btn_copy": "Dupliquer le scénario actuel",
@@ -620,6 +625,7 @@
     "min_payment": "Paiement Min",
     "your_payment": "Votre Paiement",
     "mortgage_section_title": "Dettes Hypothécaires / Immobilières",
+    "mortgage_prepayment_warning": "Note importante : Le remboursement anticipé d'une hypothèque est soumis aux conditions de votre contrat. Vérifiez auprès de votre institution financière les limites de prépaiement autorisées pour éviter des pénalités.",
     "mortgage_title": "Titre / Propriété",
     "mortgage_balance": "Solde Hypothécaire",
     "mortgage_rate": "Taux (%)",
@@ -790,7 +796,7 @@
     "remaining_balance": "Solde Restant"
   },
   "performance": {
-    "title": "Calculateur de Rendement",
+    "title": "Performance",
     "params": "Paramètres de l'investissement",
     "initial_value": "Valeur Initiale",
     "final_value": "Valeur Finale",
@@ -800,8 +806,15 @@
     "total_return": "Rendement Total",
     "cagr": "CAGR (Annuel)",
     "simple": "Simple",
-    "evolution": "Évolution du Capital",
-    "gips_warning": "Note : Ce calcul utilise la méthode Money-Weighted Return (MWRR) simplifiée entre deux dates."
+    "evolution": "Évolution de l'investissement",
+    "gips_warning": "Note : Ce calcul utilise la méthode Money-Weighted Return (MWRR) simplifiée entre deux dates.",
+    "compare_sp500": "Comparer avec S&P 500",
+    "my_portfolio": "Mon Investissement",
+    "benchmark_disclaimer": "Simulation théorique basée sur un rendement annuel moyen de 10.5% (S&P 500). Les performances passées ne garantissent pas les résultats futurs.",
+    "real_data_disclaimer": "✔ Données réelles : Comparaison historique basée sur les dates exactes (Yahoo Finance).",
+    "legend_sp500_real": "S&P 500 (Total Return - Historique Réel)",
+    "legend_sp500_simulated": "S&P 500 (Total Return - Simulé 10.5%)",
+    "warning_min_duration": "Impossible d'afficher la courbe : La durée doit être d'au moins 1 an."
   },
   "realestate": {
     "title": "Calculateur Immobilier",
@@ -964,7 +977,8 @@
     "chap23_title": "23. Pièges Psychologiques",
     "chap24_title": "24. Astuces & Bonus",
     "glossary_title": "25. Glossary",
-    "myths_title": "Les Mythes à Déboulonner"
+    "myths_title": "Les Mythes à Déboulonner",
+    "intro_comparison": "Pour bien comprendre les ratios boursiers, comparez-les à votre propre gestion familiale."
   },
   "debt_analysis": {
     "title": "Analyse de Votre Dette",
@@ -979,5 +993,124 @@
     "col_total_interest": "Intérêts totaux payés",
     "conclusion": "Plus le paiement est élevé, moins tu paies d'intérêts au total. Avec {{paiement}}/mois, tu paierais des intérêts indéfiniment sans jamais réduire ta dette.",
     "button_analyze": "⚠️ Pourquoi ma dette ne baisse pas ?"
+  },
+  "intro": {
+    "analyse": {
+      "title": "Analysez vos actions en profondeur",
+      "text": "Ce module vous aide à évaluer la santé financière des entreprises avant d'investir.",
+      "features": [
+        "Analyse fondamentale et technique simplifiée.",
+        "Accès aux données financières détaillées (Bénéfices, Dette, P/E).",
+        "Graphiques interactifs pour visualiser les tendances.",
+        "Comparaison de ratios clés pour identifier les opportunités."
+      ]
+    },
+    "immobilier": {
+      "title": "Simulez vos investissements immobiliers",
+      "text": "Un outil complet pour analyser la rentabilité de vos projets immobiliers.",
+      "features": [
+        "Simulation d'achat d'immeubles à revenus.",
+        "Calcul automatique du Cashflow et de la rentabilité.",
+        "Prise en compte des charges, impôts et amortissements.",
+        "Projection sur 25 ans de la valeur de votre patrimoine."
+      ]
+    },
+    "performance": {
+      "title": "Mesurez la performance de vos investissements",
+      "text": "Analysez vos gains et pertes avec précision sur différentes périodes.",
+      "features": [
+        "Calcul du rendement simple et composé (CAGR).",
+        "Comparaison facile entre plusieurs scénarios.",
+        "Visualisation graphique de l'évolution de la valeur.",
+        "Comparaison S&P 500 (Total Return & CAGR).",
+        "Prise en compte des dates pour un calcul précis."
+      ]
+    },
+    "projections": {
+      "title": "Planifiez votre avenir financier",
+      "text": "Des outils puissants pour projeter votre retraite et vos objectifs d'épargne.",
+      "features": [
+        "Calcul de la valeur future avec intérêts composés.",
+        "Détermination de l'épargne nécessaire pour atteindre un but.",
+        "Simulation de décaissement (retraits périodiques).",
+        "Prise en compte de l'inflation pour des résultats réels."
+      ]
+    },
+    "budget": {
+      "title": "Maîtrisez votre Budget",
+      "text": "Ce module est le cœur de votre gestion quotidienne. Il vous permet de planifier où va votre argent avant de le dépenser.",
+      "features": [
+        "Lister vos sources de revenus (Salaire, Dividendes, etc.).",
+        "Définir des budgets précis pour chaque catégorie de dépenses.",
+        "Visualiser immédiatement votre Cash Flow (Restant à vivre).",
+        "Définir vos objectifs d'épargne automatique."
+      ]
+    },
+    "plan": {
+      "title": "Votre Plan de Remboursement",
+      "text": "Libérez-vous de vos dettes grâce à une stratégie claire et optimisée. Ce module vous aide à reprendre le contrôle.",
+      "features": [
+        "Centraliser toutes vos dettes (Cartes, Prêts, Hypothèques).",
+        "Comparer les stratégies (Avalanche vs Boule de Neige) pour économiser des intérêts.",
+        "Visualiser votre date de liberté financière.",
+        "Simuler l'impact de paiements accélérés."
+      ]
+    },
+    "investissement": {
+      "title": "Suivez la performance de votre Portefeuille",
+      "text": "Ce module centralise tous vos investissements pour une analyse approfondie de votre performance globale.",
+      "features": [
+        "Vue d'ensemble de la valeur actuelle et du rendement total.",
+        "Graphiques de répartition d'actifs et de performance (Bulles).",
+        "Historique détaillé des transactions (Achat, Vente, Dividendes).",
+        "Configuration des sources de données (AlphaVantage, Yahoo, Questrade)."
+      ]
+    },
+    "remboursement": {
+      "title": "Analysez vos stratégies de Remboursement",
+      "text": "Ce module vous permet de simuler et comparer différentes options de remboursement pour vos dettes individuelles.",
+      "features": [
+        "Simuler une Hypothèque, un Prêt Auto ou Personnel.",
+        "Analyser l'impact des paiements accélérés sur les intérêts.",
+        "Calculer le temps nécessaire pour rembourser une Carte de Crédit.",
+        "Visualiser le coût total des intérêts pour chaque scénario."
+      ]
+    },
+    "dashboard": {
+      "title": "Bienvenue sur votre Tableau de Bord",
+      "text": "Le tableau de bord est votre centre de commandement financier. Il vous donne une vue d'ensemble instantanée de votre santé financière.",
+      "features": [
+        "Visualiser votre Patrimoine Net en temps réel.",
+        "Suivre la répartition de vos actifs (liquidités, placements, immobilier).",
+        "Consulter le statut mensuel de votre budget (Revenus vs Dépenses).",
+        "Accéder rapidement aux modules clés via les raccourcis."
+      ]
+    },
+    "help_perf": {
+      "modal_title": "Comprendre le module Dépôts & Performance",
+      "modal_intro": "Ce module vous permet de suivre précisément la rentabilité réelle de vos investissements en tenant compte de vos apports et retraits.",
+      "tab_overview_title": "Vue d'ensemble",
+      "tab_overview_desc": "Visualisez un graphique comparatif entre l'argent que vous avez sorti de votre poche (Investi) et la valeur actuelle de votre portefeuille. Cela vous montre instantanément si vous êtes gagnant ou perdant.",
+      "tab_overview_example": "Si la ligne verte (Valeur) est au-dessus de la ligne bleue (Investi), vous faites du profit. L'écart entre les deux représente votre gain.",
+      "tab_deposits_title": "Gérer les dépôts",
+      "tab_deposits_desc": "C'est ici que vous notez chaque somme d'argent que vous transférez vers vos comptes d'investissement. C'est crucial pour calculer votre performance réelle.",
+      "tab_deposits_example": "Le 1er Janvier, j'ai viré 1000$ de mon compte chèque vers mon CELI. J'ajoute donc une entrée : 01/01/2024 | CELI | 1000$.",
+      "tab_journal_title": "Journal de valeur",
+      "tab_journal_desc": "Notez ici la valeur totale de votre portefeuille à des dates clés (ex: fin du mois). C'est comme prendre une photo de votre solde pour voir l'évolution dans le temps.",
+      "tab_journal_example": "Le 31 Janvier, je me connecte à ma banque et je vois que mon CELI vaut 1050$. J'ajoute un relevé : 31/01/2024 | 1050$. Le système calculera que j'ai gagné 50$."
+    }
+  },
+  "help_perf": {
+    "modal_title": "Comprendre le module Dépôts & Performance",
+    "modal_intro": "Ce module vous permet de suivre précisément la rentabilité réelle de vos investissements en tenant compte de vos apports et retraits.",
+    "tab_overview_title": "Vue d'ensemble",
+    "tab_overview_desc": "Visualisez un graphique comparatif entre l'argent que vous avez sorti de votre poche (Investi) et la valeur actuelle de votre portefeuille. Cela vous montre instantanément si vous êtes gagnant ou perdant.",
+    "tab_overview_example": "Si la ligne verte (Valeur) est au-dessus de la ligne bleue (Investi), vous faites du profit. L'écart entre les deux représente votre gain.",
+    "tab_deposits_title": "Gérer les dépôts",
+    "tab_deposits_desc": "C'est ici que vous notez chaque somme d'argent que vous transférez vers vos comptes d'investissement. C'est crucial pour calculer votre performance réelle.",
+    "tab_deposits_example": "Le 1er Janvier, j'ai viré 1000$ de mon compte chèque vers mon CELI. J'ajoute donc une entrée : 01/01/2024 | CELI | 1000$.",
+    "tab_journal_title": "Journal de valeur",
+    "tab_journal_desc": "Notez ici la valeur totale de votre portefeuille à des dates clés (ex: fin du mois). C'est comme prendre une photo de votre solde pour voir l'évolution dans le temps.",
+    "tab_journal_example": "Le 31 Janvier, je me connecte à ma banque et je vois que mon CELI vaut 1050$. J'ajoute un relevé : 31/01/2024 | 1050$. Le système calculera que j'ai gagné 50$."
   }
 }

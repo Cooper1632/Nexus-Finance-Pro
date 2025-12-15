@@ -7,7 +7,8 @@ import PatrimonyDetailModal from './PatrimonyDetailModal';
 import Thermometer from './Thermometer';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title, RadialLinearScale, PointElement, LineElement, Filler } from 'chart.js';
 import { Doughnut, Radar, Bar } from 'react-chartjs-2';
-import { QuestionMarkCircleIcon, TrophyIcon, ShieldCheckIcon, BanknotesIcon, ArrowTrendingUpIcon, BuildingLibraryIcon, ScaleIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
+import { QuestionMarkCircleIcon, TrophyIcon, ShieldCheckIcon, BanknotesIcon, ArrowTrendingUpIcon, BuildingLibraryIcon, ScaleIcon, PencilSquareIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
+import IntroTableauDeBord from './IntroTableauDeBord';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title, RadialLinearScale, PointElement, LineElement, Filler);
 
@@ -67,6 +68,7 @@ const gaugeTicks = {
 };
 
 const PASTEL = { green: '#82E0AA', red: '#F1948A', blue: '#85C1E9', yellow: '#F7DC6F', orange: '#F0B27A', purple: '#D2B4DE', teal: '#A3E4D7', grey: '#BDC3C7' };
+const STOCK_COLORS = ['#3498DB', '#E74C3C', '#9B59B6', '#F1C40F', '#1ABC9C', '#2C3E50', '#D35400', '#27AE60', '#8E44AD', '#2980B9', '#C0392B', '#16A085', '#F39C12', '#7F8C8D', '#E67E22'];
 
 const InfoIcon = ({ text, align = 'center' }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -132,6 +134,14 @@ function Dashboard({ setActiveMode }) {
     const [openScoreModal, setOpenScoreModal] = useState(false);
     const [openRadarModal, setOpenRadarModal] = useState(false);
     const [openPatrimonyModal, setOpenPatrimonyModal] = useState(false);
+    const [showIntro, setShowIntro] = useState(false);
+
+    useEffect(() => {
+        const hasSeenIntro = localStorage.getItem('nexus_intro_dashboard_seen');
+        if (!hasSeenIntro) {
+            setShowIntro(true);
+        }
+    }, []);
 
     useEffect(() => { const handleResize = () => setWindowWidth(window.innerWidth); window.addEventListener('resize', handleResize); return () => window.removeEventListener('resize', handleResize); }, []);
     const isTabletOrMobile = windowWidth < 1024;
@@ -205,9 +215,25 @@ function Dashboard({ setActiveMode }) {
     const depositBarColor = totalGainVal >= 0 ? PASTEL.green : PASTEL.red;
     const totalReturnPct = totalDeposits > 0 ? ((portfolioValue - totalDeposits) / totalDeposits) * 100 : 0;
 
-    const symbols = Object.keys(holdings).filter(s => holdings[s].quantity > 0);
-    const chartColors = [PASTEL.yellow, PASTEL.blue, PASTEL.green, PASTEL.purple, PASTEL.red, PASTEL.teal, PASTEL.orange, '#D7BDE2', '#AEB6BF'];
-    const allocationData = { labels: [t('dashboard.invest_perf')], datasets: symbols.map((s, i) => ({ label: s, data: [holdings[s].quantity * (holdings[s].price || (holdings[s].cost / holdings[s].quantity))], backgroundColor: chartColors[i % chartColors.length], barThickness: 50 })) };
+
+    // Use the same sorting and color assignment logic as Investissement.jsx to ensure consistency
+    const symbols = Object.keys(holdings).filter(s => holdings[s].quantity > 0).sort(); // Sort alphabetically
+
+    // Create a color map consistent with Investissement module
+    const symbolColors = {};
+    symbols.forEach((sym, index) => {
+        symbolColors[sym] = STOCK_COLORS[index % STOCK_COLORS.length];
+    });
+
+    const allocationData = {
+        labels: [t('dashboard.invest_perf')],
+        datasets: symbols.map((s) => ({
+            label: s,
+            data: [holdings[s].quantity * (holdings[s].price || (holdings[s].cost / holdings[s].quantity))],
+            backgroundColor: symbolColors[s], // Use the mapped color
+            barThickness: 50
+        }))
+    };
     const allocationOptions = { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: true, callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatCurrency(ctx.raw)}` } } }, scales: { x: { stacked: true, display: false }, y: { stacked: true, display: false } } };
     const nwData = { labels: [t('dashboard.score_assets'), t('dashboard.total_liabilities')], datasets: [{ label: t('dashboard.amount_label'), data: [totalAssets, totalLiabilities], backgroundColor: [PASTEL.green, PASTEL.red], borderRadius: 4, barThickness: 25, }] };
     const nwOptions = { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: true } }, scales: { x: { display: false, grid: { display: false } }, y: { display: true, grid: { display: false }, ticks: { color: '#333', font: { size: 11, weight: 'bold' } } } } };
@@ -221,7 +247,27 @@ function Dashboard({ setActiveMode }) {
         <div className="printable-content" style={{ display: 'block' }}>
             <style>{`@media print { .dashboard-container { display: block !important; background: none !important; padding: 0 !important; box-shadow: none !important; border: none !important; } .dashboard-card, .dashboard-main-card, .chart-container { page-break-inside: avoid !important; break-inside: avoid !important; box-shadow: none !important; border: 1px solid #ddd !important; margin-bottom: 20px !important; } h1, h2, h3 { color: #000 !important; } .icon-btn, button { display: none !important; } .dark-panel-bg { background-color: white !important; padding: 0 !important; } } @keyframes bounce-small { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } } .scroll-indicator-anim { animation: bounce-small 1.5s infinite; }`}</style>
             <div style={{ width: '100%' }}>
-                <div className="module-header-with-reset" style={{ marginBottom: '10px' }}><h2>{t('dashboard.title')}</h2></div>
+                <div className="module-header-with-reset" style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <h2 style={{ margin: 0 }}>{t('dashboard.title')}</h2>
+                    <button
+                        onClick={() => setShowIntro(true)}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            color: '#9ca3af',
+                            display: 'flex',
+                            alignItems: 'center',
+                            transition: 'color 0.2s',
+                            padding: '4px'
+                        }}
+                        onMouseOver={(e) => e.currentTarget.style.color = '#3b82f6'}
+                        onMouseOut={(e) => e.currentTarget.style.color = '#9ca3af'}
+                        title="Voir l'introduction"
+                    >
+                        <InformationCircleIcon style={{ width: '24px', height: '24px' }} />
+                    </button>
+                </div>
 
                 <div className="dashboard-container dark-panel-bg" style={{ backgroundColor: '#000000', padding: '10px', borderRadius: '16px', boxShadow: 'inset 0 0 20px rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', ...gridStyle }}>
 
@@ -331,6 +377,11 @@ function Dashboard({ setActiveMode }) {
                 totalLiabilities={totalLiabilities}
                 assetsDetails={{ investments: portfolioValue, physical: budgetAssets }}
                 liabilitiesDetails={{ total: totalLiabilities }}
+            />
+
+            <IntroTableauDeBord
+                isOpen={showIntro}
+                onClose={() => setShowIntro(false)}
             />
         </div>
     );

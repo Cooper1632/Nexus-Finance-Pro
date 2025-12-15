@@ -7,7 +7,8 @@ import {
     Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, BarElement, Filler
 } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2';
-import { HomeIcon, BanknotesIcon, CreditCardIcon, PlusCircleIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, BanknotesIcon, CreditCardIcon, PlusCircleIcon, InformationCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import IntroRemboursement from './IntroRemboursement';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, Filler);
 
@@ -197,7 +198,7 @@ const PaymentAnalysisModal = ({ isOpen, onClose, solde, taux, paiement, formatCu
                 >×</button>
 
                 <h2 style={{ marginTop: 0, color: TEXT_COLOR.red, display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    ⚠️ {t('debt_analysis.title')}
+                    <ExclamationTriangleIcon style={{ width: '28px' }} /> {t('debt_analysis.title')}
                 </h2>
 
                 <div style={{ fontSize: '1rem', lineHeight: '1.6', color: 'var(--text-color)' }}>
@@ -267,6 +268,14 @@ function Remboursement() {
     const [results, setResults] = useState(null);
     const [warningMessage, setWarningMessage] = useState('');
     const [showAnalysisModal, setShowAnalysisModal] = useState(false); // État pour le modal
+    const [showIntro, setShowIntro] = useState(false);
+
+    useEffect(() => {
+        const hasSeenIntro = localStorage.getItem('nexus_intro_remboursement_seen');
+        if (!hasSeenIntro) {
+            setShowIntro(true);
+        }
+    }, []);
 
     const currentCurrency = appState.settings?.currentCurrency || 'CAD';
     const SCENARIO_KEYS = { hypotheque: 'hypScenarios', pret: 'pretScenarios', carte: 'carteScenarios' };
@@ -534,7 +543,7 @@ function Remboursement() {
             // "TRAP_DETECTED" sert de signal pour afficher le bouton dans le rendu
             setWarningMessage('TRAP_DETECTED');
         } else if (paiement > 0 && paiement < paiementMinExige) {
-            setWarningMessage(`⚠️ ${t('repayment.alert_payment_low')} (${formatCurrency(paiementMinExige)}).`);
+            setWarningMessage(`${t('repayment.alert_payment_low')} (${formatCurrency(paiementMinExige)}).`);
         } else {
             // Reset si tout est OK (important sinon le message reste)
             setWarningMessage('');
@@ -693,7 +702,27 @@ function Remboursement() {
 
     return (
         <div className="printable-content" style={{ display: 'block' }}>
-            <div className="module-header-with-reset"><h2>{t('header.repayment')}</h2></div>
+            <div className="module-header-with-reset" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <h2 style={{ margin: 0 }}>{t('remboursement.title')}</h2>
+                <button
+                    onClick={() => setShowIntro(true)}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        color: '#9ca3af',
+                        display: 'flex',
+                        alignItems: 'center',
+                        transition: 'color 0.2s',
+                        padding: '4px'
+                    }}
+                    onMouseOver={(e) => e.currentTarget.style.color = '#3b82f6'}
+                    onMouseOut={(e) => e.currentTarget.style.color = '#9ca3af'}
+                    title="Voir l'introduction"
+                >
+                    <InformationCircleIcon style={{ width: '24px', height: '24px' }} />
+                </button>
+            </div>
 
             <div style={{ display: 'flex', borderBottom: '1px solid var(--border-color)', marginBottom: '25px', overflowX: 'auto' }}>
                 <button style={tabStyle('hypotheque', TEXT_COLOR.green)} onClick={() => setActiveTab('hypotheque')}><HomeIcon style={{ width: '20px', height: '20px' }} /> {t('repayment.tab_mortgage')}</button>
@@ -732,7 +761,10 @@ function Remboursement() {
                     </button>
                 </div>
             ) : (
-                warningMessage && <div className="budget-warning-pulse" style={{ marginBottom: '20px' }}>{warningMessage}</div>
+                warningMessage && <div className="budget-warning-pulse" style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                    <ExclamationTriangleIcon style={{ width: '24px', flexShrink: 0 }} />
+                    {warningMessage}
+                </div>
             )}
 
             {/* MODAL ANALYSE */}
@@ -940,6 +972,10 @@ function Remboursement() {
                     {t('repayment.fill_parameters')}
                 </div>
             )}
+            <IntroRemboursement
+                isOpen={showIntro}
+                onClose={() => setShowIntro(false)}
+            />
         </div>
     );
 }

@@ -107,6 +107,12 @@ export default function UserGuide({ isOpen, onClose, onOpenRealEstateGuide, onOp
     }, [i18n.language]);
 
     const scrollTo = (id) => {
+        if (id === 'intro') {
+            const container = document.querySelector('.guide-scroll-content');
+            if (container) container.scrollTo({ top: 0, behavior: 'smooth' });
+            setActiveSection(id);
+            return;
+        }
         const element = document.getElementById(id);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
@@ -243,9 +249,16 @@ export default function UserGuide({ isOpen, onClose, onOpenRealEstateGuide, onOp
 
                         <ul style={styles.ul}>
                             {data.sections.dashboard.items.map((item, i) => (
-                                <li key={i} style={styles.li}>
-                                    <CheckCircleIcon style={{ ...styles.iconSmall, color: 'var(--success-color)' }} />
-                                    <span dangerouslySetInnerHTML={{ __html: `<strong>${item.title}</strong> ${item.text}` }}></span>
+                                <li key={i} style={{ ...styles.li, flexDirection: 'column', alignItems: 'flex-start' }}>
+                                    <div style={{ display: 'flex', gap: '10px' }}>
+                                        <CheckCircleIcon style={{ ...styles.iconSmall, color: 'var(--success-color)' }} />
+                                        <span dangerouslySetInnerHTML={{ __html: `<strong>${item.title}</strong> ${item.text}` }}></span>
+                                    </div>
+                                    {item.example && (
+                                        <div style={{ marginLeft: '28px', backgroundColor: 'rgba(52, 152, 219, 0.1)', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #3498DB', fontSize: '0.9rem', width: '90%' }}>
+                                            <strong>Exemple :</strong> {item.example}
+                                        </div>
+                                    )}
                                 </li>
                             ))}
                         </ul>
@@ -256,38 +269,38 @@ export default function UserGuide({ isOpen, onClose, onOpenRealEstateGuide, onOp
                         <p style={styles.text}>{data.sections.budget.desc}</p>
                         <ul style={styles.ul}>
                             {data.sections.budget.items.map((item, i) => (
-                                <li key={i} style={styles.li}>
-                                    <div style={{ ...styles.iconSmall, backgroundColor: 'var(--secondary-color)', borderRadius: '50%', width: '6px', height: '6px', marginTop: '8px' }}></div>
-                                    <span dangerouslySetInnerHTML={{ __html: item.title ? `<strong>${item.title}</strong> ${item.text}` : item.text }}></span>
+                                <li key={i} style={{ ...styles.li, flexDirection: 'column', alignItems: 'flex-start' }}>
+                                    <div style={{ display: 'flex', gap: '10px' }}>
+                                        <div style={{ ...styles.iconSmall, backgroundColor: 'var(--secondary-color)', borderRadius: '50%', width: '6px', height: '6px', marginTop: '8px' }}></div>
+                                        <span dangerouslySetInnerHTML={{ __html: item.title ? `<strong>${item.title}</strong> ${item.text}` : item.text }}></span>
+                                    </div>
+                                    {item.example && (
+                                        <div style={{ marginLeft: '16px', backgroundColor: 'rgba(241, 196, 15, 0.1)', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #F1C40F', fontSize: '0.9rem', width: '90%' }}>
+                                            <strong>Exemple :</strong> {item.example}
+                                        </div>
+                                    )}
                                 </li>
                             ))}
                         </ul>
                     </section>
 
-                    <section id="projections">
-                        <h2 style={styles.sectionTitle}><ArrowTrendingUpIcon style={{ width: '28px' }} /> {data.sections.projections.title}</h2>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
-                            {data.sections.projections.cards.map((card, i) => {
-                                const Icons = [PresentationChartLineIcon, CursorArrowRaysIcon, BanknotesIcon];
-                                const Icon = Icons[i] || PresentationChartLineIcon;
-                                return (
-                                    <div key={i}>
-                                        <h3 style={styles.subTitle}><Icon style={{ width: '20px' }} /> {card.title}</h3>
-                                        <p style={{ fontSize: '0.9rem', color: 'var(--text-color)' }}>{card.desc}</p>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </section>
+
 
                     <section id="plan">
                         <h2 style={styles.sectionTitle}><ShieldCheckIcon style={{ width: '28px' }} /> {data.sections.plan.title}</h2>
                         <p style={styles.text}>{data.sections.plan.desc}</p>
                         <ul style={styles.ul}>
                             {data.sections.plan.items.map((item, i) => (
-                                <li key={i} style={styles.li}>
-                                    <CheckCircleIcon style={{ ...styles.iconSmall, color: 'var(--info-color)' }} />
-                                    <span><strong>{item.title}</strong> {item.text}</span>
+                                <li key={i} style={{ ...styles.li, flexDirection: 'column', alignItems: 'flex-start' }}>
+                                    <div style={{ display: 'flex', gap: '10px' }}>
+                                        <CheckCircleIcon style={{ ...styles.iconSmall, color: 'var(--info-color)' }} />
+                                        <span><strong>{item.title}</strong> {item.text}</span>
+                                    </div>
+                                    {item.example && (
+                                        <div style={{ marginLeft: '28px', backgroundColor: 'rgba(231, 76, 60, 0.1)', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #E74C3C', fontSize: '0.9rem', width: '90%' }}>
+                                            <strong>Exemple :</strong> {item.example}
+                                        </div>
+                                    )}
                                 </li>
                             ))}
                         </ul>
@@ -299,21 +312,65 @@ export default function UserGuide({ isOpen, onClose, onOpenRealEstateGuide, onOp
                         </div>
                     </section>
 
+                    <section id="remb">
+                        <h2 style={styles.sectionTitle}><CalculatorIcon style={{ width: '28px' }} /> {data.sections.remb.title}</h2>
+                        <p style={styles.text}>{data.sections.remb.desc}</p>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+                            {data.sections.remb.cards.map((card, i) => (
+                                <div key={i} style={{ background: 'var(--background-color)', padding: '15px', borderRadius: '10px', border: '1px solid var(--border-color)' }}>
+                                    <h3 style={{ ...styles.subTitle, marginTop: 0 }}><BanknotesIcon style={{ width: '20px' }} /> {card.title}</h3>
+                                    <p style={{ fontSize: '0.9rem', color: 'var(--text-color)', margin: '0 0 10px 0' }}>{card.desc}</p>
+                                    {card.example && (
+                                        <div style={{ marginTop: '10px', backgroundColor: 'rgba(46, 204, 113, 0.1)', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #2ECC71', fontSize: '0.85rem' }}>
+                                            <strong>Exemple :</strong> {card.example}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
                     <section id="invest">
                         <h2 style={styles.sectionTitle}><ChartBarIcon style={{ width: '28px' }} /> {data.sections.invest.title}</h2>
                         <p style={styles.text}>{data.sections.invest.desc}</p>
                         <ul style={styles.ul}>
                             {data.sections.invest.items.map((item, i) => {
-                                const Icons = [Cog6ToothIcon, ArrowPathIcon, ListBulletIcon, ChartBarIcon];
-                                const Icon = Icons[i];
+                                const Icons = [Cog6ToothIcon, ArrowPathIcon, ListBulletIcon, ChartBarIcon, PresentationChartLineIcon, ArrowDownTrayIcon, BuildingLibraryIcon];
+                                const Icon = Icons[i] || CheckCircleIcon;
                                 return (
                                     <li key={i} style={styles.li}>
                                         <Icon style={{ ...styles.iconSmall, color: 'var(--secondary-color)' }} />
-                                        <span><strong>{item.title}</strong> {item.text}</span>
+                                        <span dangerouslySetInnerHTML={{ __html: item.title ? `<strong>${item.title}</strong> ${item.text}` : item.text }}></span>
                                     </li>
                                 );
                             })}
                         </ul>
+
+                        {/* Renders SubSections (For Performance & Dépôts etc.) */}
+                        {data.sections.invest.subSections && data.sections.invest.subSections.map((sub, idx) => (
+                            <div key={idx} style={{ marginTop: '30px', padding: '20px', backgroundColor: 'rgba(0,0,0,0.02)', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                                <h3 style={{ fontSize: '1.3rem', color: 'var(--text-color)', marginBottom: '10px' }}>{sub.title}</h3>
+                                {sub.intro && <p style={{ ...styles.text, fontStyle: 'italic', marginBottom: '20px' }}>{sub.intro}</p>}
+                                <ul style={styles.ul}>
+                                    {sub.items.map((item, i) => (
+                                        <li key={i} style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '5px' }}>
+                                                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--primary-color)' }}></div>
+                                                <strong>{item.title}</strong>
+                                            </div>
+                                            <p style={{ margin: '0 0 8px 16px', fontSize: '0.95rem' }}>{item.text}</p>
+                                            {item.example && (
+                                                <div style={{ marginLeft: '16px', backgroundColor: 'rgba(241, 196, 15, 0.1)', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #F1C40F', fontSize: '0.9rem' }}>
+                                                    <strong>Exemple :</strong> {item.example}
+                                                </div>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+
+
 
                         {data.sections.invest.button && (
                             <button
@@ -340,21 +397,58 @@ export default function UserGuide({ isOpen, onClose, onOpenRealEstateGuide, onOp
                         <p style={styles.text}>{data.sections.analyse.desc}</p>
                         <ul style={styles.ul}>
                             {data.sections.analyse.items.map((item, i) => (
-                                <li key={i} style={styles.li}>
-                                    {i === 2 ? <LightBulbIcon style={{ ...styles.iconSmall, color: 'var(--perf-color)' }} /> : <CheckCircleIcon style={{ ...styles.iconSmall, color: 'var(--perf-color)' }} />}
-                                    <span><strong>{item.title}</strong> {item.text}</span>
+                                <li key={i} style={{ ...styles.li, flexDirection: 'column', alignItems: 'flex-start' }}>
+                                    <div style={{ display: 'flex', gap: '10px' }}>
+                                        {i === 2 ? <LightBulbIcon style={{ ...styles.iconSmall, color: 'var(--perf-color)' }} /> : <CheckCircleIcon style={{ ...styles.iconSmall, color: 'var(--perf-color)' }} />}
+                                        <span><strong>{item.title}</strong> {item.text}</span>
+                                    </div>
+                                    {item.example && (
+                                        <div style={{ marginLeft: '28px', backgroundColor: 'rgba(142, 68, 173, 0.1)', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #8E44AD', fontSize: '0.9rem', width: '90%' }}>
+                                            <strong>Exemple :</strong> {item.example}
+                                        </div>
+                                    )}
                                 </li>
                             ))}
                         </ul>
+
+                        {/* Renders SubSections (For Analyse) */}
+                        {data.sections.analyse.subSections && data.sections.analyse.subSections.map((sub, idx) => (
+                            <div key={idx} style={{ marginTop: '30px', padding: '20px', backgroundColor: 'rgba(0,0,0,0.02)', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                                <h3 style={{ fontSize: '1.3rem', color: 'var(--text-color)', marginBottom: '10px' }}>{sub.title}</h3>
+                                {sub.intro && <p style={{ ...styles.text, fontStyle: 'italic', marginBottom: '20px' }}>{sub.intro}</p>}
+                                <ul style={styles.ul}>
+                                    {sub.items.map((item, i) => (
+                                        <li key={i} style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '5px' }}>
+                                                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--concept-color)' }}></div>
+                                                <strong style={{ color: 'var(--text-color)' }}>{item.title}</strong>
+                                            </div>
+                                            <p dangerouslySetInnerHTML={{ __html: item.text }} style={{ margin: '0 0 8px 16px', fontSize: '0.95rem', color: 'var(--text-color)' }}></p>
+                                            {item.example && (
+                                                <div style={{ marginLeft: '16px', backgroundColor: 'rgba(155, 89, 182, 0.1)', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #9B59B6', fontSize: '0.9rem' }}>
+                                                    <strong>Exemple :</strong> {item.example}
+                                                </div>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </section>
 
                     <section id="immo">
                         <h2 style={styles.sectionTitle}><BuildingLibraryIcon style={{ width: '28px' }} /> {data.sections.immo.title}</h2>
                         <p style={styles.text}>{data.sections.immo.desc}</p>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '20px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginBottom: '20px' }}>
                             {data.sections.immo.cards.map((card, i) => (
-                                <div key={i} style={{ background: 'var(--background-color)', padding: '10px', borderRadius: '6px', fontSize: '0.9rem' }}>
-                                    <strong>{card.title}</strong> {card.text}
+                                <div key={i} style={{ background: 'var(--background-color)', padding: '15px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '0.9rem' }}>
+                                    <h3 style={{ ...styles.subTitle, marginTop: 0, fontSize: '1.1rem' }}>{card.title}</h3>
+                                    <p style={{ margin: '0 0 10px 0', color: 'var(--text-color)' }}>{card.text}</p>
+                                    {card.example && (
+                                        <div style={{ marginTop: '10px', backgroundColor: 'rgba(192, 57, 43, 0.08)', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #C0392B', fontSize: '0.85rem' }}>
+                                            <strong>Exemple :</strong> {card.example}
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                         </div>
@@ -377,6 +471,88 @@ export default function UserGuide({ isOpen, onClose, onOpenRealEstateGuide, onOp
                         </button>
                     </section>
 
+                    <section id="perf">
+                        <h2 style={styles.sectionTitle}><ChartBarIcon style={{ width: '28px' }} /> {data.sections.perf.title}</h2>
+                        <p style={styles.text}>{data.sections.perf.desc}</p>
+                        <ul style={styles.ul}>
+                            {data.sections.perf.items.map((item, i) => (
+                                <li key={i} style={{ ...styles.li, flexDirection: 'column', alignItems: 'flex-start' }}>
+                                    <div style={{ display: 'flex', gap: '10px' }}>
+                                        <CheckCircleIcon style={{ ...styles.iconSmall, color: 'var(--perf-color)' }} />
+                                        <span><strong>{item.title}</strong> {item.text}</span>
+                                    </div>
+                                    {item.example && (
+                                        <div style={{ marginLeft: '28px', backgroundColor: 'rgba(52, 73, 94, 0.1)', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #34495E', fontSize: '0.9rem', width: '90%' }}>
+                                            <strong>Exemple :</strong> {item.example}
+                                        </div>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                        {/* Renders SubSections (For Performance) */}
+                        {data.sections.perf.subSections && data.sections.perf.subSections.map((sub, idx) => (
+                            <div key={idx} style={{ marginTop: '30px', padding: '20px', backgroundColor: 'rgba(0,0,0,0.02)', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                                <h3 style={{ fontSize: '1.3rem', color: 'var(--text-color)', marginBottom: '10px' }}>{sub.title}</h3>
+                                {sub.intro && <p style={{ ...styles.text, fontStyle: 'italic', marginBottom: '20px' }}>{sub.intro}</p>}
+                                <ul style={styles.ul}>
+                                    {sub.items.map((item, i) => (
+                                        <li key={i} style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '5px' }}>
+                                                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--perf-color)' }}></div>
+                                                <strong style={{ color: 'var(--text-color)' }}>{item.title}</strong>
+                                            </div>
+                                            <p dangerouslySetInnerHTML={{ __html: item.text }} style={{ margin: '0 0 8px 16px', fontSize: '0.95rem', color: 'var(--text-color)' }}></p>
+                                            {item.example && (
+                                                <div style={{ marginLeft: '16px', backgroundColor: 'rgba(243, 156, 18, 0.1)', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #F39C12', fontSize: '0.9rem' }}>
+                                                    <strong>Exemple :</strong> {item.example}
+                                                </div>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </section>
+
+                    <section id="projections">
+                        <h2 style={styles.sectionTitle}><ArrowTrendingUpIcon style={{ width: '28px' }} /> {data.sections.projections.title}</h2>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+                            {data.sections.projections.cards.map((card, i) => {
+                                const Icons = [PresentationChartLineIcon, CursorArrowRaysIcon, BanknotesIcon];
+                                const Icon = Icons[i] || PresentationChartLineIcon;
+                                return (
+                                    <div key={i}>
+                                        <h3 style={styles.subTitle}><Icon style={{ width: '20px' }} /> {card.title}</h3>
+                                        <p style={{ fontSize: '0.9rem', color: 'var(--text-color)' }}>{card.desc}</p>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        {/* Renders SubSections (For Projections) */}
+                        {data.sections.projections.subSections && data.sections.projections.subSections.map((sub, idx) => (
+                            <div key={idx} style={{ marginTop: '30px', padding: '20px', backgroundColor: 'rgba(0,0,0,0.02)', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                                <h3 style={{ fontSize: '1.3rem', color: 'var(--text-color)', marginBottom: '10px' }}>{sub.title}</h3>
+                                {sub.intro && <p style={{ ...styles.text, fontStyle: 'italic', marginBottom: '20px' }}>{sub.intro}</p>}
+                                <ul style={styles.ul}>
+                                    {sub.items.map((item, i) => (
+                                        <li key={i} style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '5px' }}>
+                                                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--proj-color)' }}></div>
+                                                <strong style={{ color: 'var(--text-color)' }}>{item.title}</strong>
+                                            </div>
+                                            <p dangerouslySetInnerHTML={{ __html: item.text }} style={{ margin: '0 0 8px 16px', fontSize: '0.95rem', color: 'var(--text-color)' }}></p>
+                                            {item.example && (
+                                                <div style={{ marginLeft: '16px', backgroundColor: 'rgba(26, 188, 156, 0.1)', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #1ABC9C', fontSize: '0.9rem' }}>
+                                                    <strong>Exemple :</strong> {item.example}
+                                                </div>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </section>
+
                     <section id="params">
                         <h2 style={styles.sectionTitle}><Cog6ToothIcon style={{ width: '28px' }} /> {data.sections.params.title}</h2>
                         <div style={{ display: 'grid', gap: '15px' }}>
@@ -395,6 +571,29 @@ export default function UserGuide({ isOpen, onClose, onOpenRealEstateGuide, onOp
                                 );
                             })}
                         </div>
+                        {/* Renders SubSections (For Params) */}
+                        {data.sections.params.subSections && data.sections.params.subSections.map((sub, idx) => (
+                            <div key={idx} style={{ marginTop: '30px', padding: '20px', backgroundColor: 'rgba(0,0,0,0.02)', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                                <h3 style={{ fontSize: '1.3rem', color: 'var(--text-color)', marginBottom: '10px' }}>{sub.title}</h3>
+                                {sub.intro && <p style={{ ...styles.text, fontStyle: 'italic', marginBottom: '20px' }}>{sub.intro}</p>}
+                                <ul style={styles.ul}>
+                                    {sub.items.map((item, i) => (
+                                        <li key={i} style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '5px' }}>
+                                                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--secondary-color)' }}></div>
+                                                <strong style={{ color: 'var(--text-color)' }}>{item.title}</strong>
+                                            </div>
+                                            <p dangerouslySetInnerHTML={{ __html: item.text }} style={{ margin: '0 0 8px 16px', fontSize: '0.95rem', color: 'var(--text-color)' }}></p>
+                                            {item.example && (
+                                                <div style={{ marginLeft: '16px', backgroundColor: 'rgba(127, 140, 141, 0.1)', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #7F8C8D', fontSize: '0.9rem' }}>
+                                                    <strong>Exemple :</strong> {item.example}
+                                                </div>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </section>
 
                     <div style={{ height: '80px' }}></div>

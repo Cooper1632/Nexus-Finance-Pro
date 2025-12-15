@@ -54,6 +54,45 @@ app.get('/api/yahoo/quote/:symbol', async (req, res) => {
     }
 });
 
+// --- Route Yahoo Finance (Historique) ---
+app.get('/api/yahoo/history', async (req, res) => {
+    const { symbol = '^GSPC', from, to } = req.query;
+    console.log(`📡 Recherche Historique Yahoo pour: ${symbol} du ${from} au ${to}`);
+
+    try {
+        if (!from || !to) {
+            return res.status(400).json({ error: 'Dates manquantes (from, to)' });
+        }
+
+        const queryOptions = {
+            period1: from, // YYYY-MM-DD
+            period2: to,   // YYYY-MM-DD
+            interval: '1d' // Journalier
+        };
+
+        const result = await yahooFinance.historical(symbol, queryOptions);
+
+        if (!result || result.length === 0) {
+            console.warn(`⚠️ Aucun historique pour ${symbol}`);
+            return res.json([]);
+        }
+
+        // Simplifier la réponse
+        const history = result.map(day => ({
+            date: day.date.toISOString().split('T')[0],
+            close: day.close,
+            adjClose: day.adjClose
+        }));
+
+        console.log(`✅ Historique trouvé : ${history.length} points`);
+        res.json(history);
+
+    } catch (error) {
+        console.error(`❌ Erreur Historique Yahoo:`, error.message);
+        res.status(500).json({ error: 'Erreur récupération historique', details: error.message });
+    }
+});
+
 // --- Questrade Service (Refresh Token Trap Handling) ---
 import fs from 'fs/promises';
 import axios from 'axios';

@@ -5,7 +5,8 @@ import CurrencyInput from './CurrencyInput';
 import ScenarioTabs from './ScenarioTabs';
 import ScenarioChoiceModal from './ScenarioChoiceModal';
 import { useTranslation, Trans } from 'react-i18next'; // Importation nécessaire
-import { ArrowTrendingUpIcon, FlagIcon, BanknotesIcon } from '@heroicons/react/24/outline';
+import { ArrowTrendingUpIcon, FlagIcon, BanknotesIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
+import IntroProjections from './IntroProjections';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement, Filler } from 'chart.js';
 import { Line, Doughnut } from 'react-chartjs-2';
 
@@ -263,9 +264,42 @@ function Projections() {
     const getFreqLabel = (freq) => { const map = { 365: t('projections.per_day'), 52: t('projections.per_week'), 26: t('projections.per_biweek'), 12: t('projections.per_month'), 4: t('projections.per_quarter'), 2: t('projections.per_semester'), 1: t('projections.per_year') }; return map[freq] || t('projections.per_period'); };
     const frequencyOptions = (<><option value="365">{t('common.freq_daily')}</option><option value="52">{t('common.freq_weekly')}</option><option value="26">{t('common.freq_biweekly')}</option><option value="12">{t('common.freq_monthly')}</option><option value="4">{t('common.freq_quarterly')}</option><option value="2">{t('common.freq_biannual')}</option><option value="1">{t('common.freq_annual')}</option></>);
 
+    const [showIntro, setShowIntro] = useState(false);
+
+    useEffect(() => {
+        const hasSeenIntro = localStorage.getItem('nexus_intro_projections_seen');
+        if (!hasSeenIntro) {
+            setShowIntro(true);
+        }
+    }, []);
+
     return (
         <div className="printable-content" style={{ display: 'block' }}>
-            <div className="module-header-with-reset"><h2>{t('projections.title')}</h2></div>
+            <div className="module-header-with-reset" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h2 style={{ margin: 0 }}>{t('projections.title')}</h2>
+                <button
+                    onClick={() => setShowIntro(true)}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        color: '#9ca3af',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        transition: 'color 0.2s',
+                        padding: '4px',
+                        borderRadius: '50%'
+                    }}
+                    onMouseOver={(e) => e.currentTarget.style.color = '#3b82f6'}
+                    onMouseOut={(e) => e.currentTarget.style.color = '#9ca3af'}
+                    title={t('common.help') || "Introduction"}
+                >
+                    <InformationCircleIcon style={{ width: '24px', height: '24px' }} />
+                </button>
+            </div>
+
+            <IntroProjections isOpen={showIntro} onClose={() => setShowIntro(false)} />
 
             <div style={{ display: 'flex', borderBottom: '1px solid var(--border-color)', marginBottom: '25px', overflowX: 'auto' }}>
                 <button style={tabStyle('fv', '#48C9B0')} onClick={() => setActiveTab('fv')}><ArrowTrendingUpIcon style={{ width: '24px' }} /> {t('projections.fv_tab')}</button>

@@ -11,6 +11,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next'; // IMPORT
+import HelpPerformanceModal from './HelpPerformanceModal'; // IMPORT
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
@@ -166,6 +167,7 @@ export default function PerformanceModal({
 }) {
     const { t } = useTranslation(); // HOOK
     const [activeTab, setActiveTab] = useState('overview');
+    const [showHelpModal, setShowHelpModal] = useState(false); // STATE
 
     // Tooltip logic based on currency
     const depositsTooltipKey = currency === 'CAD'
@@ -390,16 +392,32 @@ export default function PerformanceModal({
 
     return (
         <div style={styles.overlay}>
+            <HelpPerformanceModal isOpen={showHelpModal} onClose={() => setShowHelpModal(false)} />
             <div style={styles.content}>
                 <div style={styles.header}>
                     <h2 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <ChartBarIcon style={{ width: '28px', color: 'var(--primary-color)' }} /> {t('perf_modal.title')}
+                        <button
+                            onClick={() => setShowHelpModal(true)}
+                            style={{
+                                background: 'transparent',
+                                border: 'none',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                color: 'var(--info-color)',
+                                marginLeft: '10px'
+                            }}
+                            title="Aide et Explications"
+                        >
+                            <QuestionMarkCircleIcon style={{ width: '24px' }} />
+                        </button>
                     </h2>
                     <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><XMarkIcon style={{ width: '28px', color: 'var(--text-color)' }} /></button>
                 </div>
 
                 <div style={styles.tabContainer}>
-                    <button style={getTabStyle(activeTab === 'overview', 'var(--primary-color)')} onClick={() => setActiveTab('overview')}>
+                    <button style={getTabStyle(activeTab === 'overview', '#3498DB')} onClick={() => setActiveTab('overview')}>
                         <ChartBarIcon style={{ width: '20px' }} /> {t('perf_modal.tab_overview')}
                         <InfoTooltip text={t('perf_modal.tooltip_tab_overview')} />
                     </button>
@@ -407,7 +425,7 @@ export default function PerformanceModal({
                         <BanknotesIcon style={{ width: '20px' }} /> {t('perf_modal.tab_deposits')}
                         <InfoTooltip text={t(depositsTooltipKey)} />
                     </button>
-                    <button style={getTabStyle(activeTab === 'snapshots', 'var(--info-color)')} onClick={() => setActiveTab('snapshots')}>
+                    <button style={getTabStyle(activeTab === 'snapshots', '#9B59B6')} onClick={() => setActiveTab('snapshots')}>
                         <TableCellsIcon style={{ width: '20px' }} /> {t('perf_modal.tab_snapshots')}
                         <InfoTooltip text={t('perf_modal.tooltip_tab_snapshots')} />
                     </button>

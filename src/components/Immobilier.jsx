@@ -33,8 +33,10 @@ import {
     TrashIcon,
     XMarkIcon,
     TableCellsIcon,
-    WrenchScrewdriverIcon
+    WrenchScrewdriverIcon,
+    InformationCircleIcon
 } from '@heroicons/react/24/outline';
+import IntroImmobilier from './IntroImmobilier';
 
 // --- CONFIGURATION CHART.JS ---
 ChartJS.register(
@@ -567,12 +569,47 @@ export default function Immobilier() {
         }]
     };
 
+
+
+    const [showIntro, setShowIntro] = useState(false);
+
+    useEffect(() => {
+        const hasSeenIntro = localStorage.getItem('nexus_intro_immobilier_seen');
+        if (!hasSeenIntro) {
+            setShowIntro(true);
+        }
+    }, []);
+
     return (
         <div className="printable-content" style={{ display: 'block' }}>
-            <div className="module-header-with-reset">
-                <h2>{t('realestate.title')}</h2>
-                <button onClick={resetForm} className="icon-clean" style={{ border: '2px solid var(--immobilier-color)', borderRadius: '50%', width: '36px', height: '36px', color: 'var(--immobilier-color)' }} title={t('common.reset')}><ArrowPathIcon style={{ width: '18px' }} /></button>
+            <div className="module-header-with-reset" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+                <h2 style={{ margin: 0 }}>{t('realestate.title')}</h2>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <button onClick={resetForm} className="icon-clean" style={{ border: '2px solid var(--immobilier-color)', borderRadius: '50%', width: '36px', height: '36px', color: 'var(--immobilier-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} title={t('common.reset')}><ArrowPathIcon style={{ width: '18px' }} /></button>
+                    <button
+                        onClick={() => setShowIntro(true)}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            color: '#9ca3af',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            transition: 'color 0.2s',
+                            padding: '4px',
+                            borderRadius: '50%'
+                        }}
+                        onMouseOver={(e) => e.currentTarget.style.color = '#3b82f6'}
+                        onMouseOut={(e) => e.currentTarget.style.color = '#9ca3af'}
+                        title={t('common.help') || "Introduction"}
+                    >
+                        <InformationCircleIcon style={{ width: '24px', height: '24px' }} />
+                    </button>
+                </div>
             </div>
+
+            <IntroImmobilier isOpen={showIntro} onClose={() => setShowIntro(false)} />
 
             {/* GESTION DES SCÉNARIOS IMMO */}
             <ScenarioTabs

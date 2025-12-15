@@ -8,6 +8,9 @@
         "update": "Atualizar",
         "create": "Criar",
         "confirm": "Confirmar",
+        "got_it": "Entendido!",
+        "features_title": "O que você pode fazer:",
+        "dont_show_again": "Não mostrar esta mensagem novamente",
         "payment": "Pagamento",
         "account_types": {
             "celi": "TFSA",
@@ -88,6 +91,7 @@
         "annual": "Anual",
         "rate": "Taxa",
         "duration": "Duração",
+        "results": "Resultados",
         "scenario_modal_title": "Novo Cenário",
         "scenario_modal_question": "Como você gostaria de começar?",
         "btn_copy": "Duplicar cenário atual",
@@ -620,6 +624,7 @@
         "min_payment": "Pagamento Mín",
         "your_payment": "Seu Pagamento",
         "mortgage_section_title": "Dívidas Hipotecárias / Imobiliárias",
+        "mortgage_prepayment_warning": "Nota importante: O reembolso antecipado de uma hipoteca está sujeito às condições do seu contrato. Verifique com sua instituição financeira os limites de pré-pagamento permitidos para evitar penalidades.",
         "mortgage_title": "Título / Propriedade",
         "mortgage_balance": "Saldo da Hipoteca",
         "mortgage_rate": "Taxa (%)",
@@ -801,7 +806,14 @@
         "cagr": "CAGR (Anual)",
         "simple": "Simples",
         "evolution": "Evolução do Capital",
-        "gips_warning": "Nota: Este cálculo usa o método Money-Weighted Return (MWRR) simplificado entre duas datas."
+        "gips_warning": "Nota: Este cálculo usa o método Money-Weighted Return (MWRR) simplificado entre duas datas.",
+        "compare_sp500": "Comparar com S&P 500",
+        "my_portfolio": "Meu Investimento",
+        "benchmark_disclaimer": "Simulação teórica baseada num retorno anual médio de 10,5% (S&P 500). O desempenho passado não garante resultados futuros.",
+        "real_data_disclaimer": "✔ Dados reais: Comparação histórica baseada em datas exatas (Yahoo Finance).",
+        "legend_sp500_real": "S&P 500 (Retorno Total - Histórico Real)",
+        "legend_sp500_simulated": "S&P 500 (Retorno Total - Simulado 10.5%)",
+        "warning_min_duration": "Não é possível exibir o gráfico: A duração deve ser de pelo menos 1 ano."
     },
     "realestate": {
         "title": "Calculadora Imobiliária",
@@ -964,7 +976,8 @@
         "chap23_title": "23. Armadilhas Psicológicas",
         "chap24_title": "24. Dicas e Bônus",
         "glossary_title": "25. Glossário",
-        "myths_title": "Mitos a Desmascarar"
+        "myths_title": "Mitos a Desmascarar",
+        "intro_comparison": "Para entender bem os índices bolsistas, compare-os com a sua própria gestão familiar."
     },
     "debt_analysis": {
         "title": "Análise da Sua Dívida",
@@ -979,5 +992,111 @@
         "col_total_interest": "Total de juros pagos",
         "conclusion": "Quanto maior o pagamento, menos juros você pagará no total. Com {{paiement}}/mês, você pagaria juros indefinidamente sem nunca reduzir sua dívida.",
         "button_analyze": "⚠️ Por que minha dívida não diminui?"
+    },
+    "intro": {
+        "analyse": {
+            "title": "Analise suas ações em profundidade",
+            "text": "Este módulo ajuda a avaliar a saúde financeira das empresas antes de investir.",
+            "features": [
+                "Análise fundamental e técnica simplificada.",
+                "Acesso a dados financeiros detalhados (Lucros, Dívida, P/L).",
+                "Gráficos interativos para visualizar tendências.",
+                "Comparação de índices principais para identificar oportunidades."
+            ]
+        },
+        "immobilier": {
+            "title": "Simule seus investimentos imobiliários",
+            "text": "Uma ferramenta completa para analisar a rentabilidade de seus projetos imobiliários.",
+            "features": [
+                "Simulação de compra de imóveis de renda.",
+                "Cálculo automático de fluxo de caixa e rentabilidade.",
+                "Consideração de despesas, impostos e amortização.",
+                "Projeção de 25 anos do valor do seu patrimônio."
+            ]
+        },
+        "performance": {
+            "title": "Meça o desempenho de seus investimentos",
+            "text": "Analise seus ganhos e perdas com precisão em diferentes períodos.",
+            "features": [
+                "Cálculo de retorno simples e composto (CAGR).",
+                "Fácil comparação entre vários cenários.",
+                "Visualização gráfica da evolução do valor.",
+                "Comparação S&P 500 (Retorno Total e CAGR).",
+                "Consideração de datas para cálculo preciso."
+            ]
+        },
+        "projections": {
+            "title": "Planeje seu futuro financeiro",
+            "text": "Ferramentas poderosas para projetar sua aposentadoria e metas de poupança.",
+            "features": [
+                "Cálculo do valor futuro com juros compostos.",
+                "Determinação da poupança necessária para atingir uma meta.",
+                "Simulação de desembolso (retiradas periódicas).",
+                "Consideração da inflação para resultados reais."
+            ]
+        },
+        "budget": {
+            "title": "Domine seu Orçamento",
+            "text": "Este módulo é o coração da sua gestão diária. Ele permite planejar para onde vai seu dinheiro antes de gastá-lo.",
+            "features": [
+                "Liste suas fontes de renda (Salário, Dividendos, etc.).",
+                "Defina orçamentos precisos para cada categoria de despesas.",
+                "Visualize imediatamente seu Fluxo de Caixa (Restante para viver).",
+                "Defina seus objetivos de poupança automática."
+            ]
+        },
+        "plan": {
+            "title": "Seu Plano de Pagamento",
+            "text": "Liberte-se de suas dívidas graças a uma estratégia clara e otimizada. Este módulo ajuda você a retomar o controle.",
+            "features": [
+                "Centralize todas as suas dívidas (Cartões, Empréstimos, Hipotecas).",
+                "Compare estratégias (Avalanche vs Bola de Neve) para economizar juros.",
+                "Visualize sua data de liberdade financeira.",
+                "Simule o impacto de pagamentos acelerados."
+            ]
+        },
+        "investissement": {
+            "title": "Acompanhe o desempenho do seu Portfólio",
+            "text": "Este módulo centraliza todos os seus investimentos para uma análise aprofundada do seu desempenho global.",
+            "features": [
+                "Visão geral do valor atual e retorno total.",
+                "Gráficos de alocação de ativos e desempenho (Bolhas).",
+                "Histórico detalhado de transações (Compra, Venda, Dividendos).",
+                "Configuração de fontes de dados (AlphaVantage, Yahoo, Questrade)."
+            ]
+        },
+        "remboursement": {
+            "title": "Analise suas estratégias de Pagamento",
+            "text": "Este módulo permite simular e comparar diferentes opções de pagamento para suas dívidas individuais.",
+            "features": [
+                "Simule uma Hipoteca, um Empréstimo de Carro ou Pessoal.",
+                "Analise o impacto de pagamentos acelerados nos juros.",
+                "Calcule o tempo necessário para pagar um Cartão de Crédito.",
+                "Visualize o custo total dos juros para cada cenário."
+            ]
+        },
+        "dashboard": {
+            "title": "Bem-vindo ao seu Painel de Controle",
+            "text": "O painel é seu centro de comando financeiro. Ele fornece uma visão geral instantânea de sua saúde financeira.",
+            "features": [
+                "Visualize seu Patrimônio Líquido em tempo real.",
+                "Acompanhe a alocação de seus ativos (dinheiro, investimentos, imóveis).",
+                "Consulte o status mensal do seu orçamento (Receitas vs Despesas).",
+                "Acesso rápido aos módulos principais via atalhos."
+            ]
+        }
+    },
+    "help_perf": {
+        "modal_title": "Entendendo o Módulo de Depósitos e Performance",
+        "modal_intro": "Este módulo permite acompanhar com precisão a rentabilidade real dos seus investimentos, levando em consideração seus aportes e retiradas.",
+        "tab_overview_title": "Visão Geral",
+        "tab_overview_desc": "Visualize um gráfico comparativo entre o dinheiro que você investiu do bolso (Investido) e o valor atual do seu portfólio. Mostra instantaneamente se você está ganhando ou perdendo.",
+        "tab_overview_example": "Se a linha verde (Valor) estiver acima da linha azul (Investido), você está lucrando. A diferença entre as duas representa seu ganho.",
+        "tab_deposits_title": "Gerenciar Depósitos",
+        "tab_deposits_desc": "É aqui que você registra cada valor transferido para suas contas de investimento. É crucial para calcular sua performance real.",
+        "tab_deposits_example": "Em 1º de janeiro, transferi R$ 1000 da minha conta corrente. Adiciono uma entrada: 01/01/2024 | Investimento | R$ 1000.",
+        "tab_journal_title": "Diário de Valor",
+        "tab_journal_desc": "Registre aqui o valor total do seu portfólio em datas importantes (ex: fim do mês). É como tirar uma foto do seu saldo para ver a evolução ao longo do tempo.",
+        "tab_journal_example": "Em 31 de janeiro, vejo que minha conta vale R$ 1050. Adiciono um registro: 31/01/2024 | R$ 1050. O sistema calcula que ganhei R$ 50."
     }
 }

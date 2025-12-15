@@ -9,12 +9,12 @@ import {
 
 export const userGuideData = {
     sidebar: {
-        title: "Guia do Usuário",
+        title: "Guia do Utilizador",
         items: [
             { id: 'intro', label: 'Introdução' },
-            { id: 'dashboard', label: 'Painel de Controle' },
-            { id: 'budget', label: 'Orçamento e Ativos' },
-            { id: 'plan', label: 'Plano de Dívidas' },
+            { id: 'dashboard', label: 'Dashboard' },
+            { id: 'budget', label: 'Orçamento' },
+            { id: 'plan', label: 'Plano de Dívida' },
             { id: 'remb', label: 'Reembolso' },
             { id: 'invest', label: 'Investimento' },
             { id: 'analyse', label: 'Análise de Ações' },
@@ -25,28 +25,28 @@ export const userGuideData = {
         ]
     },
     mainTitle: "Nexus Finance Pro",
-    subTitle: "Seu guia de referência para usar o software.",
+    subTitle: "O seu guia de referência para dominar o software.",
     cards: [
-        { title: "Visão Global", desc: "Centralize seu Patrimônio Líquido.", color: "info" },
-        { title: "Orçamento e Fluxo", desc: "Domínio de receitas e despesas.", color: "warning" },
-        { title: "Estratégia de Dívida", desc: "Eliminação inteligente de dívidas.", color: "danger" },
-        { title: "Desempenho", desc: "Acompanhamento real de seus retornos.", color: "dark" },
-        { title: "Crescimento", desc: "Juros compostos e Aposentadoria.", color: "success" },
-        { title: "Inteligência", desc: "Análise de Bolsa e Imobiliária.", color: "concept" }
+        { title: "Visão Global", desc: "Centralize o seu Património Líquido.", color: "info" },
+        { title: "Orçamento", desc: "Controle Receitas e Despesas.", color: "warning" },
+        { title: "Estratégia Dívida", desc: "Eliminação inteligente de dívidas.", color: "danger" },
+        { title: "Desempenho", desc: "Acompanhe os seus ganhos reais.", color: "dark" },
+        { title: "Crescimento", desc: "Juro Composto e Reforma.", color: "success" },
+        { title: "Inteligência", desc: "Análise de Bolsa e Imobiliário.", color: "concept" }
     ],
     benefits: {
-        title: "O que este software traz para você:",
+        title: "O que este software faz por si:",
         items: [
-            { title: "Visão Global (Dashboard):", text: "Centralize seu Patrimônio Líquido, seus ativos e suas dívidas em um piscar de olhos." },
-            { title: "Controle Orçamentário:", text: "Acompanhe suas receitas, despesas e sua capacidade de poupança mensal." },
-            { title: "Estratégia de Dívida:", text: "Planeje a eliminação de suas dívidas (Avalanche/Bola de neve) para economizar juros." },
-            { title: "Simuladores de Reembolso:", text: "Calcule seus pagamentos para hipotecas, empréstimos e cartões de crédito." },
-            { title: "Acompanhamento de Portfólio:", text: "Gerencie seus investimentos e visualize seu desempenho real." },
-            { title: "Análise Imobiliária:", text: "Calcule a rentabilidade exata de seus projetos de aluguel." },
-            { title: "Inteligência Bursátil:", text: "Analise a qualidade das empresas (Nexus Score) antes de investir." },
-            { title: "Acompanhamento de Desempenho:", text: "Visualize a evolução histórica de sua riqueza e a compare com os índices." },
-            { title: "Projeções Futuras:", text: "Calcule seus juros compostos, planeje sua aposentadoria e suas retiradas." },
-            { title: "Confidencialidade Total:", text: "Seus dados são armazenados localmente em seu dispositivo, nada é enviado para a nuvem." }
+            { title: "Visão Global (Dashboard):", text: "Centralize o seu Património Líquido, ativos e passivos num piscar de olhos." },
+            { title: "Controlo Orçamental:", text: "Acompanhe as suas receitas, despesas e capacidade mensal de poupança." },
+            { title: "Estratégia de Dívida:", text: "Planeie a eliminação de dívidas (Avalanche/Bola de Neve) para poupar juros." },
+            { title: "Simuladores de Reembolso:", text: "Calcule pagamentos para hipotecas, empréstimos e cartões de crédito." },
+            { title: "Seguimento de Portfólio:", text: "Gira os seus investimentos e visualize o desempenho real." },
+            { title: "Análise Imobiliária:", text: "Calcule a rentabilidade exata dos seus projetos de arrendamento." },
+            { title: "Inteligência Bolsista:", text: "Analise a qualidade das empresas (Score Nexus) antes de investir." },
+            { title: "Seguimento de Desempenho:", text: "Visualize a evolução histórica da sua riqueza e compare com índices." },
+            { title: "Projeções Futuras:", text: "Calcule juros compostos, planeie a sua reforma e levantamentos." },
+            { title: "Privacidade Total:", text: "Os seus dados são guardados localmente no seu dispositivo, nada é enviado para a nuvem." }
         ]
     },
     sections: {
@@ -54,124 +54,264 @@ export const userGuideData = {
             id: "intro",
             box: {
                 type: "info",
-                title: "Dica:",
-                content: "Este guia explica o uso técnico do software. Para conceitos teóricos financeiros (Bolsa, Índices), consulte o <strong>Guia Finanças 101</strong> disponível no menu Educação."
+                title: "Para começar:",
+                content: "Este guia foi desenhado para acompanhá-lo passo a passo. Cada módulo é explicado com <strong>exemplos concretos</strong> para que compreenda não só <em>como</em> usar o software, mas também <em>porquê</em> estas ferramentas o ajudarão a enriquecer."
             }
         },
         dashboard: {
             id: "dashboard",
-            title: "Painel de Controle",
-            desc: "Seu centro de controle que agrega os dados de todos os módulos.",
+            title: "Dashboard (Painel de Controlo)",
+            desc: "A sua torre de controlo. Agrega dados de todos os outros módulos para lhe dar uma visão imediata da sua saúde financeira.",
             items: [
-                { title: "Patrimônio Líquido:", text: "Indicador chave <code>(Total Ativos - Total Passivos)</code>." },
-                { title: "Ativos Totais:", text: "Soma do seu portfólio (Investimento) e seus bens (Orçamento/Ativos)." },
-                { title: "Passivos Totais:", text: "Acumulado de todas as dívidas inseridas no módulo Plano." },
-                { title: "Fluxo de Caixa:", text: "Seu saldo mensal disponível (Receitas - Despesas - Poupança)." }
+                { title: "Património Líquido:", text: "É O número mais importante. É tudo o que possui (Ativos) MENOS tudo o que deve (Passivos).", example: "Se tem uma casa de 400k€ e 50k€ em investimentos (Total Ativos = 450k€) mas uma hipoteca de 300k€ (Passivo), o seu Património Líquido é de 150k€." },
+                { title: "Total Ativos:", text: "A soma do valor do seu Imobiliário, Veículos (Módulo Orçamento) e Investimentos (Módulo Investimento).", example: "Casa (350k) + Carro (20k) + Investimentos (30k) = 400k€ Ativos." },
+                { title: "Total Passivos:", text: "A soma de todas as suas dívidas registadas no módulo 'Plano de Dívida' (Hipotecas, Cartões, Empréstimos).", example: "Hipoteca (280k) + Crédito Auto (15k) + Visa (5k) = 300k€ Passivos." },
+                { title: "Fluxo de Caixa:", text: "O dinheiro que sobra no seu bolso ao fim do mês. Calculado automaticamente do módulo Orçamento.", example: "Receitas (5000) - Despesas Fixas (3000) - Variáveis (1000) = +1000€ Fluxo." }
             ],
             box: {
                 type: "warning",
-                title: "Nota Importante - Cenários:",
-                content: "O Painel de Controle exibe sempre os dados do <strong>Cenário Ativo</strong> (o cenário selecionado na tela) para cada módulo. Se você mudar de cenário no módulo Orçamento, o Painel de Controle será atualizado para refletir essa escolha."
+                title: "Atenção aos Cenários:",
+                content: "O Dashboard é dinâmico. Se selecionar o 'Cenário B' no módulo Orçamento, o Dashboard mudará instantaneamente para mostrar o impacto desse cenário no seu Património Líquido."
             }
         },
         budget: {
             id: "budget",
-            title: "Orçamento e Ativos",
-            desc: "A pedra angular de sua gestão financeira.",
+            title: "Orçamento",
+            desc: "Não sofra mais com as suas despesas. Este módulo permite-lhe dizer ao seu dinheiro para onde ir em vez de se perguntar para onde foi.",
             items: [
-                { text: "Preencha os valores para cada item com a frequência correta." },
-                { title: "Impostos e Taxas:", text: "Nova categoria para gerenciar seus pagamentos antecipados ou saldos de impostos." },
-                { title: "Seção 'Valor de seus ativos':", text: "Esta seção é dedicada exclusivamente aos seus bens materiais (Imóveis, Veículos) para estabelecer seu patrimônio líquido. Suas ações e investimentos vão no módulo Investimento." }
-            ]
-        },
-        projections: {
-            id: "projections",
-            title: "Calculadoras de Projeção",
-            cards: [
-                { title: "Valor Futuro", desc: "Visualize o crescimento de seus investimentos com juros compostos." },
-                { title: "Objetivo", desc: "Defina um valor alvo e uma data, a ferramenta calcula o esforço de poupança necessário." },
-                { title: "Retirada", desc: "Simule a fase de retirada. Quanto tempo durará seu capital?" }
+                { title: "Receitas e Despesas:", text: "Introduza os seus números e escolha a frequência (Semanal, Mensal, Anual). O software converte tudo para 'Mensal' para simplificar a leitura.", example: "Paga o seguro do carro 1200€ por ano? Introduza '1200' e frequência 'Anual'. O software contará uma despesa de 100€/mês." },
+                { title: "Gestão de Ativos (Casa/Carro):", text: "Secção especial para listar bens materiais. Aqui introduz o valor de mercado da sua casa ou carro.", example: "Adicione uma linha 'Casa Própria' com valor de 450 000€. Este montante somar-se-á aos seus Ativos Totais." },
+                { title: "Impostos:", text: "Não se esqueça de incluir impostos se for trabalhador independente, ou impostos municipais (IMI).", example: "Adicione 'Impostos Municipais': 3500€/ano." },
+                { title: "Cenários (A/B):", text: "Crie até 3 versões do seu orçamento para testar hipóteses.", example: "Cenário A = Vida atual. Cenário B = 'E se comprar este duplex?' (Adiciono rendas e novas despesas)." }
             ]
         },
         plan: {
             id: "plan",
-            title: "Plano de Dívidas",
-            desc: "Estabeleça sua estratégia de reembolso ideal.",
+            title: "Plano de Dívida",
+            desc: "A ferramenta definitiva para se libertar de dívidas mais rápido e poupar milhares em juros.",
             items: [
-                { title: "Avalanche:", text: "Prioriza as taxas de juros altas (Economia máxima)." },
-                { title: "Bola de Neve:", text: "Prioriza os saldos pequenos (Motivação psicológica)." }
+                { title: "Método 'Avalanche':", text: "Matematicamente ideal. Paga-se primeiro a dívida com a taxa de juro mais alta.", example: "Tem um cartão a 20% e um crédito auto a 7%. A Avalanche ataca o cartão a 20% primeiro. Poupança máxima de juros." },
+                { title: "Método 'Bola de Neve':", text: "Psicologicamente motivador. Elimina-se a dívida mais pequena primeiro para obter uma vitória rápida.", example: "Tem uma dívida pequena de 500€ (Visa) e uma grande de 15 000€ (Carro). Eliminamos a 500€ imediatamente para sentir orgulho." },
+                { title: "Coluna 'Saldo':", text: "Isto é um simulador. O saldo desce virtualmente mês a mês.", example: "Importante: Se fizer um pagamento real no banco, atualize o saldo aqui uma vez por mês." }
             ],
             warning: {
-                title: "Nota Importante - Hipotecas",
-                content: "O módulo 'Plano' é um <strong>simulador</strong>. Ele não atualiza automaticamente seu saldo real no Painel de Controle.<br/><strong>Ação necessária:</strong> Uma vez por mês, ajuste manualmente o campo 'Valor' neste módulo para refletir seu extrato bancário real."
+                title: "Dica Hipoteca",
+                content: "Pode desmarcar a caixa **'Incluir'** para a sua hipoteca. Isto permite focar o módulo apenas na eliminação de 'más' dívidas de consumo sem que a hipoteca deforme o gráfico."
             }
         },
         remb: {
             id: "remb",
-            title: "Simuladores de Reembolso",
-            desc: "Calcule seus pagamentos para diferentes tipos de empréstimos.",
+            title: "Reembolso",
+            desc: "Este módulo contém 3 calculadoras distintas para o ajudar a tomar decisões informadas antes de assinar um contrato.",
             cards: [
-                { title: "Hipoteca:", desc: "Simule seus pagamentos mensais, o total de juros e o impacto de uma entrada (Compra/Renovação)." },
-                { title: "Empréstimo Pessoal:", desc: "Calcule o custo real de um empréstimo de carro ou pessoal." },
-                { title: "Cartão de Crédito:", desc: "Veja o tempo necessário para pagar um cartão com o pagamento mínimo." }
+                { title: "Aba 1: Hipoteca", desc: "Simule os seus pagamentos mensais. Compreenda o impacto de uma entrada maior ou taxa diferente.", example: "Para um apartamento de 400 000€ a 5% juros a 25 anos: Verá que pagará no final 701 508€ (dos quais 301 508€ são só juros!)." },
+                { title: "Aba 2: Empréstimo", desc: "Ideal para carros ou créditos pessoais. Descubra o custo real de um financiamento longo.", example: "Carro de 30 000€ financiado a 84 meses (7 anos) a 8%. A calculadora mostrará que custará na realidade 39 200€." },
+                { title: "Aba 3: Cartão de Crédito", desc: "Ferramenta de consciencialização. Calcula o tempo necessário para pagar um cartão se fizer apenas o pagamento mínimo.", example: "Dívida de 2000€ num cartão a 19.99% com mínimo de 3%: Demorará 11 anos a pagar e custará 1800€ em juros." }
             ]
         },
         invest: {
             id: "invest",
             title: "Investimento",
-            desc: "Acompanhamento completo de seu portfólio de ações.",
+            desc: "O seu centro de comando para pilotar a sua carteira de investimentos (Ações, ETF, Cripto).",
             items: [
-                { title: "Fontes de Dados:", text: "Escolha entre <strong>Yahoo Finance (Grátis, Atraso 15min)</strong> ou <strong>Alpha Vantage (Tempo Real, Chave necessária)</strong> através das configurações." },
-                { title: "Atualizar:", text: "Atualiza o valor de seus títulos instantaneamente." },
-                { title: "Histórico:", text: "Modifique ou exclua qualquer transação passada." },
-                { title: "Desempenho (GIPS):", text: "Analisa o retorno real (CAGR) ponderado pelo tempo." }
+                { title: "Indicadores Chave (KPI):", text: "No topo, 5 cartões resumem a situação: 1. Valor Atual, 2. Total Investido, 3. Ganho/Perda €, 4. Rendimento %, 5. CAGR (Taxa de Crescimento Anual Composta)." },
+                { title: "Bolhas de Análise:", text: "Cada título recebe uma etiqueta de cor:\n• Verde (Excelência): Ganho > 1000€ & > 15%.\n• Azul (Motor): Ganho > 1000€.\n• Cinza (Adormecido): Posição pequena.\n• Vermelho (Perigo): Em perda." },
+                { title: "Barra de Ferramentas:", text: "• Botão 'Atualizar' (Setas): Atualiza preços de mercado.\n• Botão '+': Adicionar transação.\n• Botão 'Performance' (Gráfico): Abre relatório detalhado.\n• Botão 'Watchlist' (Olho): Seguir ações." }
             ],
             box: {
-                type: "warning",
-                title: "Sobre as Novidades:",
-                content: "<ul><li><strong>Yahoo Finance:</strong> Excelente escolha gratuita, mas observe que os preços têm um atraso de 15 minutos em relação ao mercado.</li><li><strong>Questrade:</strong> A opção de conexão aparecerá <em>apenas</em> se sua moeda principal for o <strong>CAD</strong> (Dólar Canadense).</li></ul>"
+                type: "info",
+                title: "Relatório de Desempenho (Botão Gráfico)",
+                content: "O coração do acompanhamento real. Este módulo separa ganhos reais de simples depósitos. 3 abas:\n\n1. **Vista Geral**: Gráfico Linha Azul (Capital investido) vs Linha Verde (Valor real). A diferença é o seu lucro.\n\n2. **Depósitos**: Onde regista dinheiro *fresco* injetado.\n\n3. **Snapshots**: Permite corrigir ou historiar o valor total da conta numa data precisa."
             },
-            button: "Ver o Guia Finanças 101"
+            subSections: [
+                {
+                    title: "Gestão de Transações",
+                    intro: "Clique em '+' ou no lápis.",
+                    items: [
+                        { title: "Compra (Buy)", text: "Aumenta quantidade e recalcula Preço Médio (PMP).", example: "Compra 10 AAPL a 150€. Custo total sobe 1500€." },
+                        { title: "Venda (Sell)", text: "Reduz quantidade e realiza ganho/perda.", example: "Vende 5 AAPL. O software calcula quanto lucro fez *realmente* nessas 5 ações." },
+                        { title: "Dividendo", text: "Adiciona dinheiro sem mudar quantidade de ações.", example: "Recebe 50€ dividendos. Lucro puro." }
+                    ]
+                },
+                {
+                    title: "Configuração e APIs",
+                    intro: "Para preços em direto, vá a Ferramentas -> Configurações.",
+                    items: [
+                        { title: "Yahoo Finance (Padrão)", text: "Cobertura mundial, grátis. Perfeito para iniciantes." },
+                        { title: "Alpha Vantage", text: "Dados profissionais. Requer chave API gratuita." },
+                        { title: "Questrade", text: "Integração direta. Importa posições reais." }
+                    ]
+                }
+            ],
+            button: "Ver Guia Finanças 101"
         },
         analyse: {
             id: "analyse",
             title: "Análise de Ações",
-            desc: "Avalie a saúde fundamental de uma empresa antes de investir.",
+            desc: "Não escolha mais ações ao acaso. Analise como um profissional em segundos.",
             items: [
-                { title: "Nexus Score (0-100):", text: "Nota sintética baseada em 7 métricas chave (P/L, Crescimento, Margem, Dívida, ROE...)." },
-                { title: "Índice PEG:", text: "Detecta as ações subvalorizadas em relação ao seu crescimento." },
-                { title: "Assistente IA:", text: "Gera um prompt otimizado para Gemini/ChatGPT para recuperar os dados financeiros." }
-            ]
-        },
-        perf: {
-            id: "perf",
-            title: "Desempenho",
-            desc: "Visualize a evolução real de sua riqueza.",
-            items: [
-                { title: "Gráfico Histórico:", text: "Curva de evolução de seu Patrimônio Líquido e de seus Ativos totais no tempo." },
-                { title: "Benchmarks:", text: "Compare seu próprio desempenho com o dos grandes índices (S&P 500, TSX)." }
+                { title: "Objetivo:", text: "Este módulo dá uma nota objetiva (Score Nexus) sobre a saúde fundamental de uma empresa." },
+                { title: "Score Nexus (0-100):", text: "Nota global sobre 7 pilares. >70 é Excelente, <40 é Arriscado." },
+                { title: "Comparador:", text: "Crie vários cartões lado a lado para comparar Apple vs Microsoft vs Google." }
+            ],
+            subSections: [
+                {
+                    title: "Entrada de Dados",
+                    intro: "Preencha manualmente ou use o Assistente IA.",
+                    items: [
+                        { title: "Símbolo e Preço", text: "Introduza Ticker (ex: AAPL)." },
+                        { title: "BPA (EPS)", text: "Lucro Por Ação. PER calcula-se automaticamente." },
+                        { title: "Auto-Cálculo", text: "<strong>PER (P/E)</strong> e <strong>Yield %</strong> são cinzentos porque são calculados." },
+                        { title: "Exclusão", text: "Desmarque a caixa para excluir um campo do cálculo da pontuação." }
+                    ]
+                },
+                {
+                    title: "Os 7 Pilares",
+                    intro: "Pontos por métrica.",
+                    items: [
+                        { title: "1. Valorização (PER)", text: "É caro? Procuramos PER entre 15 e 25." },
+                        { title: "2. Crescimento", text: "A empresa cresce? Procuramos >15% ao ano." },
+                        { title: "3. Margem Líquida", text: "É rentável? Procuramos >20%." },
+                        { title: "4. Dívida", text: "É solvente? Dívida/Capital < 1.0." },
+                        { title: "5. ROE", text: "Eficácia da gestão. Procuramos >15%." },
+                        { title: "6. Liquidez", text: "Capacidade de pagar contas curto prazo. >1.5." },
+                        { title: "7. Dividendo", text: "Bónus. Procuramos >2%." }
+                    ]
+                },
+                {
+                    title: "Ferramentas Inteligentes",
+                    intro: "Funcionalidades extra.",
+                    items: [
+                        { title: "Lâmpada (IA)", text: "Clique para copiar 'Prompt Mágico'. Cole no ChatGPT para obter dados." },
+                        { title: "PEG Ratio", text: "Se < 1.0, é uma pechincha." },
+                        { title: "Radar Visual", text: "Gráfico aranha mostra equilíbrio." },
+                        { title: "Guardar e Vigiar", text: "'Guardar' mantém análise. 'Olho' adiciona à Watchlist." }
+                    ]
+                }
             ]
         },
         immo: {
             id: "immo",
             title: "Imobiliário",
-            desc: "Análise de rentabilidade de aluguel profissional.",
+            desc: "Para o investidor sério. Não confie no 'instinto', confie na matemática.",
             cards: [
-                { title: "NOI:", text: "Receita Líquida Operacional (Lucro antes da hipoteca)." },
-                { title: "Cap Rate:", text: "Rendimento puro do edifício sem alavancagem." },
-                { title: "Cash-on-Cash:", text: "Retorno real sobre sua entrada." },
-                { title: "DSCR:", text: "Índice de cobertura da dívida (Banco)." }
+                { title: "NOI (Receita Líquida Operacional)", text: "Lucro puro antes da hipoteca. A cifra mais fiável.", example: "Rendas 60k. Despesas 20k. NOI é 40k." },
+                { title: "Cap Rate", text: "Potência do motor. Rendimento se comprasse a pronto. >6% é bom sinal.", example: "Preço 800k. NOI 40k. 5% Cap Rate." },
+                { title: "Cash-on-Cash", text: "Retorno real sobre o seu dinheiro de entrada.", example: "Entrada 150k. Cashflow 15k. 10% Retorno. Excelente." },
+                { title: "DSCR (Cobertura Dívida)", text: "O que o banco olha. Rendas cobrem hipoteca?", example: "Hipoteca 30k. NOI 40k. DSCR = 1.33. Seguro." },
+                { title: "GRM", text: "Quantas vezes a renda bruta paga pelo imóvel?", example: "Preço 500k, Renda 50k. GRM = 10." },
+                { title: "Break-Even", text: "Nível de segurança. Percentagem de ocupação mínima para não perder dinheiro." },
+                { title: "LTV", text: "Alavancagem. Parte financiada pelo banco.", example: "80% LTV = 20% entrada." },
+                { title: "ROI Total", text: "Cashflow + Reembolso Capital (Enriquecimento latente)." }
             ],
-            button: "Guia Imobiliário"
+            button: "Ver Guia Imobiliário"
+        },
+        perf: {
+            id: "perf",
+            title: "Desempenho (Calculadora)",
+            desc: "Um auditor imparcial. Calcule a rentabilidade precisa entre duas datas.",
+            items: [
+                { title: "Objetivo:", text: "NÃO é a sua carteira global. É uma calculadora isolada: 'Quanto rendeu a ação X entre Jan e Dez?'" },
+                { title: "Independente:", text: "Sem ligação às suas contas." }
+            ],
+            subSections: [
+                {
+                    title: "Retorno Total vs CAGR",
+                    intro: "Duas visões:",
+                    items: [
+                        { title: "Retorno Total", text: "Simples. 'Fiz +20%'.", example: "Compra 100, Venda 120." },
+                        { title: "CAGR (Anual)", text: "O verdadeiro juiz. Anualiza o rendimento.", example: "+20% em 10 anos é fraco (1.8% ano)." }
+                    ]
+                },
+                {
+                    title: "O Benchmark (S&P 500)",
+                    intro: "A prova de fogo.",
+                    items: [
+                        { title: "Comparação", text: "Ative o interruptor. O software busca o histórico REAL do S&P 500." },
+                        { title: "Veredicto", text: "Se a sua linha (Verde) está acima da cinza, bateu o mercado." }
+                    ]
+                }
+            ]
+        },
+        projections: {
+            id: "projections",
+            title: "Projeções",
+            desc: "Não adivinhe. Saiba exatamente quando poderá deixar de trabalhar.",
+            cards: [
+                { title: "Valor Futuro", desc: "Magia do juro composto.", example: "Quanto valerão os meus 10k em 20 anos?" },
+                { title: "Objetivo (Target)", desc: "Planeamento inverso.", example: "Quero 1 milhão. Quanto devo poupar?" },
+                { title: "Reforma (Renda)", desc: "Estratégia de levantamento.", example: "Posso levantar 4000€/mês para sempre?" }
+            ],
+            subSections: [
+                {
+                    title: "Calc 1: Valor Futuro",
+                    intro: "Para aforradores.",
+                    items: [
+                        { title: "Frequência", text: "Simule pagamentos crescentes." },
+                        { title: "Timing", text: "Começar cedo é crucial. Veja o impacto de 30 anos." },
+                        { title: "Inflação", text: "Não esqueça! Olhe para a linha 'Poder de Compra Real'." }
+                    ]
+                },
+                {
+                    title: "Calc 2: Objetivo Poupança",
+                    intro: "Para projetos.",
+                    items: [
+                        { title: "Resposta Clara", text: "Montante EXATO a poupar por mês." },
+                        { title: "Ajuste Taxa", text: "Veja como 7% de retorno facilita a vida comparado a 5%." }
+                    ]
+                },
+                {
+                    title: "Calc 3: Reforma",
+                    intro: "O teste final.",
+                    items: [
+                        { title: "Ajuste Inflação", text: "Marcar esta caixa é vital. Simula aumento de levantamentos." },
+                        { title: "Risco Ruína", text: "Se o gráfico cai a zero, tem um problema." }
+                    ]
+                }
+            ]
         },
         params: {
             id: "params",
-            title: "Configurações e Ferramentas",
+            title: "Configurações",
+            subSections: [
+                {
+                    title: "Dados e Segurança",
+                    intro: "Os seus dados NUNCA saem do seu computador.",
+                    items: [
+                        { title: "Backup JSON", text: "Faça uma cópia ('Exportar') uma vez por mês." },
+                        { title: "Importar", text: "Restaure uma cópia." }
+                    ]
+                },
+                {
+                    title: "Personalização",
+                    intro: "Adapte a ferramenta.",
+                    items: [
+                        { title: "Moeda", text: "Mude entre CAD, USD, EUR. Apenas muda o símbolo." },
+                        { title: "Modo Decimal (.00)", text: "Ative para precisão (1250.45€). Desative para minimalismo." },
+                        { title: "Tema Escuro/Claro", text: "Modo Escuro recomendado para a noite." },
+                        { title: "Largura Site", text: "'1600px' ou '100%' para ecrãs grandes." }
+                    ]
+                },
+                {
+                    title: "Zona de Perigo",
+                    intro: "Cuidado.",
+                    items: [
+                        { title: "Reiniciar Módulo", text: "Limpa SÓ a aba ativa." },
+                        { title: "Reset Fábrica", text: "Limpa TUDO. Irreversível." }
+                    ]
+                }
+            ],
+            items: []
+        },
+        glossaire: {
+            id: "glossaire",
+            title: "Glossário",
             items: [
-                { title: "Backup / Restauração:", text: "Exporte seus dados em arquivo JSON para nunca perdê-los." },
-                { title: "Calculadora:", text: "Ferramenta flutuante disponível em todo o aplicativo." },
-                { title: "Redefinir Módulo:", text: "O botão laranja (seta circular) apaga apenas os dados do módulo ativo." },
-                { title: "Redefinição de Fábrica:", text: "O botão vermelho apaga TODOS os dados do aplicativo. <span style='color:var(--danger-color); font-weight:bold'>Ação irreversível.</span>" }
+                { title: "BPA (EPS)", text: "Lucro Por Ação." },
+                { title: "PER (P/E)", text: "Ratio Preço/Lucro." },
+                { title: "Conta Livre Impostos", text: "Ganhos não tributáveis." },
+                { title: "Conta Reforma", text: "Imposto diferido." },
+                { title: "Património Líquido", text: "Ativos - Passivos." }
             ]
         }
     }

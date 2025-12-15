@@ -104,9 +104,8 @@ export default function Thermometer({ title, percentage, value1, label1, value2,
                         paddingRight: '5px',
                         borderTop: '1px dashed var(--border-color)',
                         paddingTop: '10px',
-                        maxHeight: '350px',
-                        maskImage: showScrollIndicator ? 'linear-gradient(to bottom, black 85%, transparent 100%)' : 'none',
-                        WebkitMaskImage: showScrollIndicator ? 'linear-gradient(to bottom, black 85%, transparent 100%)' : 'none'
+                        flex: 1,
+                        minHeight: 0
                     }}>
                         {miniItems.map((item, idx) => {
                             // Logique identique pour les sous-éléments
@@ -128,11 +127,6 @@ export default function Thermometer({ title, percentage, value1, label1, value2,
                             );
                         })}
                     </div>
-                    {showScrollIndicator && (
-                        <div className="scroll-indicator-anim" style={{ fontSize: '0.65rem', color: 'var(--secondary-color)', textAlign: 'center', marginTop: '5px', fontWeight: '600', cursor: 'default' }}>
-                            ▼ Défiler pour voir la suite
-                        </div>
-                    )}
                 </div>
             )}
         </div>

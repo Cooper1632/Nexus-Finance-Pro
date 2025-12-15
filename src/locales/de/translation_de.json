@@ -1,6 +1,9 @@
 {
     "common": {
-        "save": "Speichern",
+        "save": "SPEICHERN",
+        "saved": "Gespeichert!",
+        "loading": "Laden...",
+        "results": "Ergebnisse",
         "cancel": "Abbrechen",
         "delete": "Löschen",
         "edit": "Bearbeiten",
@@ -8,6 +11,9 @@
         "update": "Aktualisieren",
         "create": "Erstellen",
         "confirm": "Bestätigen",
+        "got_it": "Verstanden!",
+        "features_title": "Was Sie tun können:",
+        "dont_show_again": "Diese Nachricht nicht mehr anzeigen",
         "payment": "Zahlung",
         "account_types": {
             "celi": "TFSA",
@@ -53,7 +59,6 @@
         "confirm_delete": "Möchten Sie wirklich löschen?",
         "confirm_delete_title": "Löschen bestätigen",
         "confirm_delete_msg": "Möchten Sie diese Zeile wirklich löschen?\nDiese Aktion kann nicht rückgängig gemacht werden.",
-        "loading": "Wird geladen...",
         "search": "Suchen",
         "filter": "Filtern",
         "no_data": "Keine Daten verfügbar",
@@ -620,6 +625,7 @@
         "min_payment": "Min. Zahlung",
         "your_payment": "Ihre Zahlung",
         "mortgage_section_title": "Hypotheken- / Immobilienschulden",
+        "mortgage_prepayment_warning": "Wichtiger Hinweis: Die vorzeitige Rückzahlung einer Hypothek unterliegt Ihren Vertragsbedingungen. Prüfen Sie bei Ihrem Finanzinstitut die zulässigen Sondertilgungsgrenzen, um Strafen zu vermeiden.",
         "mortgage_title": "Titel / Immobilie",
         "mortgage_balance": "Hypothekensaldo",
         "mortgage_rate": "Satz (%)",
@@ -801,7 +807,14 @@
         "cagr": "CAGR (Jährlich)",
         "simple": "Einfach",
         "evolution": "Kapitalentwicklung",
-        "gips_warning": "Hinweis: Diese Berechnung verwendet die vereinfachte Money-Weighted Return (MWRR) Methode zwischen zwei Daten."
+        "gips_warning": "Hinweis: Diese Berechnung verwendet die vereinfachte Money-Weighted Return (MWRR) Methode zwischen zwei Daten.",
+        "compare_sp500": "Mit S&P 500 vergleichen",
+        "my_portfolio": "Meine Investition",
+        "benchmark_disclaimer": "Theoretische Simulation basierend auf einer durchschnittlichen Jahresrendite von 10,5% (S&P 500). Die vergangene Wertentwicklung ist keine Garantie für zukünftige Ergebnisse.",
+        "real_data_disclaimer": "✔ Echte Daten: Historischer Vergleich basierend auf exakten Daten (Yahoo Finance).",
+        "legend_sp500_real": "S&P 500 (Gesamtrendite - Reale Historie)",
+        "legend_sp500_simulated": "S&P 500 (Gesamtrendite - Simuliert 10.5%)",
+        "warning_min_duration": "Diagramm kann nicht angezeigt werden: Die Dauer muss mindestens 1 Jahr betragen."
     },
     "realestate": {
         "title": "Immobilienrechner",
@@ -964,7 +977,8 @@
         "chap23_title": "23. Psychologische Fallen",
         "chap24_title": "24. Tipps & Bonus",
         "glossary_title": "25. Glossar",
-        "myths_title": "Mythen entlarven"
+        "myths_title": "Mythen entlarven",
+        "intro_comparison": "Um Börsenkennzahlen richtig zu verstehen, vergleichen Sie diese mit Ihrer eigenen Haushaltsführung."
     },
     "debt_analysis": {
         "title": "Analyse Ihrer Schulden",
@@ -979,5 +993,111 @@
         "col_total_interest": "Gezahlte Gesamtzinsen",
         "conclusion": "Je höher die Zahlung, desto weniger Zinsen zahlen Sie insgesamt. Mit {{paiement}}/Monat würden Sie unendlich lange Zinsen zahlen, ohne Ihre Schuld jemals zu reduzieren.",
         "button_analyze": "⚠️ Warum sinkt meine Schuld nicht?"
+    },
+    "intro": {
+        "analyse": {
+            "title": "Analysieren Sie Ihre Aktien im Detail",
+            "text": "Dieses Modul hilft Ihnen, die finanzielle Gesundheit von Unternehmen vor einer Investition zu bewerten.",
+            "features": [
+                "Vereinfachte fundamentale und technische Analyse.",
+                "Zugang zu detaillierten Finanzdaten (Gewinn, Schulden, KGV).",
+                "Interaktive Diagramme zur Visualisierung von Trends.",
+                "Vergleich wichtiger Kennzahlen zur Identifizierung von Chancen."
+            ]
+        },
+        "immobilier": {
+            "title": "Simulieren Sie Ihre Immobilieninvestitionen",
+            "text": "Ein komplettes Tool zur Analyse der Rentabilität Ihrer Immobilienprojekte.",
+            "features": [
+                "Simulation des Kaufs von Ertragsimmobilien.",
+                "Automatische Berechnung von Cashflow und Rentabilität.",
+                "Berücksichtigung von Ausgaben, Steuern und Abschreibungen.",
+                "25-Jahres-Prognose Ihres Vermögenswertes."
+            ]
+        },
+        "performance": {
+            "title": "Messen Sie die Leistung Ihrer Investitionen",
+            "text": "Analysieren Sie Ihre Gewinne und Verluste über verschiedene Zeiträume präzise.",
+            "features": [
+                "Berechnung der einfachen und zusammengesetzten Rendite (CAGR).",
+                "Einfacher Vergleich zwischen mehreren Szenarien.",
+                "Grafische Visualisierung der Wertentwicklung.",
+                "S&P 500 Vergleich (Gesamtrendite & CAGR).",
+                "Berücksichtigung von Daten für genaue Berechnungen."
+            ]
+        },
+        "projections": {
+            "title": "Planen Sie Ihre finanzielle Zukunft",
+            "text": "Leistungsstarke Tools zur Prognose Ihrer Altersvorsorge und Sparziele.",
+            "features": [
+                "Berechnung des Zukunftswerts mit Zinseszins.",
+                "Ermittlung der notwendigen Ersparnisse zum Erreichen eines Ziels.",
+                "Auszahlungssimulation (periodische Entnahmen).",
+                "Berücksichtigung der Inflation für reale Ergebnisse."
+            ]
+        },
+        "budget": {
+            "title": "Meistern Sie Ihr Budget",
+            "text": "Dieses Modul ist das Herzstück Ihrer täglichen Verwaltung. Es ermöglicht Ihnen zu planen, wohin Ihr Geld fließt, bevor Sie es ausgeben.",
+            "features": [
+                "Listen Sie Ihre Einkommensquellen auf (Gehalt, Dividenden, usw.).",
+                "Definieren Sie genaue Budgets für jede Ausgabenkategorie.",
+                "Visualisieren Sie sofort Ihren Cashflow (Verbleibend zum Leben).",
+                "Definieren Sie Ihre automatischen Sparziele."
+            ]
+        },
+        "plan": {
+            "title": "Ihr Rückzahlungsplan",
+            "text": "Befreien Sie sich von Ihren Schulden dank einer klaren und optimierten Strategie. Dieses Modul hilft Ihnen, die Kontrolle zurückzugewinnen.",
+            "features": [
+                "Zentralisieren Sie alle Ihre Schulden (Karten, Kredite, Hypotheken).",
+                "Vergleichen Sie Strategien (Lawine vs Schneeball), um Zinsen zu sparen.",
+                "Visualisieren Sie Ihr Datum der finanziellen Freiheit.",
+                "Simulieren Sie die Auswirkung von beschleunigten Zahlungen."
+            ]
+        },
+        "investissement": {
+            "title": "Verfolgen Sie die Leistung Ihres Portfolios",
+            "text": "Dieses Modul zentralisiert alle Ihre Investitionen für eine eingehende Analyse Ihrer globalen Leistung.",
+            "features": [
+                "Überblick über den aktuellen Wert und die Gesamtrendite.",
+                "Diagramme zur Vermögensallokation und Leistung (Blasen).",
+                "Detaillierte Transaktionshistorie (Kauf, Verkauf, Dividenden).",
+                "Konfiguration der Datenquellen (AlphaVantage, Yahoo, Questrade)."
+            ]
+        },
+        "remboursement": {
+            "title": "Analysieren Sie Ihre Rückzahlungsstrategien",
+            "text": "Dieses Modul ermöglicht es Ihnen, verschiedene Rückzahlungsoptionen für Ihre individuellen Schulden zu simulieren und zu vergleichen.",
+            "features": [
+                "Simulieren Sie eine Hypothek, einen Autokredit oder Privatkredit.",
+                "Analysieren Sie die Auswirkung von beschleunigten Zahlungen auf die Zinsen.",
+                "Berechnen Sie die Zeit, die benötigt wird, um eine Kreditkarte abzubezahlen.",
+                "Visualisieren Sie die Gesamtzinskosten für jedes Szenario."
+            ]
+        },
+        "dashboard": {
+            "title": "Willkommen auf Ihrem Dashboard",
+            "text": "Das Dashboard ist Ihre finanzielle Kommandozentrale. Es gibt Ihnen einen sofortigen Überblick über Ihre finanzielle Gesundheit.",
+            "features": [
+                "Visualisieren Sie Ihr Nettovermögen in Echtzeit.",
+                "Verfolgen Sie die Allokation Ihrer Vermögenswerte (Bargeld, Anlagen, Immobilien).",
+                "Konsultieren Sie den monatlichen Status Ihres Budgets (Einnahmen vs Ausgaben).",
+                "Schneller Zugriff auf wichtige Module über Verknüpfungen."
+            ]
+        }
+    },
+    "help_perf": {
+        "modal_title": "Verständnis des Einzahlungs- & Leistungsmoduls",
+        "modal_intro": "Dieses Modul ermöglicht es Ihnen, die reale Rentabilität Ihrer Investitionen unter Berücksichtigung Ihrer Ein- und Auszahlungen präzise zu verfolgen.",
+        "tab_overview_title": "Überblick",
+        "tab_overview_desc": "Visualisieren Sie ein Vergleichsdiagramm zwischen dem Geld, das Sie investiert haben (Investiert), und dem aktuellen Wert Ihres Portfolios. Es zeigt sofort, ob Sie gewinnen oder verlieren.",
+        "tab_overview_example": "Wenn die grüne Linie (Wert) über der blauen Linie (Investiert) liegt, machen Sie Gewinn. Der Abstand zwischen beiden stellt Ihren Gewinn dar.",
+        "tab_deposits_title": "Einzahlungen verwalten",
+        "tab_deposits_desc": "Hier erfassen Sie jeden Betrag, den Sie auf Ihre Anlagekonten überweisen. Dies ist entscheidend für die Berechnung Ihrer realen Leistung.",
+        "tab_deposits_example": "Am 1. Januar habe ich 1000€ von meinem Girokonto überwiesen. Ich füge einen Eintrag hinzu: 01.01.2024 | Depot | 1000€.",
+        "tab_journal_title": "Wertjournal",
+        "tab_journal_desc": "Notieren Sie hier den Gesamtwert Ihres Portfolios zu wichtigen Terminen (z. B. Monatsende). Es ist wie eine Momentaufnahme Ihres Saldos, um die Entwicklung im Laufe der Zeit zu sehen.",
+        "tab_journal_example": "Am 31. Januar sehe ich, dass mein Depot 1050€ wert ist. Ich füge eine Momentaufnahme hinzu: 31.01.2024 | 1050€. Das System berechnet einen Gewinn von 50€."
     }
 }

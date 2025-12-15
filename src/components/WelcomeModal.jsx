@@ -174,8 +174,8 @@ const WelcomeModal = ({ isOpen, onClose, dontShowAgain, setDontShowAgain }) => {
                             onChange={changeLanguage}
                             style={{ ...styles.selectInput, padding: '10px 15px' }}
                         >
-                            <option value="fr">🇫🇷 Français</option>
                             <option value="en">🇺🇸 English</option>
+                            <option value="fr">🇫🇷 Français</option>
                             <option value="es">🇪🇸 Español</option>
                             <option value="de">🇩🇪 Deutsch</option>
                             <option value="pt">🇵🇹 Português</option>

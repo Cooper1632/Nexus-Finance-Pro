@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useData } from '../context/DataContext';
 import CurrencyInput from './CurrencyInput';
 import { useTranslation } from 'react-i18next'; // IMPORT
+import { CheckCircleIcon, ExclamationTriangleIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import {
     Chart as ChartJS,
     RadialLinearScale,
@@ -29,7 +30,9 @@ import {
     ArrowDownIcon,
     MinusIcon,
     CheckBadgeIcon,
+    InformationCircleIcon
 } from '@heroicons/react/24/outline';
+import IntroAnalyse from './IntroAnalyse';
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
@@ -365,23 +368,34 @@ function Analyse() {
     const tooltipsContent = {
         price: <div><strong>{t('analysis_tooltips.price_title')}</strong><p>{t('analysis_tooltips.price_desc')}</p><p style={{ color: 'var(--warning-color)' }}>{t('analysis_tooltips.price_warn')}</p></div>,
         bpa: <div><strong>{t('analysis_tooltips.bpa_title')}</strong><p>{t('analysis_tooltips.bpa_desc')}</p><p style={{ color: 'var(--danger-color)' }}>{t('analysis_tooltips.bpa_note')}</p></div>,
-        pe: <div><strong>{t('analysis_tooltips.pe_title')}</strong><p>{t('analysis_tooltips.pe_desc')}</p><p>✅ {t('analysis_tooltips.pe_good')}</p><p>❌ {t('analysis_tooltips.pe_bad')}</p></div>,
-        growth: <div><strong>{t('analysis_tooltips.growth_title')}</strong><p>{t('analysis_tooltips.growth_desc')}</p><p>✅ {t('analysis_tooltips.growth_good')}</p><p>❌ {t('analysis_tooltips.growth_bad')}</p></div>,
-        margin: <div><strong>{t('analysis_tooltips.margin_title')}</strong><p>{t('analysis_tooltips.margin_desc')}</p><p>✅ {t('analysis_tooltips.margin_good')}</p><p>❌ {t('analysis_tooltips.margin_bad')}</p></div>,
-        debt: <div><strong>{t('analysis_tooltips.debt_title')}</strong><p>{t('analysis_tooltips.debt_desc')}</p><p>✅ {t('analysis_tooltips.debt_good')}</p><p>❌ {t('analysis_tooltips.debt_bad')}</p></div>,
-        roe: <div><strong>{t('analysis_tooltips.roe_title')}</strong><p>{t('analysis_tooltips.roe_desc')}</p><p>✅ {t('analysis_tooltips.roe_good')}</p><p>❌ {t('analysis_tooltips.roe_bad')}</p></div>,
-        liq: <div><strong>{t('analysis_tooltips.liq_title')}</strong><p>{t('analysis_tooltips.liq_desc')}</p><p>✅ {t('analysis_tooltips.liq_good')}</p><p>❌ {t('analysis_tooltips.liq_bad')}</p></div>,
-        divA: <div><strong>{t('analysis_tooltips.diva_title')}</strong><p>{t('analysis_tooltips.diva_desc')}</p><p style={{ color: 'var(--warning-color)' }}>{t('analysis_tooltips.diva_note')}</p></div>,
-        divP: <div><strong>{t('analysis_tooltips.divp_title')}</strong><p>{t('analysis_tooltips.divp_desc')}</p><p>✅ {t('analysis_tooltips.divp_good')}</p><p>❌ {t('analysis_tooltips.divp_bad')}</p></div>,
-        peg: <div><strong>{t('analysis_tooltips.peg_title')}</strong><p>{t('analysis_tooltips.peg_desc')}</p><p>✅ {t('analysis_tooltips.peg_good')}</p><p>⚠️ {t('analysis_tooltips.peg_fair')}</p><p>❌ {t('analysis_tooltips.peg_bad')}</p></div>
+        pe: <div><strong>{t('analysis_tooltips.pe_title')}</strong><p>{t('analysis_tooltips.pe_desc')}</p><p className="icon-text"><CheckCircleIcon style={{ width: '16px', color: '#2ECC71' }} /> {t('analysis_tooltips.pe_good')}</p><p className="icon-text"><XCircleIcon style={{ width: '16px', color: '#E74C3C' }} /> {t('analysis_tooltips.pe_bad')}</p></div>,
+        growth: <div><strong>{t('analysis_tooltips.growth_title')}</strong><p>{t('analysis_tooltips.growth_desc')}</p><p className="icon-text"><CheckCircleIcon style={{ width: '16px', color: '#2ECC71' }} /> {t('analysis_tooltips.growth_good')}</p><p className="icon-text"><XCircleIcon style={{ width: '16px', color: '#E74C3C' }} /> {t('analysis_tooltips.growth_bad')}</p></div>,
+        margin: <div><strong>{t('analysis_tooltips.margin_title')}</strong><p>{t('analysis_tooltips.margin_desc')}</p><p className="icon-text"><CheckCircleIcon style={{ width: '16px', color: '#2ECC71' }} /> {t('analysis_tooltips.margin_good')}</p><p className="icon-text"><XCircleIcon style={{ width: '16px', color: '#E74C3C' }} /> {t('analysis_tooltips.margin_bad')}</p></div>,
+        debt: <div><strong>{t('analysis_tooltips.debt_title')}</strong><p>{t('analysis_tooltips.debt_desc')}</p><p className="icon-text"><CheckCircleIcon style={{ width: '16px', color: '#2ECC71' }} /> {t('analysis_tooltips.debt_good')}</p><p className="icon-text"><XCircleIcon style={{ width: '16px', color: '#E74C3C' }} /> {t('analysis_tooltips.debt_bad')}</p></div>,
+        roe: <div><strong>{t('analysis_tooltips.roe_title')}</strong><p>{t('analysis_tooltips.roe_desc')}</p><p className="icon-text"><CheckCircleIcon style={{ width: '16px', color: '#2ECC71' }} /> {t('analysis_tooltips.roe_good')}</p><p className="icon-text"><XCircleIcon style={{ width: '16px', color: '#E74C3C' }} /> {t('analysis_tooltips.roe_bad')}</p></div>,
+        liq: <div><strong>{t('analysis_tooltips.liq_title')}</strong><p>{t('analysis_tooltips.liq_desc')}</p><p className="icon-text"><CheckCircleIcon style={{ width: '16px', color: '#2ECC71' }} /> {t('analysis_tooltips.liq_good')}</p><p className="icon-text"><XCircleIcon style={{ width: '16px', color: '#E74C3C' }} /> {t('analysis_tooltips.liq_bad')}</p></div>,
+        divA: <div><strong>{t('analysis_tooltips.diva_title')}</strong><p>{t('analysis_tooltips.diva_desc')}</p><p style={{ color: 'var(--warning-color)', display: 'flex', alignItems: 'center', gap: '5px' }}><ExclamationTriangleIcon style={{ width: '16px' }} /> {t('analysis_tooltips.diva_note')}</p></div>,
+        divP: <div><strong>{t('analysis_tooltips.divp_title')}</strong><p>{t('analysis_tooltips.divp_desc')}</p><p className="icon-text"><CheckCircleIcon style={{ width: '16px', color: '#2ECC71' }} /> {t('analysis_tooltips.divp_good')}</p><p className="icon-text"><XCircleIcon style={{ width: '16px', color: '#E74C3C' }} /> {t('analysis_tooltips.divp_bad')}</p></div>,
+        peg: <div><strong>{t('analysis_tooltips.peg_title')}</strong><p>{t('analysis_tooltips.peg_desc')}</p><p className="icon-text"><CheckCircleIcon style={{ width: '16px', color: '#2ECC71' }} /> {t('analysis_tooltips.peg_good')}</p><p className="icon-text"><ExclamationTriangleIcon style={{ width: '16px', color: '#F39C12' }} /> {t('analysis_tooltips.peg_fair')}</p><p className="icon-text"><XCircleIcon style={{ width: '16px', color: '#E74C3C' }} /> {t('analysis_tooltips.peg_bad')}</p></div>
     };
+
+
+
+    const [showIntro, setShowIntro] = useState(false);
+
+    useEffect(() => {
+        const hasSeenIntro = localStorage.getItem('nexus_intro_analyse_seen');
+        if (!hasSeenIntro) {
+            setShowIntro(true);
+        }
+    }, []);
 
     return (
         <div className="printable-content fade-in" style={{ display: 'block' }}>
-            <div className="module-header-with-reset">
-                <h2>{t('analysis.title')}</h2>
+            <div className="module-header-with-reset" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h2 style={{ margin: 0 }}>{t('analysis.title')}</h2>
 
-                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
                     <div style={{ display: 'flex', alignItems: 'center', backgroundColor: 'var(--card-background)', padding: '5px 10px', borderRadius: '6px', border: '1px solid var(--border-color)' }}>
                         <ArchiveBoxArrowDownIcon style={{ width: '20px', color: 'var(--secondary-color)', marginRight: '8px' }} />
                         <label htmlFor="history-select" style={{ display: 'none' }}>{t('analysis.load_label')}</label>
@@ -403,8 +417,30 @@ function Analyse() {
                             <TrashIcon style={{ width: '16px' }} />
                         </button>
                     </div>
+                    <button
+                        onClick={() => setShowIntro(true)}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            color: '#9ca3af',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            transition: 'color 0.2s',
+                            padding: '4px',
+                            borderRadius: '50%'
+                        }}
+                        onMouseOver={(e) => e.currentTarget.style.color = '#3b82f6'}
+                        onMouseOut={(e) => e.currentTarget.style.color = '#9ca3af'}
+                        title={t('common.help') || "Introduction"}
+                    >
+                        <InformationCircleIcon style={{ width: '24px', height: '24px' }} />
+                    </button>
                 </div>
             </div>
+
+            <IntroAnalyse isOpen={showIntro} onClose={() => setShowIntro(false)} />
 
             <div style={{ marginBottom: '20px', display: 'flex', gap: '15px', alignItems: 'center', flexWrap: 'wrap' }}>
                 <button onClick={addCard} className="btn-success" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><PlusIcon style={{ width: '20px' }} /> {t('analysis.add_card')}</button>

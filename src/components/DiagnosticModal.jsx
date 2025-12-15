@@ -61,7 +61,10 @@ export default function DiagnosticModal({ isOpen, onClose, transactions }) {
                     </div>
                 ) : (
                     <div>
-                        <p style={{ marginBottom: '15px' }}>⚠️ <strong>{problems.length} {t('diagnostic.issues_detected')}</strong> :</p>
+                        <p style={{ marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <ExclamationTriangleIcon style={{ width: '24px', color: '#F39C12' }} />
+                            <strong>{problems.length} {t('diagnostic.issues_detected')}</strong> :
+                        </p>
                         {problems.map((prob, idx) => (
                             <div key={idx} style={styles.alertBox}>
                                 <ExclamationTriangleIcon style={{ width: '24px', color: '#DC2626', flexShrink: 0 }} />

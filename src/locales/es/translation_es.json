@@ -8,6 +8,9 @@
         "update": "Actualizar",
         "create": "Crear",
         "confirm": "Confirmar",
+        "got_it": "¡Entendido!",
+        "features_title": "Lo que puede hacer:",
+        "dont_show_again": "No volver a mostrar este mensaje",
         "payment": "Pago",
         "account_types": {
             "celi": "TFSA",
@@ -88,6 +91,7 @@
         "annual": "Anual",
         "rate": "Tasa",
         "duration": "Duración",
+        "results": "Resultados",
         "scenario_modal_title": "Nuevo Escenario",
         "scenario_modal_question": "¿Cómo desea comenzar?",
         "btn_copy": "Duplicar escenario actual",
@@ -620,6 +624,7 @@
         "min_payment": "Pago Mín",
         "your_payment": "Su Pago",
         "mortgage_section_title": "Deudas Hipotecarias / Inmobiliarias",
+        "mortgage_prepayment_warning": "Nota importante: El reembolso anticipado de una hipoteca está sujeto a las condiciones de su contrato. Verifique con su institución financiera los límites de prepago permitidos para evitar penalizaciones.",
         "mortgage_title": "Título / Propiedad",
         "mortgage_balance": "Saldo Hipotecario",
         "mortgage_rate": "Tasa (%)",
@@ -798,11 +803,17 @@
         "end_date": "Fecha de fin",
         "key_results": "Resultados Clave",
         "total_return": "Rendimiento Total",
-        "total_return": "Rendimiento Total",
         "cagr": "CAGR (Anual)",
         "simple": "Simple",
         "evolution": "Evolución del Capital",
-        "gips_warning": "Nota: Este cálculo utiliza el método Money-Weighted Return (MWRR) simplificado entre dos fechas."
+        "gips_warning": "Nota: Este cálculo utiliza el método Money-Weighted Return (MWRR) simplificado entre dos fechas.",
+        "compare_sp500": "Comparar con S&P 500",
+        "my_portfolio": "Mi Inversión",
+        "benchmark_disclaimer": "Simulación teórica basada en un rendimiento anual promedio del 10.5% (S&P 500). El rendimiento pasado no garantiza resultados futuros.",
+        "real_data_disclaimer": "✔ Datos reales: Comparación histórica basada en fechas exactas (Yahoo Finance).",
+        "legend_sp500_real": "S&P 500 (Retorno Total - Historial Real)",
+        "legend_sp500_simulated": "S&P 500 (Retorno Total - Simulado 10.5%)",
+        "warning_min_duration": "No se puede mostrar el gráfico: La duración debe ser de al menos 1 año."
     },
     "realestate": {
         "title": "Calculadora Inmobiliaria",
@@ -965,7 +976,8 @@
         "chap23_title": "23. Trampas Psicológicas",
         "chap24_title": "24. Trucos y Bonus",
         "glossary_title": "25. Glosario",
-        "myths_title": "Mitos a Desmentir"
+        "myths_title": "Mitos a Desmentir",
+        "intro_comparison": "Para entender bien los ratios bursátiles, compárelos con su propia gestión familiar."
     },
     "debt_analysis": {
         "title": "Análisis de Su Deuda",
@@ -980,5 +992,111 @@
         "col_total_interest": "Intereses totales pagados",
         "conclusion": "Cuanto mayor sea el pago, menos intereses pagará en total. Con {{paiement}}/mes, pagaría intereses indefinidamente sin reducir nunca su deuda.",
         "button_analyze": "⚠️ ¿Por qué mi deuda no baja?"
+    },
+    "intro": {
+        "analyse": {
+            "title": "Analice sus acciones en profundidad",
+            "text": "Este módulo le ayuda a evaluar la salud financiera de las empresas antes de invertir.",
+            "features": [
+                "Análisis fundamental y técnico simplificado.",
+                "Acceso a datos financieros detallados (Ganancias, Deuda, P/E).",
+                "Gráficos interactivos para visualizar tendencias.",
+                "Comparación de ratios clave para identificar oportunidades."
+            ]
+        },
+        "immobilier": {
+            "title": "Simule sus inversiones inmobiliarias",
+            "text": "Una herramienta completa para analizar la rentabilidad de sus proyectos inmobiliarios.",
+            "features": [
+                "Simulación de compra de inmuebles de ingresos.",
+                "Cálculo automático de flujo de caja y rentabilidad.",
+                "Teniendo en cuenta gastos, impuestos y amortización.",
+                "Proyección a 25 años del valor de su patrimonio."
+            ]
+        },
+        "performance": {
+            "title": "Mida el rendimiento de sus inversiones",
+            "text": "Analice sus ganancias y pérdidas con precisión en diferentes períodos.",
+            "features": [
+                "Cálculo del rendimiento simple y compuesto (CAGR).",
+                "Fácil comparación entre varios escenarios.",
+                "Visualización gráfica de la evolución del valor.",
+                "Comparación S&P 500 (Retorno Total y CAGR).",
+                "Consideración de fechas para un cálculo preciso."
+            ]
+        },
+        "projections": {
+            "title": "Planifique su futuro financiero",
+            "text": "Herramientas poderosas para proyectar su jubilación y metas de ahorro.",
+            "features": [
+                "Cálculo del valor futuro con interés compuesto.",
+                "Determinación del ahorro necesario para alcanzar una meta.",
+                "Simulación de desembolso (retiros periódicos).",
+                "Consideración de la inflación para resultados reales."
+            ]
+        },
+        "budget": {
+            "title": "Domine su Presupuesto",
+            "text": "Este módulo es el corazón de su gestión diaria. Le permite planificar a dónde va su dinero antes de gastarlo.",
+            "features": [
+                "Liste sus fuentes de ingresos (Salario, Dividendos, etc.).",
+                "Defina presupuestos precisos para cada categoría de gastos.",
+                "Visualice inmediatamente su Flujo de Caja (Restante para vivir).",
+                "Defina sus objetivos de ahorro automático."
+            ]
+        },
+        "plan": {
+            "title": "Su Plan de Reembolso",
+            "text": "Libérese de sus deudas gracias a una estrategia clara y optimizada. Este módulo le ayuda a retomar el control.",
+            "features": [
+                "Centralice todas sus deudas (Tarjetas, Préstamos, Hipotecas).",
+                "Compare estrategias (Avalancha vs Bola de Nieve) para ahorrar intereses.",
+                "Visualice su fecha de libertad financiera.",
+                "Simule el impacto de pagos acelerados."
+            ]
+        },
+        "investissement": {
+            "title": "Siga el rendimiento de su Cartera",
+            "text": "Este módulo centraliza todas sus inversiones para un análisis profundo de su rendimiento global.",
+            "features": [
+                "Visión general del valor actual y el rendimiento total.",
+                "Gráficos de distribución de activos y rendimiento (Burbujas).",
+                "Historial detallado de transacciones (Compra, Venta, Dividendos).",
+                "Configuración de fuentes de datos (AlphaVantage, Yahoo, Questrade)."
+            ]
+        },
+        "remboursement": {
+            "title": "Analice sus estrategias de Reembolso",
+            "text": "Este módulo le permite simular y comparar diferentes opciones de reembolso para sus deudas individuales.",
+            "features": [
+                "Simule una Hipoteca, un Préstamo de Auto o Personal.",
+                "Analice el impacto de los pagos acelerados en los intereses.",
+                "Calcule el tiempo necesario para pagar una Tarjeta de Crédito.",
+                "Visualice el costo total de los intereses para cada escenario."
+            ]
+        },
+        "dashboard": {
+            "title": "Bienvenido a su Tablero",
+            "text": "El tablero es su centro de comando financiero. Le da una visión general instantánea de su salud financiera.",
+            "features": [
+                "Visualice su Patrimonio Neto en tiempo real.",
+                "Siga la distribución de sus activos (efectivo, inversiones, inmobiliario).",
+                "Consulte el estado mensual de su presupuesto (Ingresos vs Gastos).",
+                "Acceso rápido a los módulos clave a través de atajos."
+            ]
+        }
+    },
+    "help_perf": {
+        "modal_title": "Entendiendo el Módulo de Depósitos y Rendimiento",
+        "modal_intro": "Este módulo le permite rastrear con precisión la rentabilidad real de sus inversiones teniendo en cuenta sus aportes y retiros.",
+        "tab_overview_title": "Visión General",
+        "tab_overview_desc": "Visualice un gráfico comparativo entre el dinero que puso de su bolsillo (Invertido) y el valor actual de su cartera. Muestra instantáneamente si está ganando o perdiendo.",
+        "tab_overview_example": "Si la línea verde (Valor) está por encima de la azul (Invertido), tiene ganancias. La brecha entre las dos representa su beneficio.",
+        "tab_deposits_title": "Gestionar Depósitos",
+        "tab_deposits_desc": "Aquí es donde registra cada cantidad de dinero que transfiere a sus cuentas de inversión. Es crucial para calcular su rendimiento real.",
+        "tab_deposits_example": "El 1 de enero, transferí $1000 de mi cuenta corriente a mi cuenta de inversión. Añado una entrada: 01/01/2024 | Inversión | $1000.",
+        "tab_journal_title": "Diario de Valor",
+        "tab_journal_desc": "Registre aquí el valor total de su cartera en fechas clave (ej: fin de mes). Es como tomar una foto de su saldo para ver la evolución en el tiempo.",
+        "tab_journal_example": "El 31 de enero, veo que mi cuenta vale $1050. Añado un registro: 31/01/2024 | $1050. El sistema calcula que gané $50."
     }
 }

@@ -1,4 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import axios from 'axios';
+import { Switch } from '@headlessui/react';
 import { useData } from '../context/DataContext';
 import { useTranslation } from 'react-i18next';
 import CurrencyInput from './CurrencyInput';
@@ -8,15 +10,19 @@ import {
     CategoryScale,
     LinearScale,
     BarElement,
+    PointElement,
+    LineElement,
     Title,
     Tooltip,
     Legend,
-    ArcElement
+    ArcElement,
+    Filler
 } from 'chart.js';
-import { Doughnut, Bar } from 'react-chartjs-2';
-import { XMarkIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { Doughnut, Bar, Line } from 'react-chartjs-2';
+import { XMarkIcon, PlusIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
+import IntroPerformance from './IntroPerformance';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, PointElement, LineElement, Filler);
 
 const STANDARD = {
     initial: '#7F8C8D',
@@ -214,11 +220,266 @@ function Performance({ currency = 'CAD' }) {
         }
     }
 
+
+    const [showBenchmark, setShowBenchmark] = useState(false);
+    const [benchmarkData, setBenchmarkData] = useState(null);
+    const [loadingBenchmark, setLoadingBenchmark] = useState(false);
+
+    // --- CORRECTION MAJEURE DU CHARGEMENT S&P 500 (Reset Automatique) ---
+    useEffect(() => {
+        // 1. Si la switch est fermée, on nettoie tout.
+        if (!showBenchmark) {
+            setBenchmarkData(null);
+            return;
+        }
+
+        // 2. RESET IMMÉDIAT : 
+        // Dès que l'utilisateur change une date, on efface les données (null).
+        // Cela force l'affichage à se remettre à zéro et évite de montrer des % erronés.
+        setBenchmarkData(null);
+
+        // Si dates invalides, on arrête là.
+        if (!currentScenario.startDate || !currentScenario.endDate) return;
+
+        // 3. TEMPORISATION (Debounce) :
+        // On attend 500ms avant de charger. Si l'utilisateur change encore la date, ce timer est annulé.
+        const timeoutId = setTimeout(async () => {
+            setLoadingBenchmark(true);
+            try {
+                const response = await axios.get('/api/yahoo/history', {
+                    params: {
+                        symbol: '^GSPC', // S&P 500
+                        from: currentScenario.startDate,
+                        to: currentScenario.endDate
+                    }
+                });
+
+                if (response.data && Array.isArray(response.data)) {
+                    setBenchmarkData({
+                        data: response.data,
+                        startDate: currentScenario.startDate,
+                        endDate: currentScenario.endDate
+                    });
+                }
+            } catch (error) {
+                console.error("Erreur chargement S&P 500:", error);
+            } finally {
+                setLoadingBenchmark(false);
+            }
+        }, 500); // 500ms de délai
+
+        // Nettoyage si changement rapide
+        return () => clearTimeout(timeoutId);
+
+    }, [showBenchmark, currentScenario.startDate, currentScenario.endDate]);
+
+
+    // --- LOGIQUE DE SIMULATION OU RÉELLE S&P 500 ---
+    const comparisonData = useMemo(() => {
+        if (!results || !results.initialVal || !results.finalVal) return null;
+
+        const { initialVal, finalVal } = results;
+        const start = parseLocalDate(currentScenario.startDate);
+        const end = parseLocalDate(currentScenario.endDate);
+
+        if (!start || !end || end <= start) return null;
+
+        const oneDay = 24 * 60 * 60 * 1000;
+        const totalDays = Math.round(Math.abs((end - start) / oneDay));
+
+        // Générer des points (max 50 pour la performance)
+        const steps = Math.min(totalDays, 50);
+        const stepSize = totalDays / steps;
+
+        const labels = [];
+        const userData = [];
+        const sp500Data = [];
+
+        // MODE RÉEL : Si on a les données historiques
+        const isRealMode = (showBenchmark && benchmarkData && benchmarkData.data && benchmarkData.data.length > 0);
+
+        if (isRealMode) {
+            const history = benchmarkData.data;
+            const startSP = history[0].close; // Index de départ pour rebaser
+
+            // On utilise les dates du marché comme référence
+            history.forEach(point => {
+                // 1. Date (Label)
+                const dateObj = new Date(point.date); // "YYYY-MM-DD" parsable directement
+                // Ajuster le fuseau horaire pour éviter le décalage (astuce locale)
+                const userTimezoneOffset = dateObj.getTimezoneOffset() * 60000;
+                const adjustedDate = new Date(dateObj.getTime() + userTimezoneOffset);
+
+                labels.push(adjustedDate.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }));
+
+                // 2. S&P 500 Rebasé (Si j'avais investi montant Initial dans le S&P)
+                // Formule: (ValeurActuelle / ValeurDepart) * MonInvestissementInitial
+                const spRebased = (point.close / startSP) * initialVal;
+                sp500Data.push(spRebased);
+
+                // 3. Mon Portefeuille (Interpolé sur cette date précise)
+                // Calcul du progrès temporel exact (0 à 1)
+                const currentDays = (dateObj - start) / oneDay;
+                const progress = Math.max(0, Math.min(1, currentDays / totalDays)); // Clamp 0-1
+
+                const userVal = initialVal + ((finalVal - initialVal) * progress);
+                userData.push(userVal);
+            });
+        }
+        // MODE SIMULATION (Fallback ou Défaut)
+        else {
+            // Taux annuel S&P 500 (~10.5%) -> Taux journalier (Fallback)
+            const SP500_CAGR = 0.105;
+            const dailyRate = Math.pow(1 + SP500_CAGR, 1 / 365.25) - 1;
+
+            // Croissance Utilisateur (Linéaire pour la démo)
+            const userTotalGrowth = finalVal - initialVal;
+
+            for (let i = 0; i <= steps; i++) {
+                const currentDayIndex = i * stepSize;
+                const currentDate = new Date(start.getTime() + (currentDayIndex * oneDay));
+
+                labels.push(currentDate.toLocaleDateString(undefined, { year: 'numeric', month: 'short' }));
+
+                const progress = currentDayIndex / totalDays;
+                const userVal = initialVal + (userTotalGrowth * progress);
+                userData.push(userVal);
+
+                const spVal = initialVal * Math.pow(1 + dailyRate, currentDayIndex);
+                sp500Data.push(spVal);
+            }
+        }
+
+        const createGradient = (ctx, colorStart, colorEnd) => {
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, colorStart);
+            gradient.addColorStop(1, colorEnd);
+            return gradient;
+        };
+
+        return {
+            labels,
+            datasets: [
+                {
+                    label: t('performance.my_portfolio') || "Mon Portefeuille",
+                    data: userData,
+                    borderColor: '#2ECC71', // GREEN (was BLUE)
+                    backgroundColor: (context) => {
+                        const ctx = context.chart.ctx;
+                        const area = context.chart.chartArea;
+                        if (!area) return 'rgba(46, 204, 113, 0.1)';
+                        // Gradient vertical du bas vers le haut
+                        const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+                        gradient.addColorStop(0, 'rgba(46, 204, 113, 0.0)'); // Transparent en bas
+                        gradient.addColorStop(1, 'rgba(46, 204, 113, 0.5)'); // Plus visible en haut
+                        return gradient;
+                    },
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 1,             // Smaller points
+                    pointHoverRadius: 6,
+                    pointBackgroundColor: '#2ECC71',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    borderWidth: 3
+                },
+                {
+                    // UPDATED LABEL: Uses isRealMode for consistency
+                    label: isRealMode ? (t('performance.legend_sp500_real') || "S&P 500 (Total Return - Historique Réel)") : (t('performance.legend_sp500_simulated') || "S&P 500 (Total Return - Simulé 10.5%)"),
+                    data: sp500Data,
+                    borderColor: '#95A5A6',
+                    backgroundColor: 'rgba(149, 165, 166, 0.05)',
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    fill: false,
+                    pointRadius: 0,
+                    pointHoverRadius: 4,
+                    borderWidth: 2
+                }
+            ]
+        };
+
+    }, [results, benchmarkData, showBenchmark, currentScenario, t]);
+
+
+
+    const [showIntro, setShowIntro] = useState(false);
+
+    useEffect(() => {
+        const hasSeenIntro = localStorage.getItem('nexus_intro_performance_seen');
+        if (!hasSeenIntro) {
+            setShowIntro(true);
+        }
+    }, []);
+
+    // --- CALCULS POUR L'AFFICHAGE DU BADGE (Start/End Values & CAGR) ---
+    let spBadgeContent = null;
+    let spBadgeColor = '#95A5A6';
+    let spBadgeBg = 'rgba(149, 165, 166, 0.1)';
+    let spBadgeBorder = '#95A5A6';
+
+    if (!loadingBenchmark && showBenchmark && benchmarkData && benchmarkData.data && benchmarkData.data.length > 0) {
+        const startPrice = benchmarkData.data[0].close;
+        const endPrice = benchmarkData.data[benchmarkData.data.length - 1].close;
+
+        // 1. Total Return
+        const percentChange = ((endPrice - startPrice) / startPrice) * 100;
+
+        // 2. CAGR Calculation
+        const startDateObj = new Date(currentScenario.startDate);
+        const endDateObj = new Date(currentScenario.endDate);
+        const daysDiff = (endDateObj - startDateObj) / (1000 * 60 * 60 * 24);
+        const years = daysDiff / 365.25;
+
+        let cagrVal = 0;
+        if (years > 0 && startPrice > 0) {
+            cagrVal = (Math.pow(endPrice / startPrice, 1 / years) - 1) * 100;
+        }
+
+        const isPositive = percentChange >= 0;
+
+        spBadgeColor = isPositive ? '#27ae60' : '#c0392b';
+        spBadgeBg = isPositive ? 'rgba(39, 174, 96, 0.1)' : 'rgba(192, 57, 43, 0.1)';
+        spBadgeBorder = isPositive ? '#27ae60' : '#c0392b';
+
+        // Construction du texte
+        spBadgeContent = (
+            <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <span>S&P 500: {formatCurrency(startPrice)} → {formatCurrency(endPrice)}</span>
+                <span style={{ fontWeight: 'bold' }}>Total: {percentChange.toFixed(2)}%</span>
+                <span style={{ fontSize: '0.9em', opacity: 0.9 }}>|</span>
+                <span style={{ fontWeight: 'bold' }}>CAGR: {cagrVal.toFixed(2)}%</span>
+            </span>
+        );
+    }
+
     return (
         <div className="printable-content" style={{ display: 'block' }}>
-            <div className="module-header-with-reset">
-                <h2>{t('performance.title')}</h2>
+            <div className="module-header-with-reset" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+                <h2 style={{ margin: 0 }}>{t('performance.title')}</h2>
+                <button
+                    onClick={() => setShowIntro(true)}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        color: '#9ca3af',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        transition: 'color 0.2s',
+                        padding: '4px',
+                        borderRadius: '50%'
+                    }}
+                    onMouseOver={(e) => e.currentTarget.style.color = '#3b82f6'}
+                    onMouseOut={(e) => e.currentTarget.style.color = '#9ca3af'}
+                    title={t('common.help') || "Introduction"}
+                >
+                    <InformationCircleIcon style={{ width: '24px', height: '24px' }} />
+                </button>
             </div>
+
+            <IntroPerformance isOpen={showIntro} onClose={() => setShowIntro(false)} />
 
             <ScenarioTabs
                 scenarios={scenarios}
@@ -261,7 +522,6 @@ function Performance({ currency = 'CAD' }) {
                             type="date"
                             value={currentScenario.startDate}
                             onChange={(e) => updateField('startDate', e.target.value)}
-                            // AJOUT ICI : Sélection automatique 
                             onFocus={(e) => e.target.select()}
                             style={{ padding: '10px', borderRadius: '6px', border: '1px solid var(--border-color)', width: '100%' }}
                         />
@@ -274,7 +534,6 @@ function Performance({ currency = 'CAD' }) {
                             type="date"
                             value={currentScenario.endDate}
                             onChange={(e) => updateField('endDate', e.target.value)}
-                            // AJOUT ICI : Sélection automatique
                             onFocus={(e) => e.target.select()}
                             style={{ padding: '10px', borderRadius: '6px', border: '1px solid var(--border-color)', width: '100%' }}
                         />
@@ -341,28 +600,139 @@ function Performance({ currency = 'CAD' }) {
                         </div>
                     </div>
 
-                    <div className="chart-container" style={{ marginTop: '20px', height: '400px', background: 'var(--card-background)', padding: '25px', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-                        <h3 style={{ marginTop: 0, marginBottom: '20px', color: 'var(--secondary-color)', textAlign: 'center' }}>{t('performance.evolution')}</h3>
-                        <div style={{ height: '300px', width: '100%' }}>
-                            <Bar
-                                data={barData}
-                                options={{
-                                    responsive: true,
-                                    maintainAspectRatio: false,
-                                    plugins: {
-                                        legend: { display: false },
-                                        title: { display: false },
-                                        tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${formatCurrency(c.raw)}` } }
-                                    },
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true,
-                                            ticks: { callback: (v) => formatCurrency(v) }
-                                        }
-                                    }
-                                }}
-                            />
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '10px', gap: '15px' }}>
+                        {loadingBenchmark && <span style={{ fontSize: '0.9rem', color: '#7F8C8D', fontStyle: 'italic' }}>{t('common.loading')}</span>}
+
+                        {!loadingBenchmark && spBadgeContent && (
+                            <div style={{
+                                display: 'inline-block',
+                                padding: '5px 12px',
+                                borderRadius: '15px',
+                                fontSize: '0.85rem',
+                                color: spBadgeColor,
+                                backgroundColor: spBadgeBg,
+                                border: `1px solid ${spBadgeBorder}`,
+                                fontWeight: '500'
+                            }}>
+                                {spBadgeContent}
+                            </div>
+                        )}
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginRight: '10px' }}>
+                            <span style={{ fontSize: '0.95rem', fontWeight: '500', color: 'var(--text-color)' }}>{t('performance.compare_sp500')}</span>
+                            <Switch
+                                checked={showBenchmark}
+                                onChange={setShowBenchmark}
+                                className={`${showBenchmark ? 'bg-emerald-500 border-emerald-500' : 'bg-gray-400 border-gray-400'} border relative inline-flex h-6 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2`}
+                                style={{ backgroundColor: showBenchmark ? '#10B981' : '#9CA3AF', minWidth: '36px', height: '24px', position: 'relative', display: 'inline-flex', alignItems: 'center', borderRadius: '9999px', border: showBenchmark ? '1px solid #10B981' : '1px solid #9CA3AF' }}
+                            >
+                                <span
+                                    className={`${showBenchmark ? 'translate-x-5' : 'translate-x-0.5'} inline-block h-4 w-4 transform rounded-full bg-white transition-transform`}
+                                    style={{ width: '16px', height: '16px', backgroundColor: '#fff', borderRadius: '50%', transform: showBenchmark ? 'translateX(18px)' : 'translateX(2px)', transition: 'transform 0.2s', display: 'inline-block' }}
+                                />
+                            </Switch>
                         </div>
+                    </div>
+
+                    <div className="chart-container" style={{
+                        marginTop: '0px',
+                        height: '400px',
+                        // DARK THEME applied here to match "Investissement > Vue d'ensemble"
+                        backgroundColor: '#13131F',
+                        padding: '25px',
+                        borderRadius: '12px',
+                        border: '1px solid #2A2A35',
+                        boxShadow: 'inset 0 0 20px rgba(0,0,0,0.5)'
+                    }}>
+                        <div style={{ marginBottom: '20px' }}>
+                            <h3 style={{ margin: 0, color: 'var(--secondary-color)' }}>{t('performance.evolution') || "Évolution de l'investissement"}</h3>
+                        </div>
+
+                        {!loadingBenchmark && showBenchmark && !benchmarkData && (
+                            <div style={{ fontSize: '0.8rem', color: '#E67E22', marginBottom: '10px', textAlign: 'right', fontStyle: 'italic' }}>
+                                {t('performance.benchmark_disclaimer')}
+                            </div>
+                        )}
+                        {!loadingBenchmark && showBenchmark && benchmarkData && (
+                            <div style={{ fontSize: '0.8rem', color: '#27ae60', marginBottom: '10px', textAlign: 'right', fontStyle: 'italic' }}>
+                                {t('performance.real_data_disclaimer')}
+                            </div>
+                        )}
+
+                        <div style={{ height: '320px', position: 'relative' }}>
+                            {comparisonData ? (
+                                <Line
+                                    data={comparisonData}
+                                    options={{
+                                        layout: {
+                                            padding: {
+                                                bottom: 40,
+                                                left: 10,
+                                                right: 15
+                                            }
+                                        },
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        interaction: {
+                                            mode: 'nearest',
+                                            axis: 'x',
+                                            intersect: false
+                                        },
+                                        plugins: {
+                                            legend: {
+                                                position: 'top',
+                                                align: 'end',
+                                                labels: {
+                                                    usePointStyle: true,
+                                                    boxWidth: 8,
+                                                    color: '#FFFFFF' // WHITE Text for Dark Mode
+                                                }
+                                            },
+                                            title: { display: false },
+                                            tooltip: {
+                                                mode: 'index',
+                                                intersect: false,
+                                                backgroundColor: 'rgba(20, 20, 30, 0.5)', // Dark tooltip
+                                                titleColor: '#FFFFFF',
+                                                bodyColor: '#FFFFFF',
+                                                borderColor: 'var(--border-color)',
+                                                borderWidth: 1,
+                                                padding: 10,
+                                                callbacks: {
+                                                    label: (ctx) => `${ctx.dataset.label}: ${formatCurrency(ctx.raw)}`
+                                                }
+                                            }
+                                        },
+                                        scales: {
+                                            x: {
+                                                grid: { display: false, drawBorder: false },
+                                                ticks: {
+                                                    maxTicksLimit: 8,
+                                                    color: '#FFFFFF' // WHITE Text
+                                                }
+                                            },
+                                            y: {
+                                                grid: {
+                                                    color: 'rgba(255, 255, 255, 0.1)', // Light grid
+                                                    borderDash: [5, 5]
+                                                },
+                                                grace: '5%', // Add padding at bottom/top
+                                                ticks: {
+                                                    callback: (v) => formatCurrency(v, 0),
+                                                    color: '#FFFFFF' // WHITE Text
+                                                },
+                                                border: { display: false }
+                                            }
+                                        }
+                                    }}
+                                />
+                            ) : (
+                                <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--secondary-color)' }}>
+                                    {t('performance.warning_min_duration')}
+                                </div>
+                            )}
+                        </div>
+
                     </div>
                 </div>
             )}

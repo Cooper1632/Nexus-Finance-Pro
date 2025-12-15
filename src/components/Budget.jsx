@@ -6,8 +6,9 @@ import ScenarioTabs from './ScenarioTabs';
 import ScenarioChoiceModal from './ScenarioChoiceModal'; // <-- IMPORT DU NOUVEAU MODAL
 import {
     TrashIcon, Bars3Icon, PlusIcon, QuestionMarkCircleIcon,
-    ArrowPathIcon, CalendarIcon, ExclamationTriangleIcon
+    ArrowPathIcon, CalendarIcon, ExclamationTriangleIcon, InformationCircleIcon
 } from '@heroicons/react/24/outline';
+import IntroBudget from './IntroBudget';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, RadialLinearScale } from 'chart.js';
 import { Bar, PolarArea } from 'react-chartjs-2';
 
@@ -57,6 +58,14 @@ function Budget() {
     const [scenarios, setScenarios] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
     const [showScenarioModal, setShowScenarioModal] = useState(false);
+    const [showIntro, setShowIntro] = useState(false);
+
+    useEffect(() => {
+        const hasSeenIntro = localStorage.getItem('nexus_intro_budget_seen');
+        if (!hasSeenIntro) {
+            setShowIntro(true);
+        }
+    }, []);
 
     useEffect(() => {
         if (appState.budgetScenarios && appState.budgetScenarios.length > 0) {
@@ -231,7 +240,27 @@ function Budget() {
     return (
         <div className="printable-content" style={{ display: 'block' }}>
             <div className="budget-container" style={{ width: '100%' }}>
-                <div className="module-header-with-reset" style={{ marginBottom: '20px' }}><h2>{t('budget.title')}</h2></div>
+                <div className="module-header-with-reset" style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <h2 style={{ margin: 0 }}>{t('budget.title')}</h2>
+                    <button
+                        onClick={() => setShowIntro(true)}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            color: '#9ca3af',
+                            display: 'flex',
+                            alignItems: 'center',
+                            transition: 'color 0.2s',
+                            padding: '4px'
+                        }}
+                        onMouseOver={(e) => e.currentTarget.style.color = '#3b82f6'}
+                        onMouseOut={(e) => e.currentTarget.style.color = '#9ca3af'}
+                        title="Voir l'introduction"
+                    >
+                        <InformationCircleIcon style={{ width: '24px', height: '24px' }} />
+                    </button>
+                </div>
 
                 <ScenarioTabs
                     scenarios={scenarios}
@@ -375,6 +404,11 @@ function Budget() {
                     isOpen={showScenarioModal}
                     onClose={() => setShowScenarioModal(false)}
                     onConfirm={confirmAddScenario}
+                />
+
+                <IntroBudget
+                    isOpen={showIntro}
+                    onClose={() => setShowIntro(false)}
                 />
 
             </div>

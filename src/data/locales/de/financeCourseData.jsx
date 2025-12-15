@@ -10,34 +10,34 @@ const pastelColors = [
 
 export const comparisonRatios = [
     {
-        id: 1, title: "1. Kurs-Gewinn-Verhältnis (KGV)", color: pastelColors[0],
+        id: 1, title: "1. KGV (Kurs-Gewinn-Verhältnis)", color: pastelColors[0],
         biz: {
-            formula: "Preis / Gewinn pro Aktie (EPS)",
-            desc: "Wie viel Sie für 1$ Gewinn zahlen. Zeigt an, ob die Aktie teuer (Wachstum) oder billig (Wert) ist.",
+            formula: "Preis / Gewinn je Aktie (EPS)",
+            desc: "Wieviel Sie für 1€ Gewinn zahlen. Zeigt ob Aktie teuer (Wachstum) oder billig (Value) ist.",
             targetIcon: <ArrowTrendingDownIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Niedriger = Besser (für Value)",
-            example: "100$ (Preis) / 5$ (EPS) = 20x"
+            example: "100€ (Preis) / 5€ (EPS) = 20x"
         },
         fam: {
             title: "Familien-Kaufpreis",
-            desc: "Stellen Sie sich vor, jemand möchte Ihre Familie 'kaufen'. Wenn Sie 10k pro Jahr sparen und man Sie für 200k kauft, ist das KGV 20.",
+            desc: "Stell dir vor, man kauft deine Familie. Wenn du 10k/Jahr sparst und jemand kauft dich für 200k, ist das KGV 20.",
             targetIcon: <ArrowTrendingDownIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Niedriger = Besser",
-            example: "200.000$ / 10.000$ = 20x"
+            example: "200.000€ / 10.000€ = 20x"
         }
     },
     {
         id: 2, title: "2. Wachstum (CAGR)", color: pastelColors[1],
         biz: {
-            formula: "((Endwert / Anfangswert)^(1/n)) - 1",
-            desc: "Geschwindigkeit, mit der das Unternehmen seine Gewinne oder Umsätze jedes Jahr steigert.",
+            formula: "((Ende / Start)^(1/n)) - 1",
+            desc: "Geschwindigkeit, mit der Firma Gewinne steigert.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Höher = Besser",
             example: "((120 / 100)^(1/1)) - 1 = 20%"
         },
         fam: {
             title: "Gehaltserhöhung",
-            desc: "Ihre jährliche Gehaltserhöhung. Wenn Sie von 50k auf 55k steigen, haben Sie ein Wachstum von 10%.",
+            desc: "Deine jährliche Erhöhung. Von 50k auf 55k sind 10% Wachstum.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Höher = Besser",
             example: "(55k - 50k) / 50k = 10%"
@@ -47,201 +47,202 @@ export const comparisonRatios = [
         id: 3, title: "3. Nettomarge (%)", color: pastelColors[2],
         biz: {
             formula: "Nettogewinn / Umsatz",
-            desc: "% jedes Dollars, der nach allen Ausgaben in der Tasche des Unternehmens bleibt.",
+            desc: "% von jedem Euro Umsatz, der in der Tasche bleibt.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Höher = Besser",
-            example: "10.000$ / 100.000$ = 10%"
+            example: "10.000€ / 100.000€ = 10%"
         },
         fam: {
-            title: "Sparquote",
-            desc: "Ihre Sparquote. Wenn Sie 4000$ verdienen und 400$ sparen, beträgt Ihre Marge 10%.",
+            title: "Sparrate",
+            desc: "Deine Sparrate. Wenn du 4000 verdienst und 400 sparst, ist deine Marge 10%.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Höher = Besser",
-            example: "400$ / 4000$ = 10%"
+            example: "400 / 4000 = 10%"
         }
     },
     {
-        id: 4, title: "4. Verschuldungsgrad", color: pastelColors[3],
+        id: 4, title: "4. Schulden / Eigenkapital", color: pastelColors[3],
         biz: {
             formula: "Gesamtschulden / Eigenkapital",
-            desc: "Schuldenstand. Wenn > 1,0, schuldet das Unternehmen mehr Geld, als es auf dem Papier wert ist.",
+            desc: "Hebel-Level. Wenn > 1.0, schuldet Firma mehr als ihr Buchwert.",
             targetIcon: <ArrowTrendingDownIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Niedriger = Besser (< 1.0)",
-            example: "200k$ / 100k$ = 2.0 (Riskant)"
+            example: "200k / 100k = 2.0 (Riskant)"
         },
         fam: {
-            title: "Schuldenquote",
-            desc: "(Hypothek + Kreditkarte) / Ihr Nettovermögen.",
+            title: "Verschuldungsgrad",
+            desc: "(Hypothek + Kredit) / Nettovermögen.",
             targetIcon: <ArrowTrendingDownIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Niedriger = Besser",
-            example: "300k$ (Schulden) / 100k$ (Netto) = 3.0"
+            example: "300k (Schulden) / 100k (Netto) = 3.0"
         }
     },
     {
         id: 5, title: "5. Eigenkapitalrendite (ROE)", color: pastelColors[4],
         biz: {
             formula: "Nettogewinn / Eigenkapital",
-            desc: "Effizienz des Managements bei der Erzielung von Gewinnen mit dem Geld der Aktionäre.",
+            desc: "Effizienz des Managements mit Aktionärsgeld.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Höher = Besser (> 15%)",
-            example: "15$ / 100$ = 15%"
+            example: "15 / 100 = 15%"
         },
         fam: {
-            title: "Investitionseffizienz",
-            desc: "Wenn Sie 100k Nettovermögen haben und es 10k Gewinne/Zinsen generiert, beträgt Ihr ROE 10%.",
+            title: "Investment-Effizienz",
+            desc: "Wenn du 100k Nettovermögen hast und 10k Gewinn machst, ist dein ROE 10%.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Höher = Besser",
-            example: "10.000$ / 100.000$ = 10%"
+            example: "10.000 / 100.000 = 10%"
         }
     },
     {
-        id: 6, title: "6. Liquiditätsgrad (Current Ratio)", color: pastelColors[5],
+        id: 6, title: "6. Liquidität (Current Ratio)", color: pastelColors[5],
         biz: {
-            formula: "Umlaufvermögen / Kurzfr. Verbindlichkeiten",
-            desc: "Fähigkeit, sofortige Rechnungen zu bezahlen. Wenn < 1,0, Gefahr von Liquiditätsengpässen.",
+            formula: "Umlaufvermögen / Kurzfr. Verb.",
+            desc: "Fähigkeit Rechnungen zu zahlen. Wenn < 1.0, Insolvenzgefahr.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Höher = Besser (> 1.5)",
-            example: "200k$ / 100k$ = 2.0"
+            example: "200k / 100k = 2.0"
         },
         fam: {
-            title: "Abdeckung durch Notgroschen",
-            desc: "Ihr Notgroschen / Ihre monatlichen Rechnungen.",
+            title: "Notgroschen-Deckung",
+            desc: "Dein Notgroschen / Monatliche Rechnungen.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
-            targetText: "Höher = Besser (Sicherheit)",
-            example: "5000$ / 2500$ = 2.0"
+            targetText: "Höher = Besser",
+            example: "5000 / 2500 = 2.0"
         }
     },
     {
         id: 7, title: "7. Dividendenrendite (%)", color: pastelColors[6],
         biz: {
-            formula: "Jährliche Dividende / Aktienkurs",
-            desc: "Die Barrendite der Investition, die vom Unternehmen gezahlt wird.",
+            formula: "Jahresdividende / Aktienpreis",
+            desc: "Bar-Rendite ausgezahlt von Firma.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Höher = Besser (Max 10-12%)",
-            example: "4$ / 100$ = 4%"
+            example: "4 / 100 = 4%"
         },
         fam: {
             title: "Taschengeld",
-            desc: "Das Taschengeld, das Sie sich aus Ihren Investitionen für Spaß auszahlen.",
+            desc: "Geld, das du dir selbst zum Spaß auszahlst statt zu reinvestieren.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Höher = Mehr Freiheit",
-            example: "50$ (Erhalten) / 1000$ (Investiert) = 5%"
+            example: "50 (Erhalten) / 1000 (Investiert) = 5%"
         }
     },
     {
         id: 8, title: "8. Bruttomarge", color: pastelColors[7],
         biz: {
-            formula: "(Umsatz - Herstellkosten) / Umsatz",
-            desc: "Grundlegende Rentabilität vor Zahlung von Büros, Werbung und Steuern.",
+            formula: "(Umsatz - COGS) / Umsatz",
+            desc: "Basis-Profitabilität vor Büros, Werbung und Steuern.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Höher = Besser",
             example: "(100 - 60) / 100 = 40%"
         },
         fam: {
-            title: "Burn Rate",
-            desc: "Lebenswichtige monatliche Ausgaben (Miete + Essen). Wie viele Monate überleben Sie ohne Einkommen?",
+            title: "Überlebensrate",
+            desc: "Vitale Ausgaben (Miete + Essen). Wieviele Monate überlebst du ohne Einkommen?",
             targetIcon: <ArrowTrendingDownIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Niedriger = Besser (Ausgaben)",
-            example: "2000$ / Monat (Vitale Ausgaben)"
+            example: "2000 / Monat (Vital)"
         }
     },
     {
-        id: 9, title: "9. Kurs-Umsatz-Verhältnis (KUV)", color: pastelColors[8],
+        id: 9, title: "9. Kurs-Umsatz (KUV)", color: pastelColors[8],
         biz: {
-            formula: "Marktkapitalisierung / Umsatz",
-            desc: "Wird verwendet, um Unternehmen ohne Gewinn zu bewerten. Vergleicht den Marktwert mit dem Umsatzvolumen.",
+            formula: "Marktkap. / Umsatz",
+            desc: "Genutzt für unprofitables. Vergleicht Marktwert mit Umsatzvolumen.",
             targetIcon: <ArrowTrendingDownIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Niedriger = Besser",
-            example: "1M$ / 500k$ = 2.0x"
+            example: "1M / 500k = 2.0x"
         },
         fam: {
-            title: "ROI (Return on Investment)",
-            desc: "20k$ in eine Küche investieren, die den Hauswert um 30k$ steigert.",
+            title: "ROI (Renovierung)",
+            desc: "20k in eine Küche stecken, die den Hauswert um 30k steigert.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Höher = Besser",
             example: "(30k - 20k) / 20k = 50%"
         }
     },
     {
-        id: 10, title: "10. Kurs-Cashflow-Verhältnis (KCV)", color: pastelColors[9],
+        id: 10, title: "10. Kurs-Cashflow (KCV)", color: pastelColors[9],
         biz: {
-            formula: "Preis / Cashflow pro Aktie",
-            desc: "Oft zuverlässiger als KGV. Zeigt die tatsächliche Fähigkeit des Unternehmens an, Bargeld zu generieren.",
+            formula: "Preis / Cashflow je Aktie",
+            desc: "Oft verlässlicher als KGV. Zeigt echte Geldgenerierung.",
             targetIcon: <ArrowTrendingDownIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Niedriger = Besser",
-            example: "100$ / 10$ = 10x"
+            example: "100 / 10 = 10x"
         },
         fam: {
-            title: "Betriebskapital (Working Capital)",
-            desc: "Ihr finanzielles Polster: Girokonto + Verfügbares Sparguthaben MINUS kommende Rechnungen.",
+            title: "Betriebskapital",
+            desc: "Finanzpolster: Konto + Sparbuch MINUS kommende Rechnungen.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Höher = Besser (Positiv)",
-            example: "2000$ (Bank) - 1500$ (Rechnungen) = +500$"
+            example: "2000 (Bank) - 1500 (Rechnung) = +500"
         }
     },
     {
-        id: 11, title: "11. Verschuldungsgrad (Debt/Assets)", color: pastelColors[10],
+        id: 11, title: "11. Schulden / Gesamtvermögen", color: pastelColors[10],
         biz: {
             formula: "Gesamtschulden / Gesamtvermögen",
-            desc: "Welcher Teil des Unternehmens ist durch die Bank finanziert?",
+            desc: "Welcher Teil der Firma ist von der Bank finanziert?",
             targetIcon: <ArrowTrendingDownIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Niedriger = Besser",
-            example: "400k$ / 1M$ = 0.4"
+            example: "400k / 1M = 0.4"
         },
         fam: {
             title: "Freier Cashflow",
-            desc: "Ihr Sparguthaben MINUS obligatorische Hausreparaturen. Das ist das echte verfügbare Geld.",
+            desc: "Ersparnisse MINUS nötige Hausreparaturen. Das real verfügbare Geld.",
             targetIcon: <ArrowTrendingUpIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Höher = Besser",
-            example: "5000$ (Sparen) - 2000$ (Dach) = 3000$"
+            example: "5000 (Sparen) - 2000 (Dach) = 3000"
         }
     },
     {
         id: 12, title: "12. Ausschüttungsquote", color: pastelColors[11],
         biz: {
-            formula: "Gezahlte Dividenden / Nettogewinn",
-            desc: "Der Anteil des Gewinns, der an die Aktionäre zurückgegeben wird. Wenn > 80%, ist die Dividende möglicherweise gefährdet.",
+            formula: "Gezahlte Div. / Nettogewinn",
+            desc: "Anteil des Gewinns an Aktionäre. Wenn > 80%, Dividende in Gefahr.",
             targetIcon: <ArrowTrendingDownIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
             targetText: "Niedriger = Besser (Nachhaltig)",
-            example: "2$ (Div) / 4$ (EPS) = 50%"
+            example: "2 (Div) / 4 (EPS) = 50%"
         },
         fam: {
-            title: "Persönliche Ausgabenquote",
-            desc: "% Ihres Überschusses, den Sie für Spaß (Restaurants) verwenden, anstatt zu reinvestieren.",
+            title: "Persönliche Spaß-Quote",
+            desc: "% des Überschusses für Spaß (Restaurants) statt Reinvestition.",
             targetIcon: <ArrowTrendingDownIcon style={{ width: '16px', color: 'var(--success-color)' }} />,
-            targetText: "Niedriger = Besser (Zukünftiger Reichtum)",
-            example: "400$ (Restos) / 1000$ (Überschuss) = 40%"
+            targetText: "Niedriger = Besser (Zukunft)",
+            example: "400 (Spaß) / 1000 (Überschuss) = 40%"
         }
     }
 ];
 
 export const financeCourseData = {
     sidebar: {
-        title: "Finanz 101 Leitfaden",
-        subtitle: "Persönliche Finanzen von A bis Z meistern",
+        title: "Finanz 101 Handbuch",
+        subtitle: "Persönliche Finanzen von A bis Z",
         parts: [
-            { title: "Einführung", items: [{ id: 'intro', label: 'Warum dieser Leitfaden?' }] },
-            { title: "Teil 1: Die Grundlagen", items: [{ id: 'chap1', label: "1. Die richtige Denkweise" }, { id: 'chap2', label: "2. Das Budget, Ihr GPS" }, { id: 'chap3', label: "3. Vermögenswerte vs. Verbindlichkeiten" }, { id: 'chap4', label: "4. Der Notgroschen" }, { id: 'chap5', label: "5. Schulden verwalten" }] },
-            { title: "Teil 2: Investieren", items: [{ id: 'chap6', label: "6. Warum investieren?" }, { id: 'chap7', label: "7. Der Zinseszins" }, { id: 'chap8', label: "8. Risiko/Rendite" }, { id: 'chap9', label: "9. Anlagearten" }, { id: 'chap10', label: "10. Kontoarten" }] },
-            { title: "Teil 3: Die Börse im Detail", items: [{ id: 'chap11', label: "11. Die Aktie" }, { id: 'chap12', label: "12. Fundamentalanalyse" }, { id: 'chap13', label: "13. Kennzahlen" }, { id: 'chap14', label: "14. Dividenden" }, { id: 'chap15', label: "15. Portfolio aufbauen" }, { id: 'chap16', label: "16. Psychologie" }] },
-            { title: "Teil 4: Ihre Ziele", items: [{ id: 'chap17', label: "17. Ziele" }, { id: 'chap18', label: "18. Ruhestand" }] },
-            { title: "Teil 5: Fortgeschrittene Strategien", items: [{ id: 'chap19', label: "19. Fund. vs Tech." }, { id: 'chap20', label: "20. Börsenaufträge" }, { id: 'chap21', label: "21. Besteuerung" }, { id: 'chap22', label: "22. Rebalancing" }, { id: 'chap23', label: "23. Psychologische Fallen" }] },
+            { title: "Einführung", items: [{ id: 'intro', label: 'Warum dieses Buch?' }] },
+            { title: "Teil 1: Grundlagen", items: [{ id: 'chap1', label: "1. Denkweise" }, { id: 'chap2', label: "2. Budget (GPS)" }, { id: 'chap3', label: "3. Aktiva vs Passiva" }, { id: 'chap4', label: "4. Notgroschen" }, { id: 'chap5', label: "5. Schuldenmanagement" }] },
+            { title: "Teil 2: Investieren", items: [{ id: 'chap6', label: "6. Warum investieren?" }, { id: 'chap7', label: "7. Zinseszins" }, { id: 'chap8', label: "8. Risiko/Rendite" }, { id: 'chap9', label: "9. Anlageklassen" }, { id: 'chap10', label: "10. Kontotypen" }] },
+            { title: "Teil 3: Börse", items: [{ id: 'chap11', label: "11. Die Aktie" }, { id: 'chap12', label: "12. Fundamentalanalyse" }, { id: 'chap13', label: "13. Kennzahlen" }, { id: 'chap14', label: "14. Dividenden" }, { id: 'chap15', label: "15. Portfoliobau" }, { id: 'chap16', label: "16. Psychologie" }] },
+            { title: "Teil 4: Ziele", items: [{ id: 'chap17', label: "17. Ziele" }, { id: 'chap18', label: "18. Ruhestand" }] },
+            { title: "Teil 5: Fortgeschritten", items: [{ id: 'chap19', label: "19. Fund. vs Tech." }, { id: 'chap20', label: "20. Ordertypen" }, { id: 'chap21', label: "21. Steuern (GAK)" }, { id: 'chap22', label: "22. Rebalancing" }, { id: 'chap23', label: "23. Psychofallen" }] },
             { title: "Anhang", items: [{ id: 'chap24', label: "24. Glossar" }, { id: 'bonus_psych', label: "Bonus: Psychologie" }] }
         ]
     },
     sections: {
         intro: {
             id: 'intro',
-            title: "Einführung: Warum dieser Leitfaden?",
+            title: "Einführung: Warum dieses Handbuch?",
             content: [
-                { type: 'p', text: "Sie halten ein mächtiges Werkzeug in Ihren Händen: <strong>Nexus Finance Pro</strong>. Es ist ein ausgefeilter Taschenrechner, ein präziser Portfoliomanager und ein strategischer Schuldenplaner in einem." },
-                { type: 'p', text: "Aber ein Werkzeug, so mächtig es auch sein mag, ist nur effektiv, wenn der Handwerker weiß, wie und warum er es benutzt." },
-                { type: 'p', text: "Dieser Leitfaden ist das <strong>\"Warum\"</strong>. Nexus Finance Pro ist das <strong>\"Wie\"</strong>." },
-                { type: 'p', text: "Sie müssen kein Experte sein, um Nexus Finance Pro zu nutzen, aber das Verständnis der grundlegenden Konzepte wird Ihre Erfahrung verändern. Sie werden nicht nur auf Knöpfe klicken, sondern einen Plan ausführen." },
+                { type: 'p', text: "Sie halten ein mächtiges Werkzeug: <strong>Nexus Finance Pro</strong>. Es ist ein Rechner, ein Portfoliomanager und ein Schuldenplaner in einem." },
+                { type: 'p', text: "Aber ein Werkzeug ist nutzlos, wenn der Handwerker es nicht versteht." },
+                { type: 'p', text: "Dieses Buch ist das <strong>\"Warum\"</strong>. Die App Nexus Finance Pro ist das <strong>\"Wie\"</strong>." },
+                { type: 'p', text: "Sie müssen kein Experte sein, aber das Verständnis der Schlüsselkonzepte wird Ihre Erfahrung transformieren. Obwohl dieses Tool mächtig ist, wurde es entwickelt, um Sie zu unterstützen: für persönliche Beratung bleibt ein zertifizierter Profi die kluge Wahl." },
                 {
                     type: 'box', style: 'info', title: 'Was Sie lernen werden', content: [
-                        { type: 'p', text: "Dieser Leitfaden lehrt Sie die zeitlosen Prinzipien des Geldmanagements. Wir behandeln:" },
-                        { type: 'ul', items: ["<strong>Psychologie:</strong> Wie Sie Ihre Emotionen beherrschen, um teure Fehler zu vermeiden.", "<strong>Die Grundlagen:</strong> Ein solides Budget erstellen, einen Notgroschen aufbauen und Schulden bekämpfen.", "<strong>Investieren:</strong> Verstehen, warum und wie Sie Ihr Geld für sich arbeiten lassen.", "<strong>Die Börse:</strong> Entmystifizierung von Aktien, ETFs und Finanzkennzahlen, um mit Zuversicht zu investieren.", "<strong>Fortgeschrittene Strategien:</strong> Konzepte für Fortgeschrittene zur Optimierung Ihrer Steuern und Ihres Portfoliomanagements."] }
+                        { type: 'p', text: "Wir decken zeitlose Prinzipien ab:" },
+                        { type: 'ul', items: ["<strong>Psychologie:</strong> Emotionen beherrschen.", "<strong>Grundlagen:</strong> Budget, Notgroschen, Schulden.", "<strong>Investieren:</strong> Geld arbeiten lassen.", "<strong>Börse:</strong> Aktien, ETFs und Ratios entmystifizieren.", "<strong>Strategien:</strong> Steuern und Portfolio-Optimierung."] },
+                        { type: 'p', text: "Am Ende wird jedes Modul in Nexus Finance Pro nicht nur ein Tab sein, sondern eine Waffe für Ihre finanzielle Freiheit." }
                     ]
                 }
             ]
@@ -250,491 +251,365 @@ export const financeCourseData = {
             id: 'chap1',
             title: "Kapitel 1: Die richtige Denkweise",
             content: [
-                { type: 'p', text: "Willkommen zu diesem Leitfaden! Bevor wir über Zahlen, Kennzahlen oder Strategien sprechen, müssen wir über das mächtigste Werkzeug sprechen, das Ihnen zur Verfügung steht: Ihre Denkweise." },
-                { type: 'p', text: "Finanzmanagement ist keine Glückssache. Es ist kein Geheimnis, das einer Elite vorbehalten ist. Es ist eine Reihe von Gewohnheiten, Entscheidungen und Systemen, die jeder lernen und anwenden kann." },
-                { type: 'p', text: "Das größte Hindernis ist nicht der Geldmangel, es ist die Psychologie. Es ist die Angst, auf die Konten zu schauen, die Prokrastination oder das Gefühl, \"schlecht mit Zahlen\" zu sein." },
+                { type: 'p', text: "Willkommen! Bevor wir über Zahlen reden, müssen wir über das wichtigste Werkzeug reden: Ihr Mindset." },
+                { type: 'p', text: "Finanzmanagement ist kein Glück. Es ist keine Magie für Eliten. Es sind Gewohnheiten." },
+                { type: 'p', text: "Das Hindernis ist nicht Geldmangel, sondern Psychologie. Angst vor dem Kontoauszug oder das Gefühl 'schlecht mit Zahlen' zu sein." },
                 {
-                    type: 'box', style: 'warning', title: 'Mythen, die es zu entlarven gilt', content: [
-                        { type: 'ul', items: ["<strong>Mythos 1: \"Man braucht Geld, um Geld zu machen.\"</strong><br>Falsch. Man braucht Gewohnheiten, um Geld zu machen. Eine Person, die mit einem Plan 100$ im Monat spart, wird immer eine Person schlagen, die 10.000$ im Monat verdient, aber 10.100$ ausgibt.", "<strong>Mythos 2: \"Investieren ist wie Glücksspiel.\"</strong><br>Falsch. Kurzfristige Spekulation (Daytrading) ist wie Glücksspiel. Langfristiges Investieren, basierend auf der Analyse der Unternehmensgesundheit, ist die Teilnahme am globalen Wirtschaftswachstum. Es ist der Besitz eines Anteils an einem echten Unternehmen.", "<strong>Mythos 3: \"Ich bin zu jung / zu alt, um anzufangen.\"</strong><br>Falsch. Wenn Sie jung sind, ist Ihr größtes Kapital die Zeit (siehe Kapitel 7 über den Zinseszins). Wenn Sie älter sind, ist Ihr größtes Kapital (oft) ein höheres Einkommen und Disziplin. Die beste Zeit, um anzufangen, war vor 10 Jahren. Die zweitbeste Zeit ist heute."] }
+                    type: 'box', style: 'warning', title: 'Mythen', content: [
+                        { type: 'ul', items: ["<strong>Mythos 1: \"Man braucht Geld um Geld zu machen.\"</strong><br>Falsch. Man braucht Gewohnheiten. Wer 100€/Monat spart, schlägt den, der 10k verdient und 10.1k ausgibt.", "<strong>Mythos 2: \"Investieren ist wie Glücksspiel.\"</strong><br>Falsch. Kurzfristige Spekulation ist Glücksspiel. Langfristiges Investieren ist Teilnahme an der Weltwirtschaft.", "<strong>Mythos 3: \"Ich bin zu jung / alt.\"</strong><br>Falsch. Wenn jung: Zeit ist Ihr Asset. Wenn alt: Einkommen ist Ihr Asset. Der beste Startzeitpunkt war vor 10 Jahren. Der zweitbeste ist heute."] }
                     ]
                 },
-                { type: 'p', text: "<strong>Ihr Hauptziel:</strong> Finanzielle UNABHÄNGIGKEIT. Es geht nicht darum, reich zu werden, um ein Luxusauto zu kaufen. Es geht darum, genug Vermögenswerte (Investitionen) zu haben, die für Sie arbeiten, damit Sie nicht mehr arbeiten müssen, um Ihre Rechnungen zu bezahlen. Arbeit wird zu einer Wahl, nicht zu einer Verpflichtung." }
+                { type: 'p', text: "<strong>Hauptziel:</strong> Finanzielle UNABHÄNGIGKEIT. Nicht Luxusautos. Sondern genug Assets, um nicht arbeiten zu *müssen*." }
             ]
         },
         chap2: {
             id: 'chap2',
-            title: "Kapitel 2: Das Budget, Ihr GPS",
+            title: "Kapitel 2: Das Budget (Ihr GPS)",
             content: [
-                { type: 'p', text: "Sie können kein Ziel erreichen, wenn Sie nicht wissen, wo Sie sind. Das Budget ist Ihr \"Sie sind hier\" auf der Finanzkarte. Es ist kein Gefängnis, das Sie vom Ausgeben abhalten soll; es ist ein Werkzeug, das Ihnen die Erlaubnis geben soll, ohne Schuldgefühle Geld auszugeben." },
-                { type: 'p', text: "Ein Budget beantwortet eine einzige Frage: <strong>Wohin geht mein Geld?</strong>" },
+                { type: 'p', text: "Ein Budget sagt Ihrem Geld, wohin es gehen soll, statt sich zu wundern, wo es hin ist." },
+                { type: 'p', text: "Ein Budget beantwortet: <strong>Wo fließt mein Geld hin?</strong>" },
                 {
-                    type: 'box', style: 'concept', title: 'Das Null-basierte Budget', content: [
-                        { type: 'p', text: "Die effektivste Methode ist das \"Null-basierte Budget\". Die Idee ist einfach: Am Ende des Monats muss die Differenz zwischen Ihrem Einkommen und Ihren Geldausgängen null sein. Das bedeutet nicht, dass Sie nichts mehr übrig haben! Es bedeutet, dass jeder Dollar eine Mission erhalten hat." },
-                        { type: 'p', text: "<code>Einkommen - Ausgaben - Sparen - Investitionen = 0$</code>" },
-                        { type: 'p', text: "Wenn Sie 3000$ verdienen und 2500$ Ausgaben haben, bleiben Ihnen 500$. Mit einem null-basierten Budget entscheiden Sie im Voraus, was diese 500$ tun werden: \"200$ für den Notgroschen\", \"100$ für das Depot\", \"200$ für den Urlaubsfonds\"." }
+                    type: 'box', style: 'concept', title: 'Null-basiertes Budget', content: [
+                        { type: 'p', text: "Am Monatsende muss Einnahmen minus Ausgaben NULL sein. Jeder Euro hat einen Job." },
+                        { type: 'p', text: "<code>Einnahmen - Ausgaben - Sparen - Investieren = 0€</code>" },
+                        { type: 'p', text: "Wenn 500€ übrig bleiben: '200€ Notgroschen', '100€ Invest', '200€ Urlaub'." }
                     ]
                 },
-                { type: 'p', text: "<strong>Handeln Sie:</strong> Nutzen Sie das <strong>Budget-Modul</strong> von Nexus Finance Pro. Listen Sie ALLE Ihre Einnahmen und ALLE Ihre Ausgaben auf, sogar den 3$-Kaffee. Verwenden Sie Häufigkeiten (jährlich, monatlich), damit das Tool Ihren exakten monatlichen Cashflow berechnet. Dies ist der erste Schritt Ihres gesamten Plans." }
+                { type: 'p', text: "<strong>Aktion:</strong> Nutzen Sie das <strong>Budget Modul</strong>. Listen Sie ALLE Einnahmen und Ausgaben." }
             ]
         },
         chap3: {
             id: 'chap3',
-            title: "Kapitel 3: Vermögenswerte vs. Verbindlichkeiten",
+            title: "Kapitel 3: Aktiva vs Passiva",
             content: [
-                { type: 'p', text: "Dies ist das wichtigste Konzept im Bereich der persönlichen Finanzen, popularisiert durch Robert Kiyosaki in \"Rich Dad Poor Dad\"." },
+                { type: 'p', text: "Das wichtigste Konzept (Robert Kiyosaki)." },
                 {
-                    type: 'box', style: 'info', title: 'Die einfache Definition', content: [
-                        { type: 'p', text: "Ein <strong>VERMÖGENSWERT (Asset)</strong> legt Geld in Ihre Tasche." },
-                        { type: 'p', text: "Eine <strong>VERBINDLICHKEIT (Liability)</strong> zieht Geld aus Ihrer Tasche." }
+                    type: 'box', style: 'info', title: 'Definition', content: [
+                        { type: 'p', text: "Ein <strong>AKTIVUM (Asset)</strong> legt Geld in Ihre Tasche." },
+                        { type: 'p', text: "Ein <strong>PASSIVUM (Liability)</strong> zieht Geld aus Ihrer Tasche." }
                     ]
                 },
-                { type: 'p', text: "Es ist so einfach. Das Ziel Ihres Finanzlebens ist es, Ihr Einkommen zu nutzen, um Vermögenswerte zu kaufen, damit diese Vermögenswerte neues Einkommen generieren, um noch mehr Vermögenswerte zu kaufen." },
+                { type: 'p', text: "Ihr Ziel: Einnahmen nutzen um Assets zu kaufen." },
                 {
                     type: 'grid', items: [
-                        { title: "Beispiele für Assets", text: "Eine Aktie, die eine Dividende zahlt. Ein ETF, der an Wert gewinnt. Eine rentable Mietimmobilie." },
-                        { title: "Beispiele für Liabilities", text: "Ein Autokredit. Kreditkartenschulden. Studienkredit." }
+                        { title: "Asset Beispiele", text: "Dividenden-Aktie. ETF. Mietimmobilie." },
+                        { title: "Passiva Beispiele", text: "Autokredit. Kreditkarte. Konsumkredit." }
                     ]
                 },
                 {
-                    type: 'box', style: 'warning', title: 'Die Falle der Hauptwohnsitzes', content: [
-                        { type: 'p', text: "\"Mein Haus ist mein größter Vermögenswert!\" Wirklich? Jeden Monat zieht es Geld aus Ihrer Tasche (Hypothek, Steuern, Versicherung, Reparaturen). Nach der strengen Definition ist Ihr Hauptwohnsitz eine Verbindlichkeit." },
-                        { type: 'p', text: "Er kann zu einem Vermögenswert werden, an dem Tag, an dem Sie ihn verkaufen (wenn er an Wert gewonnen hat) oder wenn Sie den Keller vermieten (er generiert Einkommen). Aber verwechseln Sie eine Verbindlichkeit (die Sie Geld kostet) nicht mit einer Investition." }
+                    type: 'box', style: 'warning', title: 'Die Eigenheim-Falle', content: [
+                        { type: 'p', text: "\"Mein Haus ist mein größtes Asset!\" Wirklich? Es kostet Geld (Hypothek, Steuer, Instandhaltung). Es ist ein Passivum." },
+                        { type: 'p', text: "Es wird zum Asset beim Verkauf (mit Gewinn) oder bei Vermietung." }
                     ]
                 },
-                { type: 'p', text: "Ihr <strong>Nettovermögen</strong> ist das Maß für Ihre finanzielle Gesundheit. Das ist es, was Sie auf Ihrem Dashboard sehen." },
-                { type: 'p', text: "<strong>Nettovermögen = Gesamtvermögen - Gesamtverbindlichkeiten</strong>. Ihr Ziel ist es, diese Zahl Monat für Monat, Jahr für Jahr wachsen zu lassen." }
+                { type: 'p', text: "Ihr <strong>Nettovermögen</strong> ist Aktiva minus Passiva." }
             ]
         },
         chap4: {
             id: 'chap4',
-            title: "Kapitel 4: Der Notgroschen",
+            title: "Kapitel 4: Notgroschen",
             content: [
-                { type: 'p', text: "Das Leben ist unvorhersehbar. Das Auto geht kaputt. Das Dach leckt. Sie verlieren Ihren Job. Der Unterschied zwischen einem Missgeschick und einer finanziellen Katastrophe nennt sich Notgroschen." },
-                { type: 'p', text: "Ein Notgroschen ist Ihr Schutzschild. Es ist Geld, das ausschließlich für Notfälle beiseite gelegt wird. Dieses Geld wird nicht investiert, es ist nicht dazu da, um zu \"performen\". Es ist dazu da, liquide, zugänglich und langweilig zu sein." },
+                { type: 'p', text: "Das Leben ist unberechenbar. Auto kaputt. Job weg. Der Unterschied zwischen Panne und Katastrophe ist der Notgroschen." },
+                { type: 'p', text: "Ihr Schutzschild. Geld nur für Notfälle. Nicht zum Investieren. Muss liquide sein." },
                 {
-                    type: 'box', style: 'info', title: 'Wie viel?', content: [
-                        { type: 'p', text: "Das Standardziel ist es, <strong>3 bis 6 Monate</strong> der Lebenshaltungskosten zu halten." },
-                        { type: 'p', text: "Berechnen Sie, wie viel Sie jeden Monat zum Leben ausgeben müssen (Miete/Hypothek, Grundnahrungsmittel, Strom, Minimum an Transport). Wenn dieser Betrag 2.500$ beträgt, sollte Ihr Notgroschen zwischen 7.500$ und 15.000$ liegen." }
+                    type: 'box', style: 'info', title: 'Wieviel?', content: [
+                        { type: 'p', text: "Ziel: <strong>3 bis 6 Monate</strong> Ausgaben." },
+                        { type: 'p', text: "Bei 2500€ Kosten also 7500€ bis 15000€." }
                     ]
                 },
-                { type: 'p', text: "<strong>Wo sollte es liegen?</strong> An einem sicheren und zugänglichen Ort, aber nicht zu zugänglich (nicht auf Ihrem täglichen Girokonto). Ein Tagesgeldkonto ist ideal. Es ist getrennt von Ihren täglichen Operationen, aber Sie können in 1 oder 2 Tagen darauf zugreifen." },
-                { type: 'p', text: "<strong>Absolute Priorität:</strong> Bevor Sie Schulden abbezahlen (außer Minima) und bevor Sie einen einzigen Dollar an der Börse investieren, bauen Sie einen \"Mini-Fonds\" von 1.000$ auf. Dieses Geld verhindert, dass Sie bei der nächsten Reifenpanne weiter in die Schulden rutschen." }
+                { type: 'p', text: "<strong>Wo?</strong> Tagesgeldkonto. Getrennt vom Girokonto." },
+                { type: 'p', text: "<strong>Prio:</strong> Bevor Sie Schulden tilgen oder investieren, sparen Sie 1000€ Mini-Fond." }
             ]
         },
         chap5: {
             id: 'chap5',
-            title: "Kapitel 5: Schulden verwalten",
+            title: "Kapitel 5: Schuldenmanagement",
             content: [
-                { type: 'p', text: "Es gibt zwei Arten von Schulden: \"gute\" Schulden und \"schlechte\" Schulden." },
-                { type: 'ul', items: ["<strong>Gute Schulden (Investitionsschulden):</strong> Schulden, die verwendet werden, um einen Vermögenswert zu kaufen, der an Wert gewinnt. Bsp: Eine Hypothek (um Immobilien zu kaufen), ein Studienkredit (um in sich selbst zu investieren).", "<strong>Schlechte Schulden (Konsumschulden):</strong> Schulden, die verwendet werden, um eine Verbindlichkeit zu kaufen, die an Wert verliert. Bsp: Ein Autokredit, Kreditkartenschulden für Urlaub oder Restaurants."] },
-                { type: 'p', text: "Ihr Ziel ist es, schlechte Schulden so schnell wie möglich abzubezahlen. Dafür gibt es zwei Hauptstrategien, die Sie im Planungsmodul simulieren können." },
+                { type: 'p', text: "Zwei Typen: 'Gute' vs 'Schlechte' Schulden." },
+                { type: 'ul', items: ["<strong>Gut:</strong> Kauft ein Asset (Haus, Bildung).", "<strong>Schlecht:</strong> Kauft Konsum (Auto, Urlaub)."] },
+                { type: 'p', text: "Zahlen Sie schlechte Schulden sofort ab (Simulieren im Schuldenplan Modul):" },
                 {
-                    type: 'box', style: 'info', title: 'Strategie 1: Die Lawine', content: [
-                        { type: 'p', text: "Sie listen alle Ihre Schulden nach absteigendem Zinssatz auf. Sie stecken alles überschüssige Geld in die Schuld mit dem höchsten Zinssatz." },
-                        { type: 'p', text: "<strong>Vorteil:</strong> Diese Methode spart Ihnen am meisten Geld an Zinsen. Sie ist mathematisch am effizientesten." }
+                    type: 'box', style: 'info', title: 'Strategie 1: Lawine', content: [
+                        { type: 'p', text: "Schulden nach Zins ordnen (Höchster zuerst). Spart mathematisch am meisten Geld." }
                     ]
                 },
                 {
-                    type: 'box', style: 'success', title: 'Strategie 2: Der Schneeball', content: [
-                        { type: 'p', text: "Sie listen alle Ihre Schulden nach aufsteigendem Saldo auf (vom kleinsten zum größten). Sie attackieren die kleinste Schuld mit all Ihrem überschüssigen Geld." },
-                        { type: 'p', text: "<strong>Vorteil:</strong> Sie erhalten schnelle \"Siege\". Das Abbezahlen einer kleinen Schuld schafft immensen psychologischen Schwung und Motivation, weiterzumachen." }
+                    type: 'box', style: 'success', title: 'Strategie 2: Schneeball', content: [
+                        { type: 'p', text: "Schulden nach Saldo ordnen (Kleinster zuerst). Gibt schnelle psychologische Siege." }
                     ]
-                },
-                { type: 'p', text: "Welche Methode wählen? Diejenige, die Sie motiviert hält. Das Planungsmodul zeigt Ihnen die Auswirkungen von beiden." }
+                }
             ]
         },
         chap6: {
             id: 'chap6',
-            title: "Kapitel 6: Warum investieren?",
+            title: "Kapitel 6: Warum Investieren?",
             content: [
-                { type: 'p', text: "Wenn Sie bereits ein Budget und einen Notgroschen haben, herzlichen Glückwunsch! Sie haben den \"Verteidigungsmodus\" beendet. Es ist Zeit, in den \"Angriffsmodus\" zu wechseln: Investieren." },
-                { type: 'p', text: "Sparen (Geld auf ein Konto legen) schützt Sie. Investieren (Vermögenswerte kaufen) macht Sie reich." },
+                { type: 'p', text: "Verteidigung (Sparen) fertig? Jetzt Angriff (Investieren)." },
+                { type: 'p', text: "Sparen schützt. Investieren macht reich." },
                 {
-                    type: 'box', style: 'warning', title: 'Ihr Feind Nr. 1: Inflation', content: [
-                        { type: 'p', text: "Inflation ist der allgemeine Preisanstieg im Laufe der Zeit. Wenn die Inflation 3% pro Jahr beträgt, bedeutet das, dass 100$ heute nächstes Jahr nur noch Waren und Dienstleistungen im Wert von 97$ kaufen werden. Ihr Geld <strong>verliert</strong> an Wert, wenn es schläft." },
-                        { type: 'p', text: "Wenn Sie 10.000$ für 25 Jahre auf einem Girokonto (0%) lassen, bei einer durchschnittlichen Inflation von 2,5%, wird Ihre \"Kaufkraft\" nur noch 5.394$ betragen. Sie werden fast die Hälfte Ihres Geldes verloren haben, indem Sie nichts getan haben." }
+                    type: 'box', style: 'warning', title: 'Feind #1: Inflation', content: [
+                        { type: 'p', text: "Bei 3% Inflation kaufen 100€ nächstes Jahr nur für 97€. Bargeld <strong>verliert</strong> Wert." },
+                        { type: 'p', text: "10.000€ sind nach 25 Jahren nur noch 5.394€ wert." }
                     ]
                 },
-                { type: 'p', text: "Das Ziel des Investierens ist einfach: Erzielen Sie eine Rendite, die höher ist als die Inflation, damit Ihre Kaufkraft im Laufe der Zeit wächst." },
-                { type: 'p', text: "Nexus Finance Pro hilft Ihnen, diese Auswirkungen zu sehen. In den Modulen Zukunftswert und Auszahlung berechnet das Tool immer den \"Nominalwert\" (Gesamtbetrag) und die \"Reale Kaufkraft\" (was dieses Geld nach Inflation wirklich wert sein wird)." }
+                { type: 'p', text: "Ziel: Rendite > Inflation." }
             ]
         },
         chap7: {
             id: 'chap7',
-            title: "Kapitel 7: Der Zinseszins",
+            title: "Kapitel 7: Zinseszins",
             content: [
-                { type: 'p', text: "Albert Einstein soll gesagt haben, Zinseszins sei \"das achte Weltwunder\". Er ist der Motor der Vermögensbildung." },
-                { type: 'p', text: "Zinseszins bedeutet einfach, Zinsen auf Ihre Zinsen zu verdienen. Es ist ein Schneeballeffekt." },
+                { type: 'p', text: "Einstein nannte es das '8. Weltwunder'. Zins auf Zins." },
                 {
-                    type: 'box', style: 'success', title: 'Einfaches Beispiel', content: [
-                        { type: 'ul', items: ["Jahr 1: Sie verdienen 8% von 10.000$ (800$). Saldo: 10.800$.", "Jahr 2: Sie verdienen 8% von 10.800$ (864$). Saldo: 11.664$.", "Jahr 3: Sie verdienen 8% von 11.664$ (933$). Saldo: 12.597$."] },
-                        { type: 'p', text: "Ihr Geld arbeitet für Sie, und die \"Angestellten\" (Ihre Gewinne) fangen selbst an zu arbeiten und Kinder zu bekommen!" }
+                    type: 'box', style: 'success', title: 'Beispiel', content: [
+                        { type: 'ul', items: ["Jahr 1: 10k * 8% = 800€. Total 10.800€.", "Jahr 2: 10.8k * 8% = 864€. Total 11.664€."] }
                     ]
                 },
                 {
-                    type: 'box', style: 'info', title: 'Der Zeitfaktor', content: [
-                        { type: 'p', text: "Die wichtigste Variable ist die Zeit. Schauen Sie sich den Unterschied an:" },
-                        { type: 'p', text: "<strong>Alex (25 bis 35):</strong> Investiert 5000$/Jahr für 10 Jahre (Total 50k).<br><strong>Ben (35 bis 65):</strong> Investiert 5000$/Jahr für 30 Jahre (Total 150k)." },
-                        { type: 'p', text: "Mit 65 (8% Rendite):<br>Alex (der nur 50k eingezahlt hat) wird haben: <strong>1.028.000$</strong><br>Ben (der 150k eingezahlt hat) wird haben: <strong>611.000$</strong>" },
-                        { type: 'p', text: "Alex gewinnt, einfach weil er 10 Jahre früher angefangen hat. Seine 50.000$ hatten mehr Zeit, sich zu \"verzinsen\"." }
+                    type: 'box', style: 'info', title: 'Zeitfaktor', content: [
+                        { type: 'p', text: "<strong>Alex (25-35):</strong> Investiert 50k.<br><strong>Ben (35-65):</strong> Investiert 150k." },
+                        { type: 'p', text: "Mit 65 Jahren:<br>Alex hat: <strong>1.028.000€</strong><br>Ben hat: <strong>611.000€</strong>" },
+                        { type: 'p', text: "Alex gewinnt, weil er früher anfing." }
                     ]
                 },
-                { type: 'p', text: "<strong>Handeln Sie:</strong> Gehen Sie zum Zukunftswert-Modul. Geben Sie Ihr Anfangskapital, monatliche Beiträge und eine Rendite (Bsp: 8%) ein. Schauen Sie sich an, was die Grafik Ihnen über 30 Jahre zeigt. Sie werden von der exponentiellen Kurve erstaunt sein." }
+                { type: 'p', text: "<strong>Aktion:</strong> Nutzen Sie das Zukunftswert Modul." }
             ]
         },
         chap8: {
             id: 'chap8',
-            title: "Kapitel 8: Das Risiko/Rendite-Spektrum",
+            title: "Kapitel 8: Risiko/Rendite",
             content: [
-                { type: 'p', text: "Es gibt kein kostenloses Mittagessen im Finanzwesen. Die goldene Regel lautet: <strong>Je höher die potenzielle Rendite, desto höher das Verlustrisiko.</strong>" },
-                { type: 'p', text: "Ihre Aufgabe als Investor ist es nicht, Risiken zu vermeiden, sondern sie zu managen." },
+                { type: 'p', text: "Kein Free Lunch. <strong>Höhere Chance = Höheres Risiko.</strong>" },
                 {
-                    type: 'box', style: 'info', title: 'Das Spektrum', content: [
-                        { type: 'ul', items: ["<strong>Niedriges Risiko / Niedrige Rendite:</strong> Sparkonten, Festgeld, Staatsanleihen. Kapital garantiert, schlägt aber kaum die Inflation.", "<strong>Mittleres Risiko / Mittlere Rendite:</strong> Breite Index-ETFs (S&P 500, MSCI World), \"Blue Chip\"-Aktien.", "<strong>Hohes Risiko / Hohe Rendite:</strong> Einzelaktien, kleine Unternehmen (Small Caps), Kryptowährungen."] }
+                    type: 'box', style: 'info', title: 'Spektrum', content: [
+                        { type: 'ul', items: ["<strong>Niedrig:</strong> Sparbuch, Staatsanleihen.", "<strong>Mittel:</strong> Breit gestreute ETFs.", "<strong>Hoch:</strong> Einzelaktien, Krypto."] }
                     ]
                 },
-                { type: 'p', text: "<strong>Was ist Risiko?</strong> Risiko ist <strong>Volatilität</strong>. Es ist die Geschwindigkeit, mit der der Preis steigt und fällt. Wenn Ihr Portfolio in 3 Monaten 30% verliert, werden Sie in Panik geraten und verkaufen? Es ist entscheidend, sich selbst zu kennen, bevor der Absturz passiert." }
+                { type: 'p', text: "<strong>Riesiko ist Volatilität.</strong> Wenn das Portfolio 30% fällt, verkaufen Sie panisch?" }
             ]
         },
         chap9: {
             id: 'chap9',
-            title: "Kapitel 9: Anlagearten",
+            title: "Kapitel 9: Anlageklassen",
             content: [
-                { type: 'p', text: "Hier sind die grundlegenden \"Lego-Steine\", die Sie zum Aufbau Ihres Portfolios verwenden können." },
-                { type: 'ul', items: ["<strong>1. Aktien (Equities):</strong> Der Kauf einer Aktie (`AAPL`, `Allianz`) ist der Kauf eines kleinen Anteils am Unternehmen. Sie gewinnen durch Wertsteigerung (Kurs nach oben) und Dividenden (Gewinnbeteiligung).", "<strong>2. Anleihen (Bonds):</strong> Geld an eine Regierung oder ein Unternehmen für feste Zinsen leihen. Generell sicherer als Aktien.", "<strong>3. Exchange Traded Funds (ETFs):</strong> Oft der beste Startpunkt. Ein ETF ist ein \"Korb\", der Hunderte von Aktien oder Anleihen enthält, sich aber wie eine einzelne Aktie kaufen lässt."] },
-                { type: 'p', text: "Mit einem ETF (Bsp: `VFV` für S&P 500) besitzen Sie einen winzigen Teil der 500 größten US-Unternehmen. Es ist sofortige Diversifikation zu sehr geringen Kosten." }
+                { type: 'p', text: "Die LEGO Steine." },
+                { type: 'ul', items: ["<strong>1. Aktien:</strong> Teil einer Firma. Gewinn durch Kurs + Dividende.", "<strong>2. Anleihen:</strong> Kredit an Staat/Firma. Sicherer.", "<strong>3. ETFs:</strong> Bester Start. Ein Korb aus Hunderten Aktien."] },
+                { type: 'p', text: "Ein ETF (z.B. MSCI World) ist sofortige Diversifikation." }
             ]
         },
         chap10: {
             id: 'chap10',
-            title: "Kapitel 10: Kontoarten (Kanada)",
+            title: "Kapitel 10: Kontotypen (International)",
             content: [
-                { type: 'p', text: "Bevor Sie eine Investition kaufen, müssen Sie den steuerlichen \"Behälter\" wählen. TFSA und RRSP sind <strong>keine</strong> Investitionen, sie sind Konten mit Steuervorteilen." },
-                {
-                    type: 'box', style: 'success', title: '1. TFSA (Tax-Free Savings Account)', content: [
-                        { type: 'p', text: "Sie investieren Geld nach Steuern (Netto). <strong>Vorteil:</strong> ALLE Gewinne (Kapitalgewinne, Dividenden) sind <strong>100% steuerfrei</strong>, ein Leben lang." },
-                        { type: 'p', text: "<strong>Auszahlungen:</strong> Steuerfrei. Beitragsraum kehrt im folgenden Jahr zurück. Ideal für: Notgroschen, Anzahlung Haus, Ruhestand." }
-                    ]
-                },
-                {
-                    type: 'box', style: 'info', title: '2. RRSP (Registered Retirement Savings Plan)', content: [
-                        { type: 'p', text: "Sie investieren Geld vor Steuern. <strong>Vorteil:</strong> Beitrag wird von Ihrem steuerpflichtigen Einkommen abgezogen (große Steuerrückerstattung)." },
-                        { type: 'p', text: "<strong>Auszahlungen:</strong> Steuerpflichtig im Ruhestand. Ideal für: Langfristige Altersvorsorge bei hohem Einkommen." }
-                    ]
-                },
-                { type: 'p', text: "<strong>3. Nicht-registriertes Konto:</strong> Basiskonto, kein Steuervorteil. Jährlich steuerpflichtig auf Dividenden. Kapitalgewinne sind nur beim Verkauf steuerpflichtig." },
-                { type: 'p', text: "<strong>Die Gewinnstrategie:</strong> 1. TFSA maximieren. 2. RRSP maximieren. 3. Ins nicht-registrierte Konto (Cash) investieren." }
-            ]
-        },
-        chap10_intl: {
-            id: 'chap10',
-            title: "Kapitel 10: Kontoarten (International)",
-            content: [
-                { type: 'p', text: "Regierungen auf der ganzen Welt bieten Steueranreize, um das Sparen zu fördern. Während sich die Namen ändern (401k in USA, ISA in UK, Depot in DE), bleiben die Kernkonzepte gleich." },
+                { type: 'p', text: "Staaten fördern Vorsorge. Namen variieren, Konzepte sind gleich." },
                 {
                     type: 'box', style: 'success', title: '1. Steuerfreie Konten', content: [
-                        { type: 'p', text: "Sie investieren 'Nach-Steuer'-Geld. <strong>Vorteil:</strong> Zukünftige Gewinne sind 100% steuerfrei." },
-                        { type: 'p', text: "<strong>Beispiele:</strong> Roth IRA (USA), ISA (UK), TFSA (Kanada)." }
+                        { type: 'p', text: "Man investiert versteuertes Geld. <strong>Vorteil:</strong> Gewinne sind steuerfrei." },
+                        { type: 'p', text: "<strong>Bsp:</strong> Roth IRA (USA), ISA (UK), TFSA (Kanada)." }
                     ]
                 },
                 {
                     type: 'box', style: 'info', title: '2. Steuerbegünstigte Konten', content: [
-                        { type: 'p', text: "Sie investieren 'Vor-Steuer'-Geld. <strong>Vorteil:</strong> Sofortiger Steuerabzug, aber Sie zahlen Steuern bei der Auszahlung." },
-                        { type: 'p', text: "<strong>Beispiele:</strong> 401k / Traditional IRA (USA), RRSP (Kanada), Betriebsrente." }
+                        { type: 'p', text: "Man investiert Brutto-Geld (Steuervorteil heute). Zahlt Steuern bei Entnahme." },
+                        { type: 'p', text: "<strong>Bsp:</strong> 401k (USA), RRSP (Kanada), bAV (Deutschland)." }
                     ]
                 },
-                { type: 'p', text: "<strong>3. Steuerpflichtiges Depot:</strong> Kein Steuervorteil. Sie zahlen jedes Jahr Steuern auf Dividenden und Kapitalgewinne (z.B. Abgeltungsteuer)." }
+                { type: 'p', text: "<strong>3. Normales Depot:</strong> Keine Vorteile. Jährliche Steuer auf Gewinne." }
             ]
         },
         chap11: {
             id: 'chap11',
-            title: "Kapitel 11: Die Aktie",
+            title: "Kapitel 11: Was ist eine Aktie?",
             content: [
-                { type: 'p', text: "Der Kauf einer Aktie ist der Kauf eines Eigentumsanteils an einem Unternehmen. Wenn ein Unternehmen 1.000.000 Aktien hat und Sie 100 kaufen, besitzen Sie 0,01% dieses Unternehmens." },
-                { type: 'p', text: "Sie sind jetzt ein Eigentümer. Sie haben Anspruch auf einen Anteil am Gewinn (Dividenden)." },
-                { type: 'p', text: "<strong>Die Börse:</strong> Es ist ein großer öffentlicher Marktplatz, auf dem der Preis durch Angebot und Nachfrage bestimmt wird. Wenn Menschen hohe zukünftige Gewinne erwarten (z.B. neues iPhone), steigt die Nachfrage und der Preis geht nach oben." }
+                { type: 'p', text: "Kauf von Eigentum. Sie sind Miteigentümer und erhalten Gewinnanteile (Dividende)." },
+                { type: 'p', text: "<strong>Börse:</strong> Ein Marktplatz wo Angebot und Nachfrage den Preis bestimmen." }
             ]
         },
         chap12: {
             id: 'chap12',
             title: "Kapitel 12: Fundamentalanalyse",
             content: [
-                { type: 'p', text: "Fundamentalanalyse ist die Kunst, die reale finanzielle Gesundheit und den Wert eines Unternehmens zu bewerten. Das Ziel ist es, außergewöhnliche Unternehmen zu einem gewöhnlichen Preis zu finden." },
-                { type: 'p', text: "Wir schauen uns die Konten an:" },
-                { type: 'ul', items: ["<strong>Bilanz (Balance Sheet):</strong> Was das Unternehmen besitzt (Vermögenswerte) und schuldet (Verbindlichkeiten).", "<strong>Gewinn- und Verlustrechnung (Income Statement):</strong> Einnahmen, Ausgaben und Gewinne.", "<strong>Cashflow:</strong> Geld, das tatsächlich reinkommt und rausgeht."] },
-                { type: 'p', text: "Das <strong>Aktienanalyse-Modul</strong> von Nexus Pro ist ein vereinfachtes Werkzeug zur Fundamentalanalyse." }
+                { type: 'p', text: "Den wahren Wert finden. Tolle Firmen zu fairen Preisen." },
+                { type: 'ul', items: ["<strong>Bilanz:</strong> Vermögen vs Schulden.", "<strong>GuV:</strong> Umsatz & Gewinn.", "<strong>Cash Flow:</strong> Echter Geldfluss."] },
+                { type: 'p', text: "Das <strong>Aktienanalyse Modul</strong> vereinfacht dies." }
             ]
         },
         chap13: {
             id: 'chap13',
             title: "Kapitel 13: Kennzahlen verstehen",
             content: [
-                { type: 'p', text: "Kennzahlen sind Abkürzungen, um die Gesundheit eines Unternehmens zu verstehen, ohne 100 Seiten Berichte zu lesen. Nexus Pro verwendet diese Kennzahlen für seinen \"Nexus Score\"." },
-                { type: 'p', text: "<em>Hinweis: Für Immobilienkennzahlen (LTV, Cap Rate), siehe den Immobilien-Leitfaden.</em>" },
+                { type: 'p', text: "Ratios sind Abkürzungen." },
                 {
                     type: 'box', style: 'info', title: '1. Bewertung', content: [
-                        { type: 'ul', items: ["<strong>KGV (Kurs-Gewinn-Verhältnis):</strong> Preis für 1$ Gewinn. (20x = Sie zahlen 20$ für 1$ Gewinn).", "<strong>PEG-Verhältnis:</strong> KGV geteilt durch Wachstum. Wenn < 1,0, ist die Aktie potenziell unterbewertet."] }
+                        { type: 'ul', items: ["<strong>KGV:</strong> Preis für 1€ Gewinn (20x).", "<strong>PEG:</strong> KGV geteilt durch Wachstum."] }
                     ]
                 },
                 {
                     type: 'box', style: 'success', title: '2. Rentabilität', content: [
-                        { type: 'ul', items: ["<strong>Nettomarge:</strong> % des reinen Gewinns bei jedem Verkauf.", "<strong>ROE (Eigenkapitalrendite):</strong> Effizienz bei der Verwendung von Aktionärsgeld. > 15% ist exzellent."] }
+                        { type: 'ul', items: ["<strong>Nettomarge:</strong> % Gewinn vom Umsatz.", "<strong>ROE:</strong> Effizienz des Kapitals."] }
                     ]
                 },
-                {
-                    type: 'box', style: 'warning', title: '3. Finanzielle Gesundheit', content: [
-                        { type: 'ul', items: ["<strong>Verschuldungsgrad (Debt/Equity):</strong> Misst die Verschuldung. Wenn > 1,0, seien Sie vorsichtig.", "<strong>Liquiditätsgrad:</strong> Fähigkeit, kurzfristige Rechnungen zu bezahlen."] }
-                    ]
-                },
-                { type: 'p', text: "Um Aktienkennzahlen vollständig zu verstehen, ist es hilfreich, sie mit Ihrem eigenen persönlichen Finanzmanagement zu vergleichen. Ein Unternehmen ist einfach ein Haushalt im großen Maßstab. Unten vergleichen wir jedes 'Business'-Konzept mit seinem 'Familien'-Äquivalent." },
+                { type: 'p', text: "Vergleich mit privaten Finanzen siehe Tabelle unten." },
                 { type: 'comparison_ratios' }
             ]
         },
         chap14: {
             id: 'chap14',
-            title: "Kapitel 14: Dividenden-Investieren",
+            title: "Kapitel 14: Dividenden",
             content: [
-                { type: 'p', text: "Strategie, die auf die Generierung von passivem Einkommen ausgerichtet ist. Sie werden fürs Warten bezahlt. Es ist wie der Besitz eines Obstgartens: Sie wollen die Bäume nicht verkaufen, Sie wollen die Äpfel ernten." },
-                { type: 'p', text: "<strong>Rendite:</strong> (Jährliche Dividende / Aktienkurs) * 100. Wenn eine Aktie 100$ kostet und 4$ zahlt, beträgt die Rendite 4%." },
+                { type: 'p', text: "Passives Einkommen. Bezahlt fürs Warten." },
+                { type: 'p', text: "<strong>Rendite (Yield):</strong> (Div / Preis) * 100." },
                 {
-                    type: 'box', style: 'warning', title: 'Die Rendite-Falle (> 12%)', content: [
-                        { type: 'p', text: "Nexus Regel: Jede Rendite > 12% erhält einen Score von 0. Warum?" },
-                        { type: 'p', text: "Wenn ein Aktienkurs einbricht (weil das Unternehmen scheitert), steigt die Rendite mechanisch. Eine 15%ige Rendite schreit oft danach, dass die Dividende bald gekürzt wird. Es ist eine \"Yield Trap\"." }
+                    type: 'box', style: 'warning', title: 'Yield Falle (> 12%)', content: [
+                        { type: 'p', text: "Vorsicht bei extrem hohen Dividenden. Oft ein Warnsignal für Probleme." }
                     ]
                 },
-                { type: 'p', text: "<strong>Dividendenwachstum:</strong> Die wirkliche Magie ist der Kauf von Unternehmen, die ihre Dividende jedes Jahr <strong>erhöhen</strong> (Aristokraten). Im Investment-Modul können Sie passives Einkommen separat verfolgen." }
+                { type: 'p', text: "<strong>Wachstum:</strong> Firmen kaufen, die Dividende jährlich steigern (Aristokraten)." }
             ]
         },
         chap15: {
             id: 'chap15',
-            title: "Kapitel 15: Ihr Portfolio aufbauen",
+            title: "Kapitel 15: Portfoliobau",
             content: [
-                { type: 'p', text: "Ihr Portfolio ist die Sammlung all Ihrer Investitionen. Der Aufbau erfordert zwei Dinge: Diversifikation und Allokation." },
+                { type: 'p', text: "Diversifikation & Allokation." },
                 {
                     type: 'box', style: 'concept', title: 'Diversifikation', content: [
-                        { type: 'p', text: "Legen Sie nicht alle Eier in einen Korb. Diversifizieren Sie nach <strong>Anlageklasse</strong> (Aktien/Anleihen), <strong>Sektor</strong> (Tech, Banken, Energie) und <strong>Geographie</strong> (Kanada, USA, Welt). ETFs bieten dies sofort." }
+                        { type: 'p', text: "Nicht alle Eier in einen Korb. Mix aus Assets, Sektoren und Ländern. ETFs tun dies." }
                     ]
                 },
                 {
-                    type: 'box', style: 'info', title: 'Asset-Allokation', content: [
-                        { type: 'p', text: "Es ist der % Ihres Geldes in Aktien (Risiko/Wachstum) vs. Anleihen (Sicher/Stabilität)." },
-                        { type: 'ul', items: ["<strong>Jung (20-35):</strong> Aggressiv. Bsp: 90% Aktien / 10% Anleihen.", "<strong>Mitte Karriere (35-50):</strong> Ausgewogen. Bsp: 70% Aktien / 30% Anleihen.", "<strong>Ruhestand:</strong> Konservativ. Bsp: 40% Aktien / 60% Anleihen."] }
+                    type: 'box', style: 'info', title: 'Allokation', content: [
+                        { type: 'p', text: "Aktien (Gaspedal) vs Anleihen (Bremse). Jung: 90/10. Alt: 40/60." }
                     ]
                 }
             ]
         },
         chap16: {
             id: 'chap16',
-            title: "Kapitel 16: Anlegerpsychologie",
+            title: "Kapitel 16: Psychologie",
             content: [
-                { type: 'p', text: "Investieren ist einfach, aber nicht leicht. Ihr schlimmster Feind sind Sie selbst (Ihre Emotionen)." },
-                { type: 'ul', items: ["<strong>Gier (FOMO):</strong> Kaufen, wenn alles oben ist, am Gipfel, aus Angst, etwas zu verpassen. Ergebnis: Teuer kaufen.", "<strong>Angst:</strong> Verkaufen, wenn alles abstürzt. Ergebnis: Billig verkaufen und Verlust dauerhaft machen."] },
+                { type: 'p', text: "Ihr schlimmster Feind sind Sie selbst." },
+                { type: 'ul', items: ["<strong>Gier (FOMO):</strong> Oben kaufen.", "<strong>Angst:</strong> Unten verkaufen."] },
                 {
-                    type: 'box', style: 'success', title: 'Die Lösung: Sparplan (DCA)', content: [
-                        { type: 'p', text: "<strong>Dollar-Cost Averaging</strong>. Investieren Sie 500$ pro Monat, egal was passiert, automatisch." },
-                        { type: 'p', text: "Wenn der Markt unten ist, kauft Ihr 500$ MEHR Anteile. Wenn er oben ist, kauft er WENIGER. Sie profitieren von Dips ohne Emotionen." }
+                    type: 'box', style: 'success', title: 'Lösung: Sparplan', content: [
+                        { type: 'p', text: "Fixer Betrag monatlich. Automatisch. Nimmt Emotion raus." }
                     ]
-                },
-                { type: 'p', text: "<strong>Weiter gehen:</strong> Ein Bonuskapitel, das ganz der <strong>Psychologie des Geldes</strong> gewidmet ist (basierend auf Morgan Housels Buch), wurde am Ende dieses Leitfadens hinzugefügt. Verpassen Sie es nicht!" }
+                }
             ]
         },
         chap17: {
             id: 'chap17',
-            title: "Kapitel 17: Ziele definieren",
+            title: "Kapitel 17: Ziele setzen",
             content: [
-                { type: 'p', text: "Wir sparen nicht einfach nur, um zu sparen. Wir sparen für ein Ziel. Ein gutes Ziel ist <strong>S.M.A.R.T.</strong>: Spezifisch, Messbar, Attraktiv, Realistisch, Terminiert." },
-                { type: 'p', text: "Schlecht: \"Ich will reich sein\".<br>Gut: \"Ich will 50.000$ für eine Anzahlung in 3 Jahren.\"" },
-                { type: 'p', text: "<strong>Handeln Sie:</strong> Das <strong>Ziele-Modul</strong> berechnet genau, wie viel Sie pro Monat sparen müssen, um Ihre Ziele zu erreichen." }
+                { type: 'p', text: "Sparen mit Zweck." },
+                { type: 'p', text: "\"Ich will reich sein\" ist schlecht. \"Ich will 50k in 3 Jahren\" ist gut." },
+                { type: 'p', text: "<strong>Ziel Modul</strong> berechnet nötige Sparrate." }
             ]
         },
         chap18: {
             id: 'chap18',
-            title: "Kapitel 18: Planung für den Ruhestand",
+            title: "Kapitel 18: Ruhestand",
             content: [
-                { type: 'p', text: "Es ist der Moment, in dem Ihr Portfolio für Ihren Lebensstil bezahlt." },
+                { type: 'p', text: "Wenn das Portfolio den Lebensstil zahlt." },
                 {
-                    type: 'box', style: 'info', title: 'Die 4% Regel', content: [
-                        { type: 'p', text: "Historisch gesehen können Sie jährlich <strong>4%</strong> Ihres Portfolios abheben, ohne dass Ihnen das Geld für 30 Jahre ausgeht." },
-                        { type: 'p', text: "Schnelle Berechnung des benötigten Betrags: <strong>Gewünschte Jahresausgaben x 25</strong>." },
-                        { type: 'p', text: "Bsp: Um von 40.000$/Jahr zu leben: 40.000 x 25 = <strong>1.000.000$</strong>." }
+                    type: 'box', style: 'info', title: '4% Regel', content: [
+                        { type: 'p', text: "Man kann <strong>4%</strong> des Portfolios jährlich entnehmen." },
+                        { type: 'p', text: "Zielsumme: <strong>Jahresausgaben x 25</strong>." }
                     ]
-                },
-                { type: 'p', text: "Nutzen Sie das <strong>Auszahlungs-Modul</strong>, um das Überleben des Kapitals unter verschiedenen Szenarien zu simulieren." }
+                }
             ]
         },
         chap19: {
             id: 'chap19',
-            title: "Kapitel 19: Fundamental vs. Technisch",
+            title: "Kapitel 19: Fundament vs Technik",
             content: [
-                { type: 'p', text: "Ein Duell der Philosophien." },
-                { type: 'ul', items: ["<strong>Fundamental (Investor):</strong> Frage: \"Ist es ein gutes Unternehmen?\" Werkzeuge: Bilanzen, Kennzahlen, Management. Ziel: Langfristig.", "<strong>Technisch (Trader):</strong> Frage: \"Wohin bewegt sich der Preis?\" Werkzeuge: Charts, Gleitende Durchschnitte, RSI. Ziel: Kurzfristig (Timing)."] },
-                { type: 'p', text: "<strong>Unsere Sicht:</strong> Für den Vermögensaufbau ist Fundamental der König. Technisch kann beim Timing helfen, sollte aber nie die einzige Basis sein." }
+                { type: 'p', text: "Fundamental: Ist die Firma gut? (Investor). Technik: Wo geht der Kurs hin? (Trader)." },
+                { type: 'p', text: "Für Vermögensaufbau ist Fundamental King." }
             ]
         },
         chap20: {
             id: 'chap20',
-            title: "Kapitel 20: Börsenaufträge (Der komplette Guide)",
+            title: "Kapitel 20: Ordertypen",
             content: [
-                { type: 'p', text: "Zu wissen, was man kaufen soll, ist eine Sache, zu wissen, wie man es kauft, eine andere. Hier sind die 5 wesentlichen Auftragsarten, um Ihre Einstiegs- und Ausstiegspreise zu kontrollieren." },
+                { type: 'p', text: "Wie man kauft." },
                 {
-                    type: 'box', style: 'info', title: '1. Marktorder (Market)', content: [
-                        { type: 'p', text: "<strong>Das Konzept:</strong> \"Ich will es jetzt sofort, egal zu welchem genauen Preis.\"" },
-                        { type: 'p', text: "<strong>Wie es funktioniert:</strong> Die Order wird sofort zum besten verfügbaren Preis der Verkäufer ausgeführt." },
-                        { type: 'p', text: "<strong>Vorteil:</strong> Geschwindigkeit garantiert. Sie erhalten die Aktie sicher." },
-                        { type: 'p', text: "<strong>Risiko:</strong> Sie kontrollieren den Preis nicht. Wenn der Markt schnell ist (Volatilität), zahlen Sie vielleicht mehr als erwartet." },
-                        { type: 'p', text: "<strong>Konkretes Beispiel:</strong> Aktie ABC steht bei 50,00$. Sie platzieren eine Marktorder. Den Bruchteil einer Sekunde später springt der Preis auf 50,05$. Ihre Order wird zu 50,05$ ausgeführt. Sie zahlen 5$ mehr als angezeigt." }
+                    type: 'box', style: 'info', title: 'Market', content: [
+                        { type: 'p', text: "Sofort, egal welcher Preis." }
                     ]
                 },
                 {
-                    type: 'box', style: 'success', title: '2. Limit-Order', content: [
-                        { type: 'p', text: "<strong>Das Konzept:</strong> \"Ich will kaufen, aber nicht höher als X$.\" (oder verkaufen nicht niedriger als X)." },
-                        { type: 'p', text: "<strong>Wie es funktioniert:</strong> Sie setzen einen Höchstpreis. Die Order wird nur ausgeführt, wenn der Markt Ihren Preis oder besser erreicht." },
-                        { type: 'p', text: "<strong>Vorteil:</strong> Totale Preiskontrolle. Keine bösen Überraschungen." },
-                        { type: 'p', text: "<strong>Risiko:</strong> Wenn die Aktie nie auf Ihren Limitpreis fällt, kaufen Sie sie nie. Ausführung nicht garantiert." },
-                        { type: 'p', text: "<strong>Konkretes Beispiel:</strong> Aktie XYZ ist bei 102$. Zu teuer. Sie platzieren eine Limit-Order zum Kauf bei 100$.<br><em>Szenario A:</em> Aktie fällt auf 99$. Sie kaufen bei 99$ (noch besser).<br><em>Szenario B:</em> Aktie geht auf 105$. Ihre Order bleibt stehen und Sie kaufen nichts." }
+                    type: 'box', style: 'success', title: 'Limit', content: [
+                        { type: 'p', text: "Maximal X zahlen. Volle Kontrolle." }
                     ]
                 },
                 {
-                    type: 'box', style: 'warning', title: '3. Stop-Order (Stop-Loss)', content: [
-                        { type: 'p', text: "<strong>Das Konzept:</strong> \"Der Notausgang.\" (Wird zur Marktorder sobald ausgelöst)." },
-                        { type: 'p', text: "<strong>Wie es funktioniert:</strong> Es ist eine schlafende Order. Wenn der Preis fällt und Ihre Schwelle (z.B. 90$) erreicht, wacht die Order auf und verkauft alles sofort zum Marktpreis." },
-                        { type: 'p', text: "<strong>Vorteil:</strong> Schützt vor einem großen Absturz, ohne auf den Bildschirm zu schauen." },
-                        { type: 'p', text: "<strong>Risiko:</strong> Bei einem Flash-Crash verkaufen Sie vielleicht viel tiefer als Ihre Schwelle (z.B. ausgelöst bei 90$, aber verkauft bei 85$)." },
-                        { type: 'p', text: "<strong>Konkretes Beispiel:</strong> Gekauft bei 100$. Stop bei 90$. Schlechte Nachrichten, Aktie im freien Fall. Sie kreuzt die 90$ ohne Halt. Order löst aus und verkauft an den ersten Käufer bei 88$. Sie sind raus, aber mit etwas mehr Verlust als geplant." }
+                    type: 'box', style: 'warning', title: 'Stop Loss', content: [
+                        { type: 'p', text: "Notausgang. Wenn Preis < X, verkaufen." }
                     ]
-                },
-                {
-                    type: 'box', style: 'concept', title: '4. Stop-Limit-Order', content: [
-                        { type: 'p', text: "<strong>Das Konzept:</strong> \"Der präzise Notausgang.\" (Wird zur Limit-Order sobald ausgelöst)." },
-                        { type: 'p', text: "<strong>Wie es funktioniert:</strong> Sie definieren zwei Preise: den Auslöser (Stop) und den minimal akzeptierten Preis (Limit)." },
-                        { type: 'p', text: "<strong>Vorteil:</strong> Garantiert, dass Sie während einer Panik nicht zu einem lächerlichen Preis verkaufen." },
-                        { type: 'p', text: "<strong>Risiko:</strong> Wenn der Preis unter Ihr Limit crasht, verkaufen Sie nicht. Sie bleiben auf der fallenden Aktie sitzen." },
-                        { type: 'p', text: "<strong>Konkretes Beispiel:</strong> Gekauft bei 100$. Stop bei 90$, Limit bei 89$. Aktie fällt auf 90$. Verkauf löst aus. Aber der Markt springt auf 85$ (Gap). Da 85$ unter Ihrem 89$ Limit liegt, verkauft die Order nicht. Sie besitzen die Aktie immer noch bei 85$." }
-                    ]
-                },
-                {
-                    type: 'box', style: 'success', title: '5. Trailing Stop', content: [
-                        { type: 'p', text: "<strong>Das Konzept:</strong> \"Gewinne laufen lassen.\"" },
-                        { type: 'p', text: "<strong>Wie es funktioniert:</strong> Der Verkaufspreis steigt automatisch mit der Aktie, geht aber nie nach unten. Sie setzen einen Abstand ($ oder %)." },
-                        { type: 'p', text: "<strong>Vorteil:</strong> Sichert Gewinne, ohne das Aufwärtspotenzial zu begrenzen." },
-                        { type: 'p', text: "<strong>Konkretes Beispiel:</strong> Gekauft bei 100$ mit 5$ Trailing Stop.<br>Aktie geht auf 110$. Stop bewegt sich auf 105$.<br>Aktie geht auf 150$. Stop ist jetzt 145$.<br>Aktie fällt auf 140$. Sobald sie 145$ trifft, verkaufen Sie. Sie haben 45$ Gewinn automatisch gesichert." }
-                    ]
-                },
-                {
-                    type: 'box', style: 'dark', title: 'Wichtiger Hinweis: Order-Dauer', content: [
-                        { type: 'p', text: "Für Limit- und Stop-Orders müssen Sie wählen, wie lange die Order aktiv bleibt:" },
-                        { type: 'ul', items: ["<strong>Tag (Day):</strong> Wenn nicht bis 16:00 Uhr (Börsenschluss) ausgeführt, wird sie storniert.", "<strong>GTC (Good 'Til Canceled):</strong> Bleibt aktiv (meist 60-90 Tage), bis Sie sie manuell stornieren."] }
-                    ]
-                },
-                { type: 'p', text: "<strong>Hinweis für Neugierige:</strong> Es gibt komplexere Orders für aktive Trader, wie OCO (One Cancels the Other), die es erlauben, ein Gewinnziel und ein Verlustlimit gleichzeitig zu setzen. Für einen langfristigen Investor sind die 5 oben genannten jedoch völlig ausreichend." }
+                }
             ]
         },
         chap21: {
             id: 'chap21',
-            title: "Kapitel 21: Fortgeschrittene Besteuerung (ACB)",
+            title: "Kapitel 21: Steuern (GAK)",
             content: [
-                { type: 'p', text: "Entscheidend für <strong>Nicht-registrierte (Steuerpflichtige)</strong> Konten. Wenn Sie verkaufen, zahlen Sie Steuern auf: <code>Verkaufspreis - ACB</code>." },
+                { type: 'p', text: "Steuern auf Gewinne." },
                 {
-                    type: 'box', style: 'info', title: 'Der ACB (Adjusted Cost Base)', content: [
-                        { type: 'p', text: "Es ist der offizielle Steuerbegriff für Ihre durchschnittlichen Kosten. Er entspricht den gewichteten Durchschnittskosten aller Ihrer Aktien, einschließlich Provisionsgebühren. Sie müssen dies für die Steuer selbst verfolgen." },
-                        { type: 'p', text: "Berechnung: (Gesamtkosten aller Käufe) / (Gesamtanzahl der Aktien)." }
+                    type: 'box', style: 'info', title: 'GAK (Glättender Anschaffungskurs)', content: [
+                        { type: 'p', text: "Durchschnittskaufpreis aller Aktien." }
                     ]
-                },
-                { type: 'p', text: "Nexus Finance Pro berechnet automatisch eine Schätzung Ihres ACB und der nicht realisierten Gewinne im <strong>Investment-Modul</strong>." }
+                }
             ]
         },
         chap22: {
             id: 'chap22',
-            title: "Kapitel 22: Portfolio-Rebalancing",
+            title: "Kapitel 22: Rebalancing",
             content: [
-                { type: 'p', text: "Wenn Ihr Ziel 70% Aktien und 30% Anleihen ist, und Aktien steigen (jetzt 80%), ist Ihr Portfolio zu riskant." },
-                { type: 'p', text: "<strong>Rebalancing (Umschichtung):</strong> Verkaufen, was gestiegen ist (Aktien), um zu kaufen, was gefallen ist (Anleihen), um zu 70/30 zurückzukehren." },
-                { type: 'p', text: "Es ist der Gipfel der Disziplin: Es zwingt Sie mathematisch dazu, <strong>teuer zu verkaufen und billig zu kaufen</strong>." }
+                { type: 'p', text: "Portfolio zurück zum Ziel-Mix bringen. Hoch verkaufen, tief kaufen erzwingen." }
             ]
         },
         chap23: {
             id: 'chap23',
-            title: "Kapitel 23: Psychologische Fallen (Biases)",
+            title: "Kapitel 23: Psychofallen",
             content: [
-                { type: 'ul', items: ["<strong>Bestätigungsfehler (Confirmation Bias):</strong> Nur das lesen, was unsere Meinung zu einer Aktie (z.B. Tesla) bestätigt, und Kritiker ignorieren.", "<strong>Anker-Effekt (Anchoring):</strong> Denken, eine Aktie sei \"billig\", nur weil sie 300$ war und jetzt 150$ ist. Die Vergangenheit spielt keine Rolle.", "<strong>Verlustangst (Loss Aversion):</strong> Gewinner zu schnell verkaufen (um Gewinn mitzunehmen) und Verlierer behalten (in der Hoffnung, dass sie sich erholen). Oft müssen Sie das Gegenteil tun: Verluste begrenzen!"] }
+                { type: 'ul', items: ["<strong>Bestätigungsfehler:</strong> Nur zustimmende Infos suchen.", "<strong>Verlustaversion:</strong> Gewinner zu früh, Verlierer zu spät verkaufen."] }
             ]
         },
         glossaire: {
             id: 'glossaire',
-            title: "Kapitel 24: Glossar der wichtigsten Begriffe",
+            title: "Kapitel 24: Glossar",
             content: [
-                { type: 'p', text: "Hier ist eine schnelle Auffrischung der Begriffe, denen Sie begegnen werden." },
                 {
                     type: 'grid', items: [
-                        { title: "Asset", text: "Wertgegenstand oder Einkommensquelle." },
-                        { title: "Liability", text: "Etwas, das Geld aus Ihrer Tasche zieht." },
-                        { title: "Aktie", text: "Eigentumsanteil an einem Unternehmen." },
-                        { title: "Anleihe", text: "Darlehen an ein Unternehmen/Staat gegen Zinsen." },
-                        { title: "Dividende", text: "Anteil am Gewinn, der an Aktionäre ausgeschüttet wird." },
-                        { title: "ETF", text: "Diversifizierter Korb von Investitionen." },
-                        { title: "Volatilität", text: "Amplitude der Preisschwankungen (Risiko)." },
-                        { title: "EPS", text: "Earnings Per Share (Gewinn pro Aktie)." },
-                        { title: "KGV (P/E)", text: "Kurs-Gewinn-Verhältnis. Zeigt an, ob die Aktie teuer oder billig ist." },
-                        { title: "TFSA", text: "100% steuerfreies Konto (Kanada)." },
-                        { title: "RRSP", text: "Steuerbegünstigtes Konto (Kanada)." },
-                        { title: "ACB", text: "Adjusted Cost Base (Steuerliche Anschaffungskosten)." },
-                        { title: "Nettovermögen", text: "Vermögen - Verbindlichkeiten. Wahrer Reichtum." }
+                        { title: "Asset", text: "Bringt Geld." },
+                        { title: "Passivum", text: "Kostet Geld." },
+                        { title: "Aktie", text: "Firmenanteil." },
+                        { title: "Dividende", text: "Gewinnbeteiligung." },
+                        { title: "ETF", text: "Aktienkorb." },
+                        { title: "KGV", text: "Bewertungskennzahl." },
+                        { title: "Nettovermögen", text: "Reichtum." }
                     ]
-                },
-                { type: 'p', text: "Dieser Kurs gab Ihnen die Grundlagen. Nexus Finance Pro gibt Ihnen die Macht, sie anzuwenden. Ihre finanzielle Zukunft liegt jetzt in Ihren Händen. Viel Erfolg bei der Planung!" }
+                }
             ]
         },
         bonus_psych: {
             id: 'bonus_psych',
-            title: "Bonus: Die Psychologie des Geldes",
+            title: "Bonus: Psychologie des Geldes",
             content: [
-                { type: 'p', text: "<strong>(Basierend auf Morgan Housels Konzepten)</strong> - Eines der wichtigsten Bücher über Finanzpsychologie. Wir empfehlen dringend, es zu lesen!" },
+                { type: 'p', text: "<strong>(Nach Morgan Housel)</strong>." },
                 {
-                    type: 'box', style: 'info', title: 'Teil 1: Unsere irrationale Beziehung zu Geld', content: [
-                        { type: 'p', text: "<strong>1. Niemand ist verrückt:</strong>" },
-                        { type: 'p', text: "Wir alle denken, wir wissen, wie die Welt funktioniert, aber wir haben nur einen winzigen Bruchteil davon erlebt. Ihre finanziellen Entscheidungen hängen von Ihrer Generation, der Inflation in Ihrer Jugend und Ihrer Kultur ab. <em>Verurteilen Sie andere nicht. Was für Sie 'verrückt' aussieht, könnte für jemanden anderen eine logische Überlebensentscheidung sein.</em>" },
-                        { type: 'p', text: "<strong>2. Glück und Risiko:</strong>" },
-                        { type: 'p', text: "Bill Gates' Erfolg ist seinem Genie zu verdanken, aber auch dem Glück, eine Schule mit einem Computer zu besuchen (eine Chance von eins zu einer Million). Sein Freund Kent Evans war genauso begabt, starb aber vor der Highschool (ein Risiko von eins zu einer Million). <em>Seien Sie bescheiden im Erfolg und verzeihend im Misserfolg. Glück spielt eine große Rolle.</em>" },
-                        { type: 'p', text: "<strong>3. Niemals genug (Die Falle der Gier):</strong>" },
-                        { type: 'p', text: "Rajat Gupta hatte alles (Reichtum, Ruf), wollte aber mehr und landete wegen Insiderhandels im Gefängnis. <em>Es gibt keinen Grund, das zu riskieren, was man hat und braucht, um das zu bekommen, was man nicht hat und nicht braucht.</em>" }
+                    type: 'box', style: 'info', title: 'Niemand ist verrückt', content: [
+                        { type: 'p', text: "Jeder handelt nach seiner Erfahrung." }
                     ]
                 },
                 {
-                    type: 'box', style: 'success', title: 'Teil 2: Vermögen aufbauen', content: [
-                        { type: 'p', text: "<strong>4. Verblüffender Zinseszins:</strong>" },
-                        { type: 'p', text: "Warren Buffett ist nicht reich, weil er der beste Investor ist, sondern weil er seit seiner Kindheit investiert. <em>Halten Sie den Mund und warten Sie. Zeit ist die mächtigste Kraft beim Investieren.</em>" },
-                        { type: 'p', text: "<strong>5. Reich werden vs. Reich bleiben:</strong>" },
-                        { type: 'p', text: "Um reich zu werden, müssen Sie optimistisch sein und Risiken eingehen. Um reich zu <strong>bleiben</strong>, müssen Sie paranoid, sparsam und ängstlich sein, alles zu verlieren. <em>Überleben ist der Schlüssel.</em>" },
-                        { type: 'p', text: "<strong>6. Tails, You Win (Extreme Ereignisse):</strong>" },
-                        { type: 'p', text: "Wie in der Kunst zahlen eine Handvoll 'Gewinner' für alle Fehler. <em>Sie können 50% der Zeit falsch liegen und trotzdem ein Vermögen machen. Es zählt das Ausmaß Ihrer Gewinne, nicht die Häufigkeit.</em>" }
+                    type: 'box', style: 'success', title: 'Reich werden vs bleiben', content: [
+                        { type: 'p', text: "Reich bleiben erfordert Paranoia und Bescheidenheit." }
                     ]
                 },
                 {
-                    type: 'box', style: 'warning', title: 'Teil 3: Psychologie und Verhalten', content: [
-                        { type: 'p', text: "<strong>7. Freiheit (Die wahre Dividende):</strong>" },
-                        { type: 'p', text: "Die höchste Form von Reichtum ist, morgens aufzuwachen und zu sagen: 'Ich kann heute tun, was immer ich will'. Die Kontrolle über Ihre Zeit macht Sie glücklicher als Luxusgüter." },
-                        { type: 'p', text: "<strong>8. Das Paradoxon des Mannes im Auto:</strong>" },
-                        { type: 'p', text: "Niemand ist so beeindruckt von Ihrem Besitz wie Sie selbst. Wenn Sie Respekt wollen, seien Sie bescheiden und freundlich, kaufen Sie kein großes Auto." },
-                        { type: 'p', text: "<strong>9. Reichtum ist das, was man nicht sieht:</strong>" },
-                        { type: 'p', text: "Wahrer Reichtum ist Geld, das <strong>nicht</strong> ausgegeben wurde. Verwechseln Sie nicht ein hohes Einkommen (Rich) mit Nettovermögen (Wealthy)." },
-                        { type: 'p', text: "<strong>10. Sparen Sie Geld (Einfach sparen):</strong>" },
-                        { type: 'p', text: "Sie brauchen kein bestimmtes Ziel, um zu sparen. Sie müssen für das Unbekannte sparen. Es ist Ihre Sicherheitsmarge." }
-                    ]
-                },
-                {
-                    type: 'box', style: 'concept', title: 'Teil 4: Eine realistische Philosophie', content: [
-                        { type: 'p', text: "<strong>11. Vernünftig > Rational:</strong>" },
-                        { type: 'p', text: "Versuchen Sie nicht, eine kalte Tabelle zu sein. Die beste Strategie ist die, die Sie nachts schlafen lässt." },
-                        { type: 'p', text: "<strong>12. Nichts ist umsonst:</strong>" },
-                        { type: 'p', text: "Hohe Marktrenditen haben einen Preis, nicht in Dollar, sondern in Volatilität und Angst. Betrachten Sie Abstürze als 'Eintrittspreis', nicht als Strafe." },
-                        { type: 'p', text: "<strong>13. Die Verführung des Pessimismus:</strong>" },
-                        { type: 'p', text: "Pessimismus klingt klug, Optimismus klingt naiv. Seien Sie ein 'realistischer Optimist': Glauben Sie daran, dass die Dinge langfristig besser werden, aber bereiten Sie sich darauf vor, kurzfristig zu leiden." }
-                    ]
-                },
-                {
-                    type: 'box', style: 'success', title: 'Fazit: Die Methode des Autors', content: [
-                        { type: 'p', text: "Was Morgan Housel mit seinem eigenen Geld macht:" },
-                        { type: 'ul', items: ["Sein Ziel ist Unabhängigkeit, nicht maximaler Reichtum.", "Er hält viel Bargeld (Sicherheitsmarge).", "Er investiert in kostengünstige Indexfonds (ETFs).", "Er versucht nicht, den Markt zu schlagen, sondern so lange wie möglich investiert zu bleiben."] }
+                    type: 'box', style: 'warning', title: 'Freiheit', content: [
+                        { type: 'p', text: "Die höchste Dividende ist Zeit." }
                     ]
                 }
             ]

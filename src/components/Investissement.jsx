@@ -8,6 +8,7 @@ import WatchlistModal from './WatchlistModal';
 import DiagnosticModal from './DiagnosticModal';
 import PerformanceModal from './PerformanceModal';
 import HoldingDetailsModal from './HoldingDetailsModal';
+import IntroInvestissement from './IntroInvestissement';
 
 import {
     Chart as ChartJS,
@@ -652,7 +653,7 @@ export default function Investissement() {
         labels: portfolio.holdings.map(h => h.symbol),
         datasets: [{
             data: portfolio.holdings.map(h => h.value),
-            backgroundColor: portfolio.holdings.map((_, i) => PASTEL_PALETTE[i % PASTEL_PALETTE.length]),
+            backgroundColor: portfolio.holdings.map(h => h.color || '#ccc'), // Use holding color
             borderWidth: 1
         }]
     };
@@ -687,9 +688,42 @@ export default function Investissement() {
         ]
     };
 
+    const [showIntro, setShowIntro] = useState(false);
+
+    useEffect(() => {
+        const hasSeenIntro = localStorage.getItem('nexus_intro_investissement_seen');
+        if (!hasSeenIntro) {
+            setShowIntro(true);
+        }
+    }, []);
+
     return (
         <div className="printable-content" style={{ display: 'block' }}>
-            <div className="module-header-with-reset"><h2>{t('investment.title')}</h2></div>
+            <div className="module-header-with-reset" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+                <h2 style={{ margin: 0 }}>{t('investment.title')}</h2>
+                <button
+                    onClick={() => setShowIntro(true)}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        color: '#9ca3af',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        transition: 'color 0.2s',
+                        padding: '4px',
+                        borderRadius: '50%'
+                    }}
+                    onMouseOver={(e) => e.currentTarget.style.color = '#3b82f6'}
+                    onMouseOut={(e) => e.currentTarget.style.color = '#9ca3af'}
+                    title={t('common.help') || "Introduction"}
+                >
+                    <InformationCircleIcon style={{ width: '24px', height: '24px' }} />
+                </button>
+            </div>
+
+            <IntroInvestissement isOpen={showIntro} onClose={() => setShowIntro(false)} />
 
             <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', marginBottom: '20px' }}>
                 <div className="card-hover-fix" style={styles.kpiCard}><div style={styles.kpiTitle}>{t('perf_modal.current_value')}</div><div style={styles.kpiValue}>{formatCurrency(portfolio.totalVal)}</div></div>

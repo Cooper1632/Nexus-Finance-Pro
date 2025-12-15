@@ -11,6 +11,8 @@ import {
     Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler, ScatterController
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import IntroPlan from './IntroPlan';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler, ScatterController);
 
@@ -139,6 +141,14 @@ function Plan() {
     const [showBudgetHelp, setShowBudgetHelp] = useState(false);
     // Delete Modal State
     const [deleteModalState, setDeleteModalState] = useState({ isOpen: false, type: null, id: null });
+    const [showIntro, setShowIntro] = useState(false);
+
+    useEffect(() => {
+        const hasSeenIntro = localStorage.getItem('nexus_intro_plan_seen');
+        if (!hasSeenIntro) {
+            setShowIntro(true);
+        }
+    }, []);
 
     const openDeleteModal = (type, id) => setDeleteModalState({ isOpen: true, type, id });
     const closeDeleteModal = () => setDeleteModalState({ isOpen: false, type: null, id: null });
@@ -511,10 +521,30 @@ function Plan() {
 
     return (
         <div className="printable-content" style={{ display: 'block' }}>
-            <div className="module-header-with-reset"><h2>{t('plan.title')}</h2></div>
+            <div className="module-header-with-reset" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <h2 style={{ margin: 0 }}>{t('plan.title')}</h2>
+                <button
+                    onClick={() => setShowIntro(true)}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        color: '#9ca3af',
+                        display: 'flex',
+                        alignItems: 'center',
+                        transition: 'color 0.2s',
+                        padding: '4px'
+                    }}
+                    onMouseOver={(e) => e.currentTarget.style.color = '#3b82f6'}
+                    onMouseOut={(e) => e.currentTarget.style.color = '#9ca3af'}
+                    title="Voir l'introduction"
+                >
+                    <InformationCircleIcon style={{ width: '24px', height: '24px' }} />
+                </button>
+            </div>
 
             {/* VALIDATION MODAL */}
-            <Modal isOpen={showValidationModal} onClose={() => setShowValidationModal(false)} title={`⚠️ ${t('plan.validation_error_title')}`}>
+            <Modal isOpen={showValidationModal} onClose={() => setShowValidationModal(false)} title={<div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><ExclamationTriangleIcon style={{ width: '24px', color: '#E74C3C' }} /> <span>{t('plan.validation_error_title')}</span></div>}>
                 <div style={{ padding: '20px', textAlign: 'center', color: 'var(--text-color)' }}>
                     <p style={{ fontSize: '1.1rem' }}>{t('plan.validation_error_msg')}</p>
                     <button onClick={() => setShowValidationModal(false)} className="btn-primary" style={{ marginTop: '20px', padding: '10px 30px' }}>{t('common.close')}</button>
@@ -598,6 +628,22 @@ function Plan() {
                     <button onClick={addMortgageRow} className="btn-success btn-text-white" style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.9rem' }}><PlusIcon style={{ width: '16px' }} /> {t('plan.add_mortgage')}</button>
                 </div>
 
+                <div style={{
+                    backgroundColor: 'rgba(243, 156, 18, 0.1)',
+                    borderLeft: '4px solid #F39C12',
+                    padding: '10px 15px',
+                    marginBottom: '20px',
+                    fontSize: '0.85rem',
+                    color: '#9C640C',
+                    borderRadius: '0 8px 8px 0',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px'
+                }}>
+                    <ExclamationTriangleIcon style={{ width: '24px', height: '24px', flexShrink: 0 }} />
+                    <span style={{ fontStyle: 'italic' }}>{t('plan.mortgage_prepayment_warning')}</span>
+                </div>
+
                 <div className="table-container" style={{ maxHeight: 'none', overflowY: 'visible' }}>
                     <table id="plan-mortgages-table" style={{ width: '100%' }}>
                         <thead style={{ verticalAlign: 'bottom' }}>
@@ -616,21 +662,24 @@ function Plan() {
                                         <button
                                             onClick={() => setShowIncludeHelp(true)}
                                             style={{
-                                                background: '#ddd',
-                                                color: '#555',
+                                                background: '#e2e8f0', // Slightly cleaner gray
+                                                color: '#64748b',
                                                 border: 'none',
                                                 borderRadius: '50%',
-                                                width: '18px',
-                                                height: '18px',
-                                                minWidth: '18px',
-                                                flexShrink: 0,
-                                                cursor: 'pointer',
-                                                fontWeight: 'bold',
-                                                fontSize: '0.8rem',
-                                                padding: 0,
+                                                width: '20px',
+                                                height: '20px',
+                                                minWidth: '20px',
+                                                minHeight: '20px',
                                                 display: 'flex',
                                                 alignItems: 'center',
-                                                justifyContent: 'center'
+                                                justifyContent: 'center',
+                                                flexShrink: 0,
+                                                padding: 0,
+                                                margin: 0,
+                                                cursor: 'pointer',
+                                                fontSize: '0.8rem',
+                                                fontWeight: 'bold',
+                                                lineHeight: 1
                                             }}
                                         >?</button>
                                     </div>
@@ -726,7 +775,7 @@ function Plan() {
                                 <div className="today-btn-wrapper"><span className="today-label">{t('plan.today')}</span><button className="icon-btn" onClick={() => { setTodayDate(); setValidationErrors(prev => ({ ...prev, date: false })); }} title="Mettre à aujourd'hui"><CalendarIcon style={{ width: '22px' }} /></button></div>
                             </div>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100%' }}>{isBudgetInsufficient && <div className="budget-warning-pulse">⚠️ {t('plan.budget_insufficient', { min: formatCurrency(totalMinReq) })}</div>}<button onClick={() => calculatePlan()} className="btn-primary btn-calculate-plan" style={{ height: '45px', fontSize: '1rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}><CalculatorIcon style={{ width: '24px' }} /> {t('plan.calculate')}</button></div>
+                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100%' }}>{isBudgetInsufficient && <div className="budget-warning-pulse"><ExclamationTriangleIcon style={{ width: '20px', marginRight: '5px' }} /> {t('plan.budget_insufficient', { min: formatCurrency(totalMinReq) })}</div>}<button onClick={() => calculatePlan()} className="btn-primary btn-calculate-plan" style={{ height: '45px', fontSize: '1rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}><CalculatorIcon style={{ width: '24px' }} /> {t('plan.calculate')}</button></div>
                     </div>
                 </div>
             )}
@@ -1015,6 +1064,10 @@ function Plan() {
                     <p style={{ margin: 0, fontSize: '1rem', whiteSpace: 'pre-line' }}>{t('common.confirm_delete_msg')}</p>
                 </div>
             </Modal>
+            <IntroPlan
+                isOpen={showIntro}
+                onClose={() => setShowIntro(false)}
+            />
         </div>
     );
 }
