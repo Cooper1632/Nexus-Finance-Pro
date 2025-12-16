@@ -144,11 +144,11 @@ const WelcomeModal = ({ isOpen, onClose, dontShowAgain, setDontShowAgain }) => {
 
                     {/* COLONNE GAUCHE : ICONE + BIENVENUE */}
                     <div style={{ flex: 1, textAlign: 'left', minWidth: 'min(300px, 100%)' }}>
-                        <div style={{ ...styles.iconContainer, marginBottom: '20px', alignSelf: 'center', marginLeft: 'auto', marginRight: 'auto' }}>
-                            <GlobeAltIcon style={{ width: '40px' }} />
+                        <div style={{ ...styles.iconContainer, marginBottom: '20px', alignSelf: 'center', marginLeft: 'auto', marginRight: 'auto', backgroundColor: 'transparent' }}>
+                            <img src="/logo.png" alt="Nexus Finance Pro" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                         </div>
                         <h2 style={{ ...styles.title, fontSize: '1.8rem', marginBottom: '15px', textAlign: 'center' }}>
-                            {t('onboarding.welcome_title')} <span style={{ color: 'var(--primary-color)' }}>Nexus Finance Pro!</span>
+                            {t('onboarding.welcome_title')} <br /> <span style={{ color: 'var(--primary-color)' }}>Nexus Finance Pro!</span>
                         </h2>
                         <p style={{ ...styles.subtitle, marginBottom: '25px', fontSize: '1rem', textAlign: 'center' }}>
                             {t('onboarding.intro_text')}

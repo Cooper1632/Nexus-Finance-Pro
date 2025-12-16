@@ -9,7 +9,6 @@ import Plan from './components/Plan';
 import Remboursement from './components/Remboursement';
 import Analyse from './components/Analyse';
 import Immobilier from './components/Immobilier';
-
 // IMPORTATION DES GUIDES
 import UserGuide from './components/UserGuide';
 import FinanceCourse from './components/FinanceCourse';
@@ -35,7 +34,7 @@ const AppContent = () => {
 
   // --- EFFET POUR GÉRER LE PREMIER CHARGEMENT ---
   useEffect(() => {
-    const hasSeenWelcome = localStorage.getItem('nexus_has_seen_welcome_v2');
+    const hasSeenWelcome = localStorage.getItem('nexus_has_seen_welcome_v3');
     if (!hasSeenWelcome) {
       const timer = setTimeout(() => setShowWelcome(true), 500);
       return () => clearTimeout(timer);
@@ -44,7 +43,7 @@ const AppContent = () => {
 
   const handleCloseWelcome = (shouldOpenGuide) => {
     if (dontShowWelcomeAgain) {
-      localStorage.setItem('nexus_has_seen_welcome_v2', 'true');
+      localStorage.setItem('nexus_has_seen_welcome_v3', 'true');
     }
     setShowWelcome(false);
     if (shouldOpenGuide === true) {

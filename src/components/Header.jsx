@@ -230,10 +230,13 @@ function Header({ activeMode, setActiveMode, openUserGuide, openFinanceCourse, o
                     </button>
                     <div className="nav-separator"></div>
 
+
                     {/* 8. PROJECTIONS (CALCULATEURS) */}
                     <button id="mode-projections-btn" className={getButtonClass('projections')} onClick={() => setActiveMode('projections')}>
                         <ArrowTrendingUpIcon /> <span>{t('header.calculators')}</span>
                     </button>
+                    <div className="nav-separator"></div>
+
 
                 </div>
             </div>
@@ -306,7 +309,7 @@ function Header({ activeMode, setActiveMode, openUserGuide, openFinanceCourse, o
                                 <div style={modalStyles.label}><span style={{ marginRight: '5px' }}>ℹ️</span> {t('settings.other_options')}</div>
                                 <button
                                     onClick={() => {
-                                        localStorage.removeItem('nexus_has_seen_welcome_v2');
+                                        localStorage.removeItem('nexus_has_seen_welcome_v3');
                                         setShowResetSuccessModal(true); // REPLACED ALERT WITH MODAL STATE
                                     }}
                                     style={{ ...modalStyles.btnSecondary, marginTop: '10px', fontSize: '0.85rem' }}
